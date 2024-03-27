@@ -1,0 +1,23 @@
+.reveal .slides {
+    /* The default reveal theme aligns everything to the center */
+    text-align: left;
+}
+
+.challenge-accordion {
+    /* Fix for accordions being shifted above the slide */
+    margin: auto;
+}
+
+.reveal .slides {
+    /* Add a scrollbar if any slide ends up too large */
+    overflow-y: auto;
+}
+
+.reveal .slides>section.stack button {
+    /* Fix a weird behaviour where reveal disables all buttons */
+    pointer-events: all;
+}
+
+h1 {
+    text-align: center;
+}
