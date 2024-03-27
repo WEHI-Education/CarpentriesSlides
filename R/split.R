@@ -1,4 +1,5 @@
-
+#' Generates a markdown slide deck from a Carpentries workbench project
+#' @export
 #' @param repo A length-1 character vector pointing to the root of a Carpentries workbench project
 slides_to_markdown <- function(repo){
     # Ensure the markdown has been knitted

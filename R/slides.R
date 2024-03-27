@@ -1,6 +1,10 @@
-#' @param slides A character vector of paths to slides to include in the slide show.
-#'  Ordinarily these are in `/site/built` within a Carpentries repo
-make_slides <- function(slides_md, site, extra_flags = character()){
+#' Converts a slide deck to an HTML slideshow
+#' @export
+#' @param repo Path to the Carpentries Workbench project
+make_slides <- function(repo, extra_flags = character()){
+    slides_md <- file.path(repo, "slides.md")
+    site <- file.path(repo, "site", "built")
+
     # Path to Varnish's built-in JS and CSS that handles stuff like the accordion expansion
     css_path <- system.file("pkgdown", "assets", "assets", "styles.css", package="varnish")
     js_path <- system.file("pkgdown", "assets", "assets", "scripts.js", package="varnish")
