@@ -12,7 +12,7 @@ This tool generations a basic Reveal.JS slideshow from a Carpentries Workbench l
 
 From R:
 ```R
-remotes::install_github("multimeric/CarpentriesSlides")
+remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
 ```
 
 ## Usage
@@ -45,11 +45,6 @@ You can then open this `slides.html` file in your browser and present them!
 
 The main bulk of Carpentries workshops should still be live coding.
 However, it is a common and accepted practice that certain parts of a workshop can be presented using slides.
-These include:
-
-* Figures
-* Challenge blocks (formative assessment)
-* Signposting changes in episode
 
 For more discussion on this topic, see:
 
