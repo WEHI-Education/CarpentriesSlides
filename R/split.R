@@ -1,6 +1,7 @@
 #' Generates a markdown slide deck from a Carpentries workbench project
 #' @export
 #' @param repo A length-1 character vector pointing to the root of a Carpentries workbench project
+#' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
 make_md <- function(repo, verbose = FALSE){
     # Ensure the markdown has been knitted
     sandpaper:::build_markdown(repo)
@@ -20,11 +21,14 @@ make_md <- function(repo, verbose = FALSE){
         writeLines(output)
 
     cli::cli_alert_success("Slides can be found in {.path {output}}")
+    cli::cli_alert_success("Once you have made any necessary changes, you can build the slides using {.code make_slides(\"{repo}\")}")
 }
 
+#' Converts a single slide to markdown
 #' @param slides A character vector of paths to slides to include in the slide show.
 #' @return A length-1 character vector of the pandoc markdown
 #'  Ordinarily these are in `/site/built` within a Carpentries repo
+#' @noRd
 slide_to_markdown <- function(slides){
     # output <- tools::file_path_sans_ext(nslide) |> paste0("_slides.html")
     lua_filter <- system.file("extdata", "split_slides.lua", package="CarpentriesSlides")

@@ -3,12 +3,19 @@ postprocess_filter <- system.file("extdata", "postprocess.lua", package="Carpent
 #' Converts a slide deck to an HTML slideshow
 #' @export
 #' @param repo Path to the Carpentries Workbench project
-make_slides <- function(repo, extra_flags = character()){
+#' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
+#' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
+make_slides <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
     slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
     }
     site <- file.path(repo, "site", "built")
+    config <- sandpaper::get_config(repo)
+    title <- config$title
+    if (isTRUE(verbose)){
+        cli::cli_alert_info('Workshop title is "{title}"')
+    }
 
     # Path to Varnish's built-in JS and CSS that handles stuff like the accordion expansion
     css_path <- system.file("pkgdown", "assets", "assets", "styles.css", package="varnish")
@@ -20,7 +27,7 @@ make_slides <- function(repo, extra_flags = character()){
         <script>feather.replace()</script>
     ') |> writeLines(js_fragment)
 
-    output <- file.path(repo, "slides.html")
+    output <- normalizePath(repo) |> file.path("slides.html")
     args <- sandpaper:::construct_pandoc_args(slides_md, output, to = "revealjs")
     to_delete <- which(args$options == "--mathjax")
     options = c(args$options[-to_delete],
@@ -43,11 +50,14 @@ make_slides <- function(repo, extra_flags = character()){
                 "--variable", "theme=foo",
                 # "--variable", "disableLayout=true",
                 # "--variable", "center=false",
-                # "--metadata", "title=Foo",
+                "--metadata", glue::glue("title={title}") |> shQuote(),
                 "--metadata", "lang=en",
                 extra_flags
             )
-    cli::cli_alert_info("Running pandoc with options: {options}")
+    if (isTRUE(verbose)){
+        options <- cli::cli_vec(options, list("vec-trunc" = Inf))
+        cli::cli_alert_info("Running pandoc with options: {options}")
+    }
     pandoc::pandoc_convert(
         file = slides_md,
         output = args$output,
@@ -56,7 +66,6 @@ make_slides <- function(repo, extra_flags = character()){
         # to = args$to,
         args = options
     )
-    cli::cli_alert_success("Slides are available at {.path {output}}")
 
     # Remove the callout-title from sections.
     # This occurs because of weird behaviour with the revealjs output type in pandoc,
@@ -70,4 +79,9 @@ make_slides <- function(repo, extra_flags = character()){
             xml2::`xml_attr<-`(node, "class", value=_)
     })
     xml2::write_html(document, output)
+
+    cli::cli_alert_success("Slides are available at {.path {output}}")
+    if (isTRUE(open)){
+        glue::glue("file://{output}") |> browseURL()
+    }
 }
