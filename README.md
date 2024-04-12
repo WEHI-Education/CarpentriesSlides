@@ -12,6 +12,11 @@ This tool generations a basic Reveal.JS slideshow from a Carpentries Workbench l
 
 From R:
 ```R
+options(repos = c(
+  carpentries = "https://carpentries.r-universe.dev/", 
+  CRAN = "https://cran.rstudio.com/"
+))
+
 remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
 ```
 
@@ -24,7 +29,7 @@ Start your R interpreter:
 workshop <- "/path/to/git-novice"
 
 # Convert the material to a markdown slide deck
-CarpentriesSlides::slides_to_markdown(workshop)
+CarpentriesSlides::make_md(workshop)
 
 # At this point, the package will print out the path to a markdown file within the repo
 # that you can edit if you want to add or remove material
@@ -35,7 +40,7 @@ CarpentriesSlides::make_slides(workshop)
 
 At this point, the package will print out something like:
 ```
-✔ Slides are available at /Users/milton.m/Programming/CarpentriesSlides/slides.html
+✔ Slides are available at /path/to/git-novice/slides.html
 ```
 
 You can then open this `slides.html` file in your browser and present them!
