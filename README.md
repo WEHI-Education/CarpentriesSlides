@@ -12,6 +12,11 @@ This tool generations a basic Reveal.JS slideshow from a Carpentries Workbench l
 
 From R:
 ```R
+options(repos = c(
+  carpentries = "https://carpentries.r-universe.dev/", 
+  CRAN = "https://cran.rstudio.com/"
+))
+
 remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
 ```
 

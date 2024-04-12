@@ -1,8 +1,13 @@
+postprocess_filter <- system.file("extdata", "postprocess.lua", package="CarpentriesSlides")
+
 #' Converts a slide deck to an HTML slideshow
 #' @export
 #' @param repo Path to the Carpentries Workbench project
 make_slides <- function(repo, extra_flags = character()){
     slides_md <- file.path(repo, "slides.md")
+    if (file.exists(slides_md) |> isFALSE()){
+        cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
+    }
     site <- file.path(repo, "site", "built")
 
     # Path to Varnish's built-in JS and CSS that handles stuff like the accordion expansion
@@ -15,10 +20,13 @@ make_slides <- function(repo, extra_flags = character()){
         <script>feather.replace()</script>
     ') |> writeLines(js_fragment)
 
-    output <- file.path("slides.html") |> normalizePath()
+    output <- file.path(repo, "slides.html")
     args <- sandpaper:::construct_pandoc_args(slides_md, output, to = "revealjs")
     to_delete <- which(args$options == "--mathjax")
     options = c(args$options[-to_delete],
+                # Inject our custom lua
+                "--lua-filter",
+                postprocess_filter,
                 # Look for figures in the lesson directory
                 "--resource-path", site,
                 # Only split where we indicated, not at headings
@@ -28,13 +36,13 @@ make_slides <- function(repo, extra_flags = character()){
                 # Include Carpentries CSS
                 "--css", css_path,
                 # Include Carpentries JS
-                "--include-in-header", js_fragment,
+                "--include-after-body", js_fragment,
                 # Custom CSS from this package
                 "--css", system.file("extdata", "carpentries_slides.css", package="CarpentriesSlides"),
                 # Use a more minimal Reveal.JS theme so it interferes less
                 "--variable", "theme=foo",
                 # "--variable", "disableLayout=true",
-                "--variable", "center=false",
+                # "--variable", "center=false",
                 # "--metadata", "title=Foo",
                 "--metadata", "lang=en",
                 extra_flags

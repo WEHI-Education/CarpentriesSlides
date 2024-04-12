@@ -1,20 +1,24 @@
 #' Generates a markdown slide deck from a Carpentries workbench project
 #' @export
 #' @param repo A length-1 character vector pointing to the root of a Carpentries workbench project
-slides_to_markdown <- function(repo){
+make_md <- function(repo, verbose = FALSE){
     # Ensure the markdown has been knitted
     sandpaper:::build_markdown(repo)
 
     built_dir <- file.path(repo, "site", "built")
     all_inputs <- built_dir |> 
         list.files(full.names = TRUE, pattern="^\\d\\d.+\\.md$")
-    cli::cli_alert_info("Converting: {all_inputs}")
+
+    if (isTRUE(verbose)){
+        cli::cli_alert_info("Converting: {all_inputs}")
+    }
 
     output <- file.path(repo, "slides.md")
     all_inputs |>
         purrr::map(slide_to_markdown) |>
         do.call(c, args = _) |>
         writeLines(output)
+
     cli::cli_alert_success("Slides can be found in {.path {output}}")
 }
 
