@@ -1,6 +1,3 @@
-package.path = package.path .. ";/Users/milton.m/Programming/logging/?.lua"
-local logging = require 'logging'
-
 function pandoc.List:indexOf(self, needle)
     for index, value in ipairs(self) do
         if value == needle then
@@ -19,27 +16,24 @@ function Pandoc(doc)
 
     -- Only keep certain elements: figures and challenges
     doc:walk({
-        Figure = function(figure)
-            pandoc.walk_block(figure, {
-                Image = function(image)
-                    -- If we already captured this as an Image,
-                    -- remove that, because a Figure is better
-                    previous = seen_images:indexOf(image)
-                    logging.info(previous)
-                    if previous ~= nil then
-                        seen_images:remove(previous)
-                    end
-
-                    table.insert(seen_images, image)
-                end
-            })
-            table.insert(slides, figure)
-            table.insert(slides, pandoc.HorizontalRule())
-        end,
         Image = function(image)
             -- Skip this if we've already seen it in a figure
             if not seen_images:includes(image) then
+                local caption = image.caption
+                local alt = image.attributes["alt"]
+                -- Remove the caption so that Pandoc doesn't convert it to an HTML <figure>
+                -- This ensures that the image is the top-level element
+                -- Then we can add r-stretch and the image will auto-resize
+                image.caption = {}
+                image.attributes["alt"] = nil
+                image.classes:insert("r-stretch")
+                if alt ~= nil and alt:len() > 0 then
+                    table.insert(slides, pandoc.Header(2, alt))
+                end
                 table.insert(slides, image)
+                if #caption > 0 then
+                    table.insert(slides, caption)
+                end
                 table.insert(slides, pandoc.HorizontalRule())
 
                 table.insert(seen_images, image)

@@ -14,6 +14,7 @@ make_slides <- function(repo, extra_flags = character(), verbose = FALSE, open =
     config <- sandpaper::get_config(repo)
     title <- config$title
     if (isTRUE(verbose)){
+        cli::cli_alert_info("Input markdown is {.path {slides_md}}")
         cli::cli_alert_info('Workshop title is "{title}"')
     }
 
@@ -54,17 +55,21 @@ make_slides <- function(repo, extra_flags = character(), verbose = FALSE, open =
                 "--metadata", "lang=en",
                 extra_flags
             )
-    if (isTRUE(verbose)){
-        options <- cli::cli_vec(options, list("vec-trunc" = Inf))
-        cli::cli_alert_info("Running pandoc with options: {options}")
-    }
-    pandoc::pandoc_convert(
+
+    pandoc_args <- list(
         file = slides_md,
         output = args$output,
         from  = args$from,
         to = args$to,
-        # to = args$to,
         args = options
+    )
+    if (isTRUE(verbose)){
+        cli::cli_alert_info("Running Pandoc with args:")
+        str(pandoc_args, vec.len=100)
+    }
+    do.call(
+        pandoc::pandoc_convert,
+        pandoc_args
     )
 
     # Remove the callout-title from sections.
