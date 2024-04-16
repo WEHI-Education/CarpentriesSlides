@@ -1,11 +1,11 @@
-postprocess_filter <- system.file("extdata", "postprocess.lua", package="CarpentriesSlides")
+post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
 
 #' Converts a slide deck to an HTML slideshow
 #' @export
 #' @param repo Path to the Carpentries Workbench project
 #' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
 #' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
-make_slides <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
+make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
     slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
@@ -34,7 +34,7 @@ make_slides <- function(repo, extra_flags = character(), verbose = FALSE, open =
     options = c(args$options[-to_delete],
                 # Inject our custom lua
                 "--lua-filter",
-                postprocess_filter,
+                post_reveal,
                 # Look for figures in the lesson directory
                 "--resource-path", site,
                 # Only split where we indicated, not at headings

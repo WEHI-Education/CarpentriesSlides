@@ -1,5 +1,11 @@
+pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
+
 make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose = FALSE, open = TRUE){
+    filter <- file.path(repo, "slides.md")
     slides_md <- file.path(repo, "slides.md")
+    if (file.exists(slides_md) |> isFALSE()){
+        cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
+    }
     slides_pptx <- file.path(repo, "slides.pptx")
     site <- file.path(repo, "site", "built")
 
@@ -8,12 +14,14 @@ make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose =
         file = slides_md,
         output = slides_pptx,
         from  = args$from,
+        to = "pptx",
         args = c(
             "--resource-path", site,
+            "--lua-filter", pptx_filter
         )
     )
 
-    if (!is.null(template)){
+    if (is.character(template)){
         # Add the template if provided
         pandoc_args$args <- c(
             pandoc_args$args,
@@ -22,6 +30,13 @@ make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose =
         )
     }
 
-    # TODO: add lua filter to strip out divs
-    # TODO run conversion
+    if (isTRUE(verbose)){
+        cli::cli_alert_info("Running Pandoc with args:")
+        str(pandoc_args, vec.len=100)
+    }
+
+    do.call(
+        pandoc::pandoc_convert,
+        pandoc_args
+    )
 }
