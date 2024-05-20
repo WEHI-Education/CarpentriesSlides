@@ -6,18 +6,16 @@ make_md <- function(repo, verbose = FALSE){
     # Ensure the markdown has been knitted
     sandpaper:::build_markdown(repo)
 
-    built_dir <- file.path(repo, "site", "built")
-    all_inputs <- built_dir |> 
-        list.files(full.names = TRUE, pattern=".*\\.md$") |>
-        # Remove the non-lesson content
-        stringr::str_subset("(LICENSE|CODE_OF_CONDUCT|index|links)\\.md$", negate = TRUE)
+    episodes <- sandpaper::get_episodes(repo) |>
+        stringr::str_replace(".Rmd", ".md") |>
+        file.path(repo, "site", "built", suffix = _)
 
     if (isTRUE(verbose)){
         cli::cli_alert_info("Converting: {all_inputs}")
     }
 
     output <- file.path(repo, "slides.md")
-    all_inputs |>
+    episodes |>
         purrr::map(ep_to_markdown) |>
         do.call(c, args = _) |>
         writeLines(output)
