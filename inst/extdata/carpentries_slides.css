@@ -31,3 +31,10 @@
 h1 {
     text-align: center;
 }
+
+h1.title {
+    /* Make the title slide stand out */
+    font-size: 60pt;
+    line-height: 60pt;
+    text-transform: uppercase;
+}

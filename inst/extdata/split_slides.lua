@@ -1,5 +1,6 @@
 function Pandoc(doc)
     local slides = pandoc.List({
+        -- We add each of the episode titles as a title slide
         pandoc.Header(1, doc.meta.title),
         pandoc.HorizontalRule()
     })

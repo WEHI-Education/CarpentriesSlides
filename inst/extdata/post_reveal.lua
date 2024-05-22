@@ -1,5 +1,19 @@
+function Pandoc(doc)
+    -- Add the title slide for the whole lesson
+    doc.blocks:insert(1, pandoc.Header(1, doc.meta.title, {
+        classes = "presentation-title"
+    }))
+    if doc.meta.subtitle ~= nil then
+        doc.blocks:insert(1, pandoc.Header(2, doc.meta.subtitle))
+    end
+    if doc.meta.author ~= nil then
+        doc.blocks:insert(1, pandoc.Header(2, doc.meta.author))
+    end
+    doc.blocks:insert(1, pandoc.HorizontalRule())
+end
+
 function Div(div)
-    -- Expand the solution box
+    -- Expand the solution box for challenges
     if div.classes:includes("collapse") then
         div.classes:insert("show")
         div.classes = div.classes:filter(function(cls) return cls ~= "collapse" end)
@@ -8,13 +22,16 @@ function Div(div)
 end
 
 -- TODO: fix the figure handling to add appropriate titles
---[[
 function Figure(fig)
+    local img = nil
+    -- Find the image inside the figure
     fig:walk({
-        Image = function(img) 
-            img      
+        Image = function(image) 
+            img = image
         end
     })
+    return img
+    --[[
     local caption = img.caption
     local alt = img.attributes["alt"]
     local ret = pandoc.List()
@@ -36,5 +53,5 @@ function Figure(fig)
         table.insert(ret, caption)
     end
     return ret
+    --]]
 end
-]]
