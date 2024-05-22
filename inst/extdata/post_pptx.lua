@@ -8,6 +8,14 @@ function Div(div)
                 return header
             end
         })
+    -- Likewise for discussions
+    elseif div.classes:includes("discussion") then
+        div = div:walk({
+            Header = function(header)
+                header.content:insert(1, "Discussion: ")
+                return header
+            end
+        })
     end
     -- Remove all classes and attributes from divs
     return div.content

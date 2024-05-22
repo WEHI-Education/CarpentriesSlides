@@ -1,10 +1,12 @@
+#' Path to the reveal JS postprocessing lua filter
 post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
 
 #' Converts a slide deck to an HTML slideshow
 #' @export
-#' @param repo Path to the Carpentries Workbench project
+#' @param repo Path to the git repository corresponding to a lesson that uses Carpentries Workbench.
 #' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
 #' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
+#' @param extra_flags Character vector. Extra arguments to pass to `pandoc` to modify the conversion process
 make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
     slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){

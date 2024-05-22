@@ -28,10 +28,14 @@ function Pandoc(doc)
                 table.insert(slides, challenge)
                 table.insert(slides, pandoc.HorizontalRule())
 
-                if solution ~= nil then
-                    table.insert(slides, solution)
-                    table.insert(slides, pandoc.HorizontalRule())
-                end
+                -- if solution ~= nil then
+                --     table.insert(slides, solution)
+                --     table.insert(slides, pandoc.HorizontalRule())
+                -- end
+            elseif div.classes:includes("discussion") then
+                -- Include discussions
+                table.insert(slides, div)
+                table.insert(slides, pandoc.HorizontalRule())
             end
         end
     })

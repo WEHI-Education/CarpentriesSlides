@@ -7,7 +7,9 @@
 make_reveal(repo, extra_flags = character(), verbose = FALSE, open = TRUE)
 }
 \arguments{
-\item{repo}{Path to the Carpentries Workbench project}
+\item{repo}{Path to the git repository corresponding to a lesson that uses Carpentries Workbench.}
+
+\item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process}
 
 \item{verbose}{Logical scalar. TRUE if additional but non-essential logging should be provided.}
 

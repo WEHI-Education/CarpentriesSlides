@@ -1,5 +1,9 @@
 pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
 
+#' Convert a slide deck to a PowerPoint presentation
+#' 
+#' @inheritParams make_reveal
+#' @export
 make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose = FALSE, open = TRUE){
     filter <- file.path(repo, "slides.md")
     slides_md <- file.path(repo, "slides.md")
@@ -17,7 +21,9 @@ make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose =
         to = "pptx",
         args = c(
             "--resource-path", site,
-            "--lua-filter", pptx_filter
+            "--lua-filter", pptx_filter,
+            # If we don't set a slide level, we don't get any "section header" slides
+            "--slide-level", "2"
         )
     )
 
