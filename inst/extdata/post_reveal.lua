@@ -30,8 +30,7 @@ function Figure(fig)
             img = image
         end
     })
-    return img
-    --[[
+
     local caption = img.caption
     local alt = img.attributes["alt"]
     local ret = pandoc.List()
@@ -41,17 +40,16 @@ function Figure(fig)
     img.attributes["alt"] = nil
     -- Then we can add r-stretch and the image will auto-resize
     img.classes:insert("r-stretch")
-    if alt ~= nil and alt:len() > 0 then
-        -- The alt text generally makes for a good title
-        table.insert(ret, pandoc.Header(2, alt))
-    elseif caption ~= nil and #caption > 0 then
-    end
+    -- if alt ~= nil and alt:len() > 0 then
+    --     -- The alt text generally makes for a good title
+    --     table.insert(ret, pandoc.Header(2, alt))
+    -- elseif caption ~= nil and #caption > 0 then
+    -- end
     table.insert(ret, img)
-    if #caption > 0 then
-        -- Add the caption as text under the image.
-        -- This is preferable to using an actual figure (see comment above)
-        table.insert(ret, caption)
-    end
+    -- if #caption > 0 then
+    --     -- Add the caption as text under the image.
+    --     -- This is preferable to using an actual figure (see comment above)
+    --     table.insert(ret, caption)
+    -- end
     return ret
-    --]]
 end

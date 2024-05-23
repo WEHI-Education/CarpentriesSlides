@@ -28,11 +28,28 @@
     pointer-events: all;
 }
 
-h1 {
+.reveal .slide img {
+    /* Center images */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.reveal .slide svg {
+    /* Center SVG images */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.reveal .slide h1 {
+    /* Center titles */
     text-align: center;
 }
 
-h1.title {
+.reveal h1.title {
     /* Make the title slide stand out */
     font-size: 60pt;
     line-height: 60pt;
