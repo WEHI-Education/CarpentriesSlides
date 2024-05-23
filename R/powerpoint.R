@@ -1,11 +1,10 @@
-pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
 
 #' Convert a slide deck to a PowerPoint presentation
 #' 
 #' @inheritParams make_reveal
 #' @export
 make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose = FALSE, open = TRUE){
-    filter <- file.path(repo, "slides.md")
+    pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
     slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")

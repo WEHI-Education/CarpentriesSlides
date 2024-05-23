@@ -1,5 +1,3 @@
-#' Path to the reveal JS postprocessing lua filter
-post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
 
 #' Converts a slide deck to an HTML slideshow
 #' @export
@@ -8,6 +6,9 @@ post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSli
 #' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
 #' @param extra_flags Character vector. Extra arguments to pass to `pandoc` to modify the conversion process
 make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
+    #' Path to the reveal JS postprocessing lua filter
+    post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
+
     slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
