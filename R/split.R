@@ -6,17 +6,17 @@ make_md <- function(repo, verbose = FALSE){
     # Ensure the markdown has been knitted
     sandpaper:::build_markdown(repo)
 
-    built_dir <- file.path(repo, "site", "built")
-    all_inputs <- built_dir |> 
-        list.files(full.names = TRUE, pattern="^\\d\\d.+\\.md$")
+    episodes <- sandpaper::get_episodes(repo) |>
+        stringr::str_replace(".Rmd", ".md") |>
+        file.path(repo, "site", "built", suffix = _)
 
     if (isTRUE(verbose)){
         cli::cli_alert_info("Converting: {all_inputs}")
     }
 
     output <- file.path(repo, "slides.md")
-    all_inputs |>
-        purrr::map(slide_to_markdown) |>
+    episodes |>
+        purrr::map(ep_to_markdown) |>
         do.call(c, args = _) |>
         writeLines(output)
 
@@ -25,24 +25,27 @@ make_md <- function(repo, verbose = FALSE){
 }
 
 #' Converts a single slide to markdown
-#' @param slides A character vector of paths to slides to include in the slide show.
-#' @return A length-1 character vector of the pandoc markdown
+#' @param slide A character scalar of an episode markdown file to include in the slide show.
 #'  Ordinarily these are in `/site/built` within a Carpentries repo
+#' @return A length-1 character vector of the pandoc markdown content.
 #' @noRd
-slide_to_markdown <- function(slides){
-    # output <- tools::file_path_sans_ext(nslide) |> paste0("_slides.html")
+ep_to_markdown <- function(episode){
     lua_filter <- system.file("extdata", "split_slides.lua", package="CarpentriesSlides")
-    format <- sandpaper:::construct_pandoc_args(slides, "foo.md", to = "markdown")$from
-    result <- pandoc::pandoc_convert(
-        file = slides,
-        # Convert to the same format
-        from = format,
-        to = format,
-        args = c(
-            # Split the slides appropriately
-            "--lua-filter", lua_filter
+    format <- sandpaper:::construct_pandoc_args(episode, "foo.md", to = "markdown")$from
+    tryCatch({
+        result <- pandoc::pandoc_convert(
+            file = episode,
+            # Convert to the same format
+            from = format,
+            to = format,
+            args = c(
+                # Split the slides appropriately
+                "--lua-filter", lua_filter
+            )
         )
-    )
+    }, error = function(e){
+        cli::cli_abort("Failed to convert episode {episode} with error:\n{e}")
+    })
 
     # Add a newline in case it's missing
     c(result, "\n")
