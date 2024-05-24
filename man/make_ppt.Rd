@@ -6,6 +6,7 @@
 \usage{
 make_ppt(
   repo,
+  slides_md = file.path(repo, "slides.md"),
   extra_flags = character(),
   template = NULL,
   verbose = FALSE,
@@ -15,12 +16,17 @@ make_ppt(
 \arguments{
 \item{repo}{Path to the git repository corresponding to a lesson that uses Carpentries Workbench.}
 
-\item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process
-Path to the reveal JS postprocessing lua filter}
+\item{slides_md}{Optional output from \link{make_md} indicating where the slide markdown source is found.
+By default, this function looks in the repo for the slides}
+
+\item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process}
 
 \item{verbose}{Logical scalar. TRUE if additional but non-essential logging should be provided.}
 
 \item{open}{Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.}
+}
+\value{
+The path to the output slides, invisibly.
 }
 \description{
 Convert a slide deck to a PowerPoint presentation

@@ -2,14 +2,26 @@
 #' Converts a slide deck to an HTML slideshow
 #' @export
 #' @param repo Path to the git repository corresponding to a lesson that uses Carpentries Workbench.
+#' @param slides_md Optional output from [make_md] indicating where the slide markdown source is found. 
+#'  By default, this function looks in the repo for the slides
+#' @param output An optional path indicating where the resulting slideshow should be written. 
+#'  Character scalar. If not provided, the slides will be saved into the lesson's git repository.
 #' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
 #' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
 #' @param extra_flags Character vector. Extra arguments to pass to `pandoc` to modify the conversion process
-make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open = TRUE){
+#' @return The path to the output slides, invisibly.
+make_reveal <- function(
+    repo,
+    slides_md = file.path(repo, "slides.md"),
+    output = normalizePath(repo) |> file.path("slides.html"),
+    extra_flags = character(),
+    verbose = FALSE,
+    open = TRUE
+){
     #' Path to the reveal JS postprocessing lua filter
     post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
 
-    slides_md <- file.path(repo, "slides.md")
+    
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
     }
@@ -31,7 +43,6 @@ make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open =
         <script>feather.replace()</script>
     ') |> writeLines(js_fragment)
 
-    output <- normalizePath(repo) |> file.path("slides.html")
     args <- sandpaper:::construct_pandoc_args(slides_md, output, to = "revealjs")
     to_delete <- which(args$options == "--mathjax")
     options = c(args$options[-to_delete],
@@ -92,4 +103,6 @@ make_reveal <- function(repo, extra_flags = character(), verbose = FALSE, open =
     if (isTRUE(open)){
         glue::glue("file://{output}") |> browseURL()
     }
+
+    invisible(output)
 }

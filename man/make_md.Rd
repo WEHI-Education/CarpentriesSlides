@@ -4,12 +4,18 @@
 \alias{make_md}
 \title{Generates a markdown slide deck from a Carpentries workbench project}
 \usage{
-make_md(repo, verbose = FALSE)
+make_md(repo, output = file.path(repo, "slides.md"), verbose = FALSE)
 }
 \arguments{
 \item{repo}{A length-1 character vector pointing to the root of a Carpentries workbench project}
 
+\item{output}{An optional path indicating where the resulting markdown should be written.
+Character scalar. If not provided, the document will be saved into the lesson's git repository.}
+
 \item{verbose}{Logical scalar. TRUE if additional but non-essential logging should be provided.}
+}
+\value{
+The path to the output markdown, invisibly.
 }
 \description{
 Generates a markdown slide deck from a Carpentries workbench project

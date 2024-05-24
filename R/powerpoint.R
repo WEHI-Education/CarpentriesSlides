@@ -2,10 +2,19 @@
 #' Convert a slide deck to a PowerPoint presentation
 #' 
 #' @inheritParams make_reveal
+#' @param slides_md Optional output from [make_md] indicating where the slide markdown source is found. 
+#'  By default, this function looks in the repo for the slides
 #' @export
-make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose = FALSE, open = TRUE){
+#' @return The path to the output slides, invisibly.
+make_ppt <- function(
+    repo,
+    slides_md = file.path(repo, "slides.md"),
+    extra_flags = character(),
+    template = NULL,
+    verbose = FALSE,
+    open = TRUE
+){
     pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
-    slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
     }
@@ -44,4 +53,8 @@ make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose =
         pandoc::pandoc_convert,
         pandoc_args
     )
+
+    if (open) browseURL(slides_pptx)
+
+    invisible(slides_pptx)
 }
