@@ -5,6 +5,9 @@ vignette: >
   %\VignetteIndexEntry{CarpentriesSlides}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - git-novice/slides.md
+  - git-novice/slides.html
 ---
 
 ```{css, echo=FALSE}
