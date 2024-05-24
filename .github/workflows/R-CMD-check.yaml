@@ -28,6 +28,10 @@ jobs:
             CRAN = "https://cran.rstudio.com/"
           ))' >> ~/.Rprofile
 
+      - name: Check repos
+        run: |
+          cat ~/.Rprofile
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
