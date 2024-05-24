@@ -9,7 +9,8 @@ make_reveal(repo, extra_flags = character(), verbose = FALSE, open = TRUE)
 \arguments{
 \item{repo}{Path to the git repository corresponding to a lesson that uses Carpentries Workbench.}
 
-\item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process}
+\item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process
+Path to the reveal JS postprocessing lua filter}
 
 \item{verbose}{Logical scalar. TRUE if additional but non-essential logging should be provided.}
 

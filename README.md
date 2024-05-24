@@ -1,12 +1,13 @@
 # Carpentries Slides
 
-This tool generations a basic Reveal.JS slideshow from a Carpentries Workbench lesson, in order to facilitate workshops.
+This package generates minimal slideshows from a Carpentries Workbench lesson, in order to facilitate teaching workshops.
 
 ## What is included?
 
 * A title slide for each episode
 * A slide for each figure in the lesson
 * A slide for each challenge block
+* A slide for each discussion point
 
 ## Installation
 
@@ -19,6 +20,10 @@ options(repos = c(
 
 remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
 ```
+
+## Documentation
+
+**Please visit <https://wehi-researchcomputing.github.io/CarpentriesSlides> for comprehensive documentation!**
 
 ## Usage
 
