@@ -36,6 +36,8 @@ For more discussion on this topic, see:
 * https://carpentries.slack.com/archives/C03DEQ5T2DA/p1699833900987289
 * https://github.com/carpentries/workbench/issues/78
 * https://github.com/carpentries/styles/issues/113
+* https://github.com/carpentries/instructor-training/issues/680
+* https://github.com/carpentries/instructor-training/issues/1000
 
 ### Why not add this feature to the Carpentries workbench directly?
 
