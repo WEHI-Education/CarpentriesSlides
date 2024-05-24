@@ -23,10 +23,10 @@ jobs:
 
       - name: Set the repositories
         run: |
-        echo 'options(repos = c(
-          carpentries = "https://carpentries.r-universe.dev/", 
-          CRAN = "https://cran.rstudio.com/"
-        ))' >> ~/.Rprofile
+          echo 'options(repos = c(
+            carpentries = "https://carpentries.r-universe.dev/", 
+            CRAN = "https://cran.rstudio.com/"
+          ))' >> ~/.Rprofile
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
