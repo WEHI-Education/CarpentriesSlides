@@ -57,6 +57,5 @@ Here is a preview of the resulting slides:
 ```{R}
 #| echo: FALSE
 # Preview the slides
-slides <- normalizePath("git-novice/slides.html")
-glue::glue("file://{slides}") |> knitr::include_url()
+knitr::include_url("git-novice/slides.html")
 ```
