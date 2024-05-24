@@ -1,0 +1,59 @@
+---
+title: "CarpentriesSlides"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CarpentriesSlides}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{css, echo=FALSE}
+pre.markdown {
+  max-height: 300px;
+  overflow-y: auto;
+}
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this vignette, we'll use the [Git Novice](https://github.com/swcarpentry/git-novice) lesson as an example.
+
+First, we need to obtain a copy of a Carpentries lesson:
+
+```{bash}
+git clone https://github.com/swcarpentry/git-novice.git
+```
+
+Then in R, we can convert the whole lesson to a markdown document:
+```{r}
+CarpentriesSlides::make_md("git-novice")
+```
+
+At this point, the path to the markdown presentation has been printed out, so we can manually edit the slides.
+For example, we might want to remove certain figures that we don't think are essential to the presentation.
+In particular, figures that demonstrate how to use a GUI application are generally not useful in the slides, because this usage should be demonstrated using live coding.
+
+Here is an example of the generated markdown:
+```{markdown}
+#| eval: FALSE
+#| file: git-novice/slides.md
+```
+
+Once we're happy with the content, we can convert the markdown to a Reveal JS slideshow, which is an HTML page:
+
+```{r}
+CarpentriesSlides::make_reveal("git-novice")
+```
+
+Here is a preview of the resulting slides:
+```{R}
+#| echo: FALSE
+# Preview the slides
+slides <- normalizePath("git-novice/slides.html")
+glue::glue("file://{slides}") |> knitr::include_url()
+```
