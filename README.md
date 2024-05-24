@@ -21,34 +21,9 @@ options(repos = c(
 remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
 ```
 
-## Documentation
+## Documentation and Usage
 
 **Please visit <https://wehi-researchcomputing.github.io/CarpentriesSlides> for comprehensive documentation!**
-
-## Usage
-
-Start your R interpreter:
-```R
-# This is the path to the Workbench lesson repository.
-# In this example, we're using git novice
-workshop <- "/path/to/git-novice"
-
-# Convert the material to a markdown slide deck
-CarpentriesSlides::make_md(workshop)
-
-# At this point, the package will print out the path to a markdown file within the repo
-# that you can edit if you want to add or remove material
-
-# Convert the markdown to HTML
-CarpentriesSlides::make_slides(workshop)
-```
-
-At this point, the package will print out something like:
-```
-✔ Slides are available at /path/to/git-novice/slides.html
-```
-
-You can then open this `slides.html` file in your browser and present them!
 
 ## FAQ
 ### But I thought Carpentries didn't allow slides?
