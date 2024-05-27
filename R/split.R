@@ -7,7 +7,7 @@ make_md <- function(repo, verbose = FALSE){
     sandpaper:::build_markdown(repo)
 
     episodes <- sandpaper::get_episodes(repo) |>
-        stringr::str_replace(".Rmd", ".md") |>
+        gsub(".Rmd", ".md", x = _, fixed = TRUE) |>
         file.path(repo, "site", "built", suffix = _)
 
     if (isTRUE(verbose)){
