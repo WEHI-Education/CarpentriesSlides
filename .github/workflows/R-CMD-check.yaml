@@ -30,9 +30,7 @@ jobs:
 
       - name: Install package
         run: |
-          ls
-          R -e '.libPaths()'
-          R CMD install .
+          R CMD INSTALL .
     
       - uses: r-lib/actions/check-r-package@v2
         with:
