@@ -28,7 +28,7 @@ jobs:
         run: |
           echo 'options(repos = c(
             carpentries = "https://carpentries.r-universe.dev/", 
-            CRAN = "https://cran.rstudio.com/"
+            CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"
           ))' >> ~/.Rprofile
 
       - name: Install package
