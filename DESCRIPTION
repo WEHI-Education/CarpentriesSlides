@@ -17,5 +17,6 @@ RoxygenNote: 7.3.1
 Imports: sandpaper, pandoc, varnish, glue, cli
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    rcmdcheck
 VignetteBuilder: knitr

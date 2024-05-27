@@ -94,7 +94,7 @@ make_reveal <- function(
     xml2::xml_find_all(document, "//section[contains(@class, 'callout-title')]") |>
     purrr::map(function(node){
         xml2::xml_attr(node, "class") |>
-            stringr::str_replace("callout-title", "") |>
+            gsub("callout-title", "", x = _, fixed = TRUE) |>
             xml2::`xml_attr<-`(node, "class", value=_)
     })
     xml2::write_html(document, output)
