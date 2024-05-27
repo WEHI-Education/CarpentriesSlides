@@ -26,17 +26,12 @@ jobs:
           echo 'options(repos = c(
             carpentries = "https://carpentries.r-universe.dev/", 
             CRAN = "https://cran.rstudio.com/"
-          ))' > ~/.Rprofile
+          ))' >> ~/.Rprofile
 
-      - name: Check repos
+      - name: Install package
         run: |
-          cat ~/.Rprofile
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
-
+          R CMD install .
+    
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
