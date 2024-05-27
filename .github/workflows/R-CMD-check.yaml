@@ -32,7 +32,9 @@ jobs:
           ))' >> ~/.Rprofile
 
       - name: Install package
-        run: install.packages(".", deps=TRUE)
+        run: |
+          install.packages("remotes")
+          remotes::install_local(dependencies = TRUE)
         shell: Rscript {0}
     
       - uses: r-lib/actions/check-r-package@v2
