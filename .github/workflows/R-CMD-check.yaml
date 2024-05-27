@@ -29,8 +29,8 @@ jobs:
           ))' >> ~/.Rprofile
 
       - name: Install package
-        run: |
-          R CMD INSTALL .
+        run: install.packages(".")
+        shell: Rscript {0}
     
       - uses: r-lib/actions/check-r-package@v2
         with:
