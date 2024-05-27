@@ -2,20 +2,29 @@
 #' Convert a slide deck to a PowerPoint presentation
 #' 
 #' @inheritParams make_reveal
+#' @param slides_md Optional output from [make_md] indicating where the slide markdown source is found. 
+#'  By default, this function looks in the repo for the slides
 #' @export
-make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose = FALSE, open = TRUE){
+#' @return The path to the output slides, invisibly.
+make_ppt <- function(
+    repo,
+    slides_md = file.path(repo, "slides.md"),
+    output = file.path(repo, "slides.pptx"),
+    extra_flags = character(),
+    template = NULL,
+    verbose = FALSE,
+    open = TRUE
+){
     pptx_filter <- system.file("extdata", "post_pptx.lua", package="CarpentriesSlides")
-    slides_md <- file.path(repo, "slides.md")
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
     }
-    slides_pptx <- file.path(repo, "slides.pptx")
     site <- file.path(repo, "site", "built")
 
-    args <- sandpaper:::construct_pandoc_args(slides_md, slides_pptx, to = "pptx")
+    args <- sandpaper:::construct_pandoc_args(slides_md, output, to = "pptx")
     pandoc_args <- list(
         file = slides_md,
-        output = slides_pptx,
+        output = output,
         from  = args$from,
         to = "pptx",
         args = c(
@@ -44,4 +53,8 @@ make_ppt <- function(repo, extra_flags = character(), template = NULL, verbose =
         pandoc::pandoc_convert,
         pandoc_args
     )
+
+    if (open) browseURL(output)
+
+    invisible(output)
 }

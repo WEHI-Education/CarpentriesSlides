@@ -1,8 +1,11 @@
 #' Generates a markdown slide deck from a Carpentries workbench project
 #' @export
 #' @param repo A length-1 character vector pointing to the root of a Carpentries workbench project
+#' @param output An optional path indicating where the resulting markdown should be written. 
+#'  Character scalar. If not provided, the document will be saved into the lesson's git repository.
 #' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
-make_md <- function(repo, verbose = FALSE){
+#' @return The path to the output markdown, invisibly.
+make_md <- function(repo, output = file.path(repo, "slides.md"), verbose = FALSE){
     # Ensure the markdown has been knitted
     sandpaper:::build_markdown(repo)
 
@@ -14,7 +17,6 @@ make_md <- function(repo, verbose = FALSE){
         cli::cli_alert_info("Converting: {all_inputs}")
     }
 
-    output <- file.path(repo, "slides.md")
     episodes |>
         purrr::map(ep_to_markdown) |>
         do.call(c, args = _) |>
@@ -22,6 +24,8 @@ make_md <- function(repo, verbose = FALSE){
 
     cli::cli_alert_success("Slides can be found in {.path {output}}")
     cli::cli_alert_success("Once you have made any necessary changes, you can build the slides using {.code make_slides(\"{repo}\")}")
+
+    invisible(output)
 }
 
 #' Converts a single slide to markdown

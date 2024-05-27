@@ -29,6 +29,11 @@ In this vignette, we'll use the [Git Novice](https://github.com/swcarpentry/git-
 First, we need to obtain a copy of a Carpentries lesson:
 
 ```{bash}
+#| echo: FALSE
+rm -rf git-novice
+```
+
+```{bash}
 git clone https://github.com/swcarpentry/git-novice.git
 ```
 
