@@ -7,6 +7,7 @@
 make_ppt(
   repo,
   slides_md = file.path(repo, "slides.md"),
+  output = file.path(repo, "slides.pptx"),
   extra_flags = character(),
   template = NULL,
   verbose = FALSE,
@@ -18,6 +19,9 @@ make_ppt(
 
 \item{slides_md}{Optional output from \link{make_md} indicating where the slide markdown source is found.
 By default, this function looks in the repo for the slides}
+
+\item{output}{An optional path indicating where the resulting slideshow should be written.
+Character scalar. If not provided, the slides will be saved into the lesson's git repository.}
 
 \item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process}
 

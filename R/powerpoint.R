@@ -9,6 +9,7 @@
 make_ppt <- function(
     repo,
     slides_md = file.path(repo, "slides.md"),
+    output = file.path(repo, "slides.pptx"),
     extra_flags = character(),
     template = NULL,
     verbose = FALSE,
@@ -18,13 +19,12 @@ make_ppt <- function(
     if (file.exists(slides_md) |> isFALSE()){
         cli::cli_abort("{.path {slides_md}} does not exist. Did you forget to run {.code make_md()}?")
     }
-    slides_pptx <- file.path(repo, "slides.pptx")
     site <- file.path(repo, "site", "built")
 
-    args <- sandpaper:::construct_pandoc_args(slides_md, slides_pptx, to = "pptx")
+    args <- sandpaper:::construct_pandoc_args(slides_md, output, to = "pptx")
     pandoc_args <- list(
         file = slides_md,
-        output = slides_pptx,
+        output = output,
         from  = args$from,
         to = "pptx",
         args = c(
@@ -54,7 +54,7 @@ make_ppt <- function(
         pandoc_args
     )
 
-    if (open) browseURL(slides_pptx)
+    if (open) browseURL(output)
 
-    invisible(slides_pptx)
+    invisible(output)
 }
