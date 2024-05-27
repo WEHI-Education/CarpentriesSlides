@@ -32,7 +32,7 @@ jobs:
           ))' >> ~/.Rprofile
 
       - name: Install package
-        run: install.packages(c(".", "rcmdcheck"))
+        run: install.packages(".", deps=TRUE)
         shell: Rscript {0}
     
       - uses: r-lib/actions/check-r-package@v2
