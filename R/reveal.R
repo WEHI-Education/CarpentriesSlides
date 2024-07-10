@@ -79,7 +79,7 @@ make_reveal <- function(
     )
     if (isTRUE(verbose)){
         cli::cli_alert_info("Running Pandoc with args:")
-        str(pandoc_args, vec.len=100)
+        utils::str(pandoc_args, vec.len=100)
     }
     do.call(
         pandoc::pandoc_convert,

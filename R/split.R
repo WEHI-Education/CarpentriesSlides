@@ -58,6 +58,7 @@ ep_to_markdown <- function(episode){
 }
 
 #' Return a character vector of markdown content for the agenda slide
+#' @noRd
 make_agenda <- function(repo){
     syllabus <- sandpaper::get_syllabus(repo)
     # Remove intro and ending
