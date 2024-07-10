@@ -51,7 +51,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_md</span><span class="op">(</span><span class="va">repo</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_md</span><span class="op">(</span><span class="va">repo</span>, output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">repo</span>, <span class="st">"slides.md"</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,10 +60,21 @@
 <dd><p>A length-1 character vector pointing to the root of a Carpentries workbench project</p></dd>
 
 
+<dt>output</dt>
+<dd><p>An optional path indicating where the resulting markdown should be written.
+Character scalar. If not provided, the document will be saved into the lesson's git repository.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical scalar. TRUE if additional but non-essential logging should be provided.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The path to the output markdown, invisibly.</p>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

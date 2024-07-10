@@ -98,854 +98,1062 @@ presentation. In particular, figures that demonstrate how to use a GUI
 application are generally not useful in the slides, because this usage
 should be demonstrated using live coding.</p>
 <p>Here is an example of the generated markdown:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu"># Automated Version Control</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>![Comic: a PhD student sends \"FINAL.doc\" to their supervisor, but</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>after several increasingly intense and frustrating rounds of comments</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>and revisions they end up with a file named</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>\"FINAL_rev.22.comments49.corrections.10.#@\$%WHYDIDCOMETOGRADSCHOOL????.doc\"](fig/phd101212s.png)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="al">![](fig/play-changes.svg)</span>{alt="Changes Are Saved Sequentially"}</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu"># Agenda</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ss">1. </span>Setting Up Git</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ss">2. </span>Creating a Repository</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ss">3. </span>Tracking Changes</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="ss">4. </span>Exploring History</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="ss">5. </span>Ignoring Things</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="ss">6. </span>Remotes in GitHub</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ss">7. </span>Collaborating</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="ss">8. </span>Conflicts</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="ss">9. </span>Open Science</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="ss">10. </span>Licensing</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="ss">11. </span>Citation</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="ss">12. </span>Hosting</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="ss">13. </span>Supplemental: Using Git from RStudio</span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="al">![](fig/versions.svg)</span>{alt="Different Versions Can be Saved"}</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>---</span>
 <span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="fu"># Automated Version Control</span></span>
 <span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="al">![](fig/merge.svg)</span>{alt="Multiple Versions Can be Merged"}</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="fu">## Paper Writing</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>::: overview</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="ss">-   </span>Understand the benefits of an automated version control system.</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="ss">-   </span>Understand the basics of how automated version control systems work.</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>:::</span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="ss">-   </span>Imagine you drafted an excellent paragraph for a paper you are</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>    writing, but later ruin it. How would you retrieve the *excellent*</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>    version of your conclusion? Is it even possible?</span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="ss">-   </span>Imagine you have 5 co-authors. How would you manage the changes and</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>    comments they make to your paper? If you use LibreOffice Writer or</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>    Microsoft Word, what happens if you accept changes made using the</span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>    <span class="in">`Track Changes`</span> option? Do you have a history of those changes?</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>:::</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>::: overview</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="ss">-   </span>What is version control and why should I use it?</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>:::</span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>![Comic: a PhD student sends \"FINAL.doc\" to their supervisor, but</span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>after several increasingly intense and frustrating rounds of comments</span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>and revisions they end up with a file named</span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>\"FINAL_rev.22.comments49.corrections.10.#@\$%WHYDIDCOMETOGRADSCHOOL????.doc\"](fig/phd101212s.png)</span>
 <span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a><span class="fu"># Setting Up Git</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a><span class="al">![](fig/play-changes.svg)</span>{alt="A diagram demonstrating how a single document grows as the result of sequential changes"}</span>
 <span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="fu"># Creating a Repository</span></span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a><span class="al">![](fig/motivatingexample.png)</span>{alt="motivatingexample"}</span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a><span class="fu">## Places to Create Git Repositories</span></span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>Along with tracking information about planets (the project we have</span>
-<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>already created), Dracula would also like to track information about</span>
-<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>moons. Despite Wolfman's concerns, Dracula creates a <span class="in">`moons`</span> project</span>
-<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>inside his <span class="in">`planets`</span> project with the following sequence of commands:</span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="al">![](fig/versions.svg)</span>{alt="A diagram with one source document that has been modified in two different ways to produce two different versions of the document"}</span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a><span class="al">![](fig/merge.svg)</span>{alt="A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions"}</span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a><span class="fu">## Paper Writing</span></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a><span class="ss">-   </span>Imagine you drafted an excellent paragraph for a paper you are</span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>    writing, but later ruin it. How would you retrieve the *excellent*</span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>    version of your conclusion? Is it even possible?</span>
 <span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop   <span class="co"># return to Desktop directory</span></span>
-<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a><span class="ex">$</span> cd planets     <span class="co"># go into planets directory, which is already a Git repository</span></span>
-<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># ensure the .git subdirectory is still present in the planets directory</span></span>
-<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="ex">$</span> mkdir moons    <span class="co"># make a subdirectory planets/moons</span></span>
-<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a><span class="ex">$</span> cd moons       <span class="co"># go into moons subdirectory</span></span>
-<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a><span class="ex">$</span> git init       <span class="co"># make the moons subdirectory a Git repository</span></span>
-<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># ensure the .git subdirectory is present indicating we have created a new Git repository</span></span>
-<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a>Is the <span class="in">`git init`</span> command, run inside the <span class="in">`moons`</span> subdirectory, required</span>
-<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a>for tracking files stored in the <span class="in">`moons`</span> subdirectory?</span>
-<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a><span class="fu">## Correcting `git init` Mistakes</span></span>
-<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a></span>
-<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a>Wolfman explains to Dracula how a nested repository is redundant and may</span>
-<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a>cause confusion down the road. Dracula would like to remove the nested</span>
-<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a>repository. How can Dracula undo his last <span class="in">`git init`</span> in the <span class="in">`moons`</span></span>
-<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a>subdirectory?</span>
-<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a>:::</span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a><span class="ss">-   </span>Imagine you have 5 co-authors. How would you manage the changes and</span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>    comments they make to your paper? If you use LibreOffice Writer or</span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>    Microsoft Word, what happens if you accept changes made using the</span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>    <span class="in">`Track Changes`</span> option? Do you have a history of those changes?</span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a>:::</span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a><span class="fu"># Setting Up Git</span></span>
+<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a>::: overview</span>
+<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a><span class="ss">-   </span>Configure <span class="in">`git`</span> the first time it is used on a computer.</span>
+<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a><span class="ss">-   </span>Understand the meaning of the <span class="in">`--global`</span> configuration flag.</span>
+<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a>:::</span>
+<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a>::: overview</span>
+<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a><span class="fu">## Questions</span></span>
 <span id="cb3-81"><a href="#cb3-81" tabindex="-1"></a></span>
-<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a><span class="ss">-   </span>How do I get set up to use Git?</span>
+<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a>:::</span>
 <span id="cb3-84"><a href="#cb3-84" tabindex="-1"></a></span>
-<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a><span class="fu"># Tracking Changes</span></span>
+<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-86"><a href="#cb3-86" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a><span class="al">![](fig/git-staging-area.svg)</span>{alt="The Git Staging Area"}</span>
-<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a></span>
+<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a><span class="fu"># Creating a Repository</span></span>
+<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a>::: overview</span>
+<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a><span class="fu">## Objectives</span></span>
 <span id="cb3-92"><a href="#cb3-92" tabindex="-1"></a></span>
-<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a><span class="al">![](fig/git-committing.svg)</span>{alt="The Git Commit Workflow"}</span>
-<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a></span>
-<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a><span class="ss">-   </span>Create a local Git repository.</span>
+<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a><span class="ss">-   </span>Describe the purpose of the <span class="in">`.git`</span> directory.</span>
+<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a>:::</span>
 <span id="cb3-96"><a href="#cb3-96" tabindex="-1"></a></span>
-<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a><span class="fu">## Choosing a Commit Message</span></span>
+<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a>::: overview</span>
+<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a><span class="fu">## Questions</span></span>
 <span id="cb3-99"><a href="#cb3-99" tabindex="-1"></a></span>
-<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a>Which of the following commit messages would be most appropriate for the</span>
-<span id="cb3-101"><a href="#cb3-101" tabindex="-1"></a>last commit made to <span class="in">`mars.txt`</span>?</span>
+<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a><span class="ss">-   </span>Where does Git store information?</span>
+<span id="cb3-101"><a href="#cb3-101" tabindex="-1"></a>:::</span>
 <span id="cb3-102"><a href="#cb3-102" tabindex="-1"></a></span>
-<span id="cb3-103"><a href="#cb3-103" tabindex="-1"></a><span class="ss">1.  </span>"Changes"</span>
-<span id="cb3-104"><a href="#cb3-104" tabindex="-1"></a><span class="ss">2.  </span>"Added line 'But the Mummy will appreciate the lack of humidity' to</span>
-<span id="cb3-105"><a href="#cb3-105" tabindex="-1"></a>    mars.txt"</span>
-<span id="cb3-106"><a href="#cb3-106" tabindex="-1"></a><span class="ss">3.  </span>"Discuss effects of Mars' climate on the Mummy"</span>
-<span id="cb3-107"><a href="#cb3-107" tabindex="-1"></a>:::</span>
+<span id="cb3-103"><a href="#cb3-103" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-104"><a href="#cb3-104" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" tabindex="-1"></a><span class="al">![](fig/motivatingexample.png)</span>{alt="The main elements of the story: Dracula, Wolfman, the Mummy, Mars, Pluto and The Moon"}</span>
+<span id="cb3-106"><a href="#cb3-106" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-108"><a href="#cb3-108" tabindex="-1"></a></span>
-<span id="cb3-109"><a href="#cb3-109" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-110"><a href="#cb3-110" tabindex="-1"></a></span>
-<span id="cb3-111"><a href="#cb3-111" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-112"><a href="#cb3-112" tabindex="-1"></a><span class="fu">## Committing Changes to Git</span></span>
-<span id="cb3-113"><a href="#cb3-113" tabindex="-1"></a></span>
-<span id="cb3-114"><a href="#cb3-114" tabindex="-1"></a>Which command(s) below would save the changes of <span class="in">`myfile.txt`</span> to my</span>
-<span id="cb3-115"><a href="#cb3-115" tabindex="-1"></a>local Git repository?</span>
+<span id="cb3-109"><a href="#cb3-109" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-110"><a href="#cb3-110" tabindex="-1"></a><span class="fu">## Places to Create Git Repositories</span></span>
+<span id="cb3-111"><a href="#cb3-111" tabindex="-1"></a></span>
+<span id="cb3-112"><a href="#cb3-112" tabindex="-1"></a>Along with tracking information about planets (the project we have</span>
+<span id="cb3-113"><a href="#cb3-113" tabindex="-1"></a>already created), Dracula would also like to track information about</span>
+<span id="cb3-114"><a href="#cb3-114" tabindex="-1"></a>moons. Despite Wolfman's concerns, Dracula creates a <span class="in">`moons`</span> project</span>
+<span id="cb3-115"><a href="#cb3-115" tabindex="-1"></a>inside his <span class="in">`planets`</span> project with the following sequence of commands:</span>
 <span id="cb3-116"><a href="#cb3-116" tabindex="-1"></a></span>
-<span id="cb3-117"><a href="#cb3-117" tabindex="-1"></a><span class="ss">1.  </span>``` bash</span>
-<span id="cb3-118"><a href="#cb3-118" tabindex="-1"></a>       $ git commit -m "my recent changes"</span>
-<span id="cb3-119"><a href="#cb3-119" tabindex="-1"></a>    <span class="in">```</span></span>
-<span id="cb3-120"><a href="#cb3-120" tabindex="-1"></a></span>
-<span id="cb3-121"><a href="#cb3-121" tabindex="-1"></a><span class="in">2.  ``` bash</span></span>
-<span id="cb3-122"><a href="#cb3-122" tabindex="-1"></a><span class="in">       $ git init myfile.txt</span></span>
-<span id="cb3-123"><a href="#cb3-123" tabindex="-1"></a><span class="in">       $ git commit -m "my recent changes"</span></span>
-<span id="cb3-124"><a href="#cb3-124" tabindex="-1"></a><span class="in">    ```</span></span>
-<span id="cb3-125"><a href="#cb3-125" tabindex="-1"></a></span>
-<span id="cb3-126"><a href="#cb3-126" tabindex="-1"></a><span class="ss">3.  </span>``` bash</span>
-<span id="cb3-127"><a href="#cb3-127" tabindex="-1"></a>       $ git add myfile.txt</span>
-<span id="cb3-128"><a href="#cb3-128" tabindex="-1"></a>       $ git commit -m "my recent changes"</span>
-<span id="cb3-129"><a href="#cb3-129" tabindex="-1"></a>    <span class="in">```</span></span>
-<span id="cb3-130"><a href="#cb3-130" tabindex="-1"></a></span>
-<span id="cb3-131"><a href="#cb3-131" tabindex="-1"></a><span class="in">4.  ``` bash</span></span>
-<span id="cb3-132"><a href="#cb3-132" tabindex="-1"></a><span class="in">       $ git commit -m myfile.txt "my recent changes"</span></span>
-<span id="cb3-133"><a href="#cb3-133" tabindex="-1"></a><span class="in">    ```</span></span>
-<span id="cb3-134"><a href="#cb3-134" tabindex="-1"></a>:::</span>
-<span id="cb3-135"><a href="#cb3-135" tabindex="-1"></a></span>
-<span id="cb3-136"><a href="#cb3-136" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-117"><a href="#cb3-117" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-118"><a href="#cb3-118" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop   <span class="co"># return to Desktop directory</span></span>
+<span id="cb3-119"><a href="#cb3-119" tabindex="-1"></a><span class="ex">$</span> cd planets     <span class="co"># go into planets directory, which is already a Git repository</span></span>
+<span id="cb3-120"><a href="#cb3-120" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># ensure the .git subdirectory is still present in the planets directory</span></span>
+<span id="cb3-121"><a href="#cb3-121" tabindex="-1"></a><span class="ex">$</span> mkdir moons    <span class="co"># make a subdirectory planets/moons</span></span>
+<span id="cb3-122"><a href="#cb3-122" tabindex="-1"></a><span class="ex">$</span> cd moons       <span class="co"># go into moons subdirectory</span></span>
+<span id="cb3-123"><a href="#cb3-123" tabindex="-1"></a><span class="ex">$</span> git init       <span class="co"># make the moons subdirectory a Git repository</span></span>
+<span id="cb3-124"><a href="#cb3-124" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># ensure the .git subdirectory is present indicating we have created a new Git repository</span></span>
+<span id="cb3-125"><a href="#cb3-125" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-126"><a href="#cb3-126" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" tabindex="-1"></a>Is the <span class="in">`git init`</span> command, run inside the <span class="in">`moons`</span> subdirectory, required</span>
+<span id="cb3-128"><a href="#cb3-128" tabindex="-1"></a>for tracking files stored in the <span class="in">`moons`</span> subdirectory?</span>
+<span id="cb3-129"><a href="#cb3-129" tabindex="-1"></a></span>
+<span id="cb3-130"><a href="#cb3-130" tabindex="-1"></a><span class="fu">## Correcting `git init` Mistakes</span></span>
+<span id="cb3-131"><a href="#cb3-131" tabindex="-1"></a></span>
+<span id="cb3-132"><a href="#cb3-132" tabindex="-1"></a>Wolfman explains to Dracula how a nested repository is redundant and may</span>
+<span id="cb3-133"><a href="#cb3-133" tabindex="-1"></a>cause confusion down the road. Dracula would like to go back to a single</span>
+<span id="cb3-134"><a href="#cb3-134" tabindex="-1"></a>git repository. How can Dracula undo his last <span class="in">`git init`</span> in the <span class="in">`moons`</span></span>
+<span id="cb3-135"><a href="#cb3-135" tabindex="-1"></a>subdirectory?</span>
+<span id="cb3-136"><a href="#cb3-136" tabindex="-1"></a>:::</span>
 <span id="cb3-137"><a href="#cb3-137" tabindex="-1"></a></span>
-<span id="cb3-138"><a href="#cb3-138" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-139"><a href="#cb3-139" tabindex="-1"></a><span class="fu">## Committing Multiple Files</span></span>
+<span id="cb3-138"><a href="#cb3-138" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-139"><a href="#cb3-139" tabindex="-1"></a></span>
 <span id="cb3-140"><a href="#cb3-140" tabindex="-1"></a></span>
-<span id="cb3-141"><a href="#cb3-141" tabindex="-1"></a>The staging area can hold changes from any number of files that you want</span>
-<span id="cb3-142"><a href="#cb3-142" tabindex="-1"></a>to commit as a single snapshot.</span>
-<span id="cb3-143"><a href="#cb3-143" tabindex="-1"></a></span>
-<span id="cb3-144"><a href="#cb3-144" tabindex="-1"></a><span class="ss">1.  </span>Add some text to <span class="in">`mars.txt`</span> noting your decision to consider Venus</span>
-<span id="cb3-145"><a href="#cb3-145" tabindex="-1"></a>    as a base</span>
-<span id="cb3-146"><a href="#cb3-146" tabindex="-1"></a><span class="ss">2.  </span>Create a new file <span class="in">`venus.txt`</span> with your initial thoughts about Venus</span>
-<span id="cb3-147"><a href="#cb3-147" tabindex="-1"></a>    as a base for you and your friends</span>
-<span id="cb3-148"><a href="#cb3-148" tabindex="-1"></a><span class="ss">3.  </span>Add changes from both files to the staging area, and commit those</span>
-<span id="cb3-149"><a href="#cb3-149" tabindex="-1"></a>    changes.</span>
-<span id="cb3-150"><a href="#cb3-150" tabindex="-1"></a>:::</span>
-<span id="cb3-151"><a href="#cb3-151" tabindex="-1"></a></span>
-<span id="cb3-152"><a href="#cb3-152" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-141"><a href="#cb3-141" tabindex="-1"></a><span class="fu"># Tracking Changes</span></span>
+<span id="cb3-142"><a href="#cb3-142" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" tabindex="-1"></a>::: overview</span>
+<span id="cb3-144"><a href="#cb3-144" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-145"><a href="#cb3-145" tabindex="-1"></a></span>
+<span id="cb3-146"><a href="#cb3-146" tabindex="-1"></a><span class="ss">-   </span>Go through the modify-add-commit cycle for one or more files.</span>
+<span id="cb3-147"><a href="#cb3-147" tabindex="-1"></a><span class="ss">-   </span>Explain where information is stored at each stage of that cycle.</span>
+<span id="cb3-148"><a href="#cb3-148" tabindex="-1"></a><span class="ss">-   </span>Distinguish between descriptive and non-descriptive commit messages.</span>
+<span id="cb3-149"><a href="#cb3-149" tabindex="-1"></a>:::</span>
+<span id="cb3-150"><a href="#cb3-150" tabindex="-1"></a></span>
+<span id="cb3-151"><a href="#cb3-151" tabindex="-1"></a>::: overview</span>
+<span id="cb3-152"><a href="#cb3-152" tabindex="-1"></a><span class="fu">## Questions</span></span>
 <span id="cb3-153"><a href="#cb3-153" tabindex="-1"></a></span>
-<span id="cb3-154"><a href="#cb3-154" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-155"><a href="#cb3-155" tabindex="-1"></a><span class="fu">## `bio` Repository</span></span>
-<span id="cb3-156"><a href="#cb3-156" tabindex="-1"></a></span>
-<span id="cb3-157"><a href="#cb3-157" tabindex="-1"></a><span class="ss">-   </span>Create a new Git repository on your computer called <span class="in">`bio`</span>.</span>
-<span id="cb3-158"><a href="#cb3-158" tabindex="-1"></a><span class="ss">-   </span>Write a three-line biography for yourself in a file called <span class="in">`me.txt`</span>,</span>
-<span id="cb3-159"><a href="#cb3-159" tabindex="-1"></a>    commit your changes</span>
-<span id="cb3-160"><a href="#cb3-160" tabindex="-1"></a><span class="ss">-   </span>Modify one line, add a fourth line</span>
-<span id="cb3-161"><a href="#cb3-161" tabindex="-1"></a><span class="ss">-   </span>Display the differences between its updated state and its original</span>
-<span id="cb3-162"><a href="#cb3-162" tabindex="-1"></a>    state.</span>
-<span id="cb3-163"><a href="#cb3-163" tabindex="-1"></a>:::</span>
+<span id="cb3-154"><a href="#cb3-154" tabindex="-1"></a><span class="ss">-   </span>How do I record changes in Git?</span>
+<span id="cb3-155"><a href="#cb3-155" tabindex="-1"></a><span class="ss">-   </span>How do I check the status of my version control repository?</span>
+<span id="cb3-156"><a href="#cb3-156" tabindex="-1"></a><span class="ss">-   </span>How do I record notes about what changes I made and why?</span>
+<span id="cb3-157"><a href="#cb3-157" tabindex="-1"></a>:::</span>
+<span id="cb3-158"><a href="#cb3-158" tabindex="-1"></a></span>
+<span id="cb3-159"><a href="#cb3-159" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-160"><a href="#cb3-160" tabindex="-1"></a></span>
+<span id="cb3-161"><a href="#cb3-161" tabindex="-1"></a><span class="al">![](fig/git-staging-area.svg)</span>{alt="A diagram showing how \"git add\" registers changes in the staging area, while \"git commit\" moves changes from the staging area to the repository"}</span>
+<span id="cb3-162"><a href="#cb3-162" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-164"><a href="#cb3-164" tabindex="-1"></a></span>
-<span id="cb3-165"><a href="#cb3-165" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-165"><a href="#cb3-165" tabindex="-1"></a><span class="al">![](fig/git-committing.svg)</span>{alt="A diagram showing two documents being separately staged using git add, before being combined into one commit using git commit"}</span>
 <span id="cb3-166"><a href="#cb3-166" tabindex="-1"></a></span>
-<span id="cb3-167"><a href="#cb3-167" tabindex="-1"></a></span>
-<span id="cb3-168"><a href="#cb3-168" tabindex="-1"></a><span class="fu"># Exploring History</span></span>
-<span id="cb3-169"><a href="#cb3-169" tabindex="-1"></a></span>
-<span id="cb3-170"><a href="#cb3-170" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-167"><a href="#cb3-167" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-168"><a href="#cb3-168" tabindex="-1"></a></span>
+<span id="cb3-169"><a href="#cb3-169" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-170"><a href="#cb3-170" tabindex="-1"></a><span class="fu">## Choosing a Commit Message</span></span>
 <span id="cb3-171"><a href="#cb3-171" tabindex="-1"></a></span>
-<span id="cb3-172"><a href="#cb3-172" tabindex="-1"></a><span class="al">![](fig/git-checkout.svg)</span>{alt="Git Checkout"}</span>
-<span id="cb3-173"><a href="#cb3-173" tabindex="-1"></a></span>
-<span id="cb3-174"><a href="#cb3-174" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-175"><a href="#cb3-175" tabindex="-1"></a></span>
-<span id="cb3-176"><a href="#cb3-176" tabindex="-1"></a><span class="al">![&lt;https://figshare.com/articles/How_Git_works_a_cartoon/1328266&gt;](fig/git_staging.svg)</span></span>
-<span id="cb3-177"><a href="#cb3-177" tabindex="-1"></a></span>
-<span id="cb3-178"><a href="#cb3-178" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-179"><a href="#cb3-179" tabindex="-1"></a></span>
-<span id="cb3-180"><a href="#cb3-180" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-181"><a href="#cb3-181" tabindex="-1"></a><span class="fu">## Recovering Older Versions of a File</span></span>
+<span id="cb3-172"><a href="#cb3-172" tabindex="-1"></a>Which of the following commit messages would be most appropriate for the</span>
+<span id="cb3-173"><a href="#cb3-173" tabindex="-1"></a>last commit made to <span class="in">`mars.txt`</span>?</span>
+<span id="cb3-174"><a href="#cb3-174" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" tabindex="-1"></a><span class="ss">1.  </span>"Changes"</span>
+<span id="cb3-176"><a href="#cb3-176" tabindex="-1"></a><span class="ss">2.  </span>"Added line 'But the Mummy will appreciate the lack of humidity' to</span>
+<span id="cb3-177"><a href="#cb3-177" tabindex="-1"></a>    mars.txt"</span>
+<span id="cb3-178"><a href="#cb3-178" tabindex="-1"></a><span class="ss">3.  </span>"Discuss effects of Mars' climate on the Mummy"</span>
+<span id="cb3-179"><a href="#cb3-179" tabindex="-1"></a>:::</span>
+<span id="cb3-180"><a href="#cb3-180" tabindex="-1"></a></span>
+<span id="cb3-181"><a href="#cb3-181" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-182"><a href="#cb3-182" tabindex="-1"></a></span>
-<span id="cb3-183"><a href="#cb3-183" tabindex="-1"></a>Jennifer has made changes to the Python script that she has been working</span>
-<span id="cb3-184"><a href="#cb3-184" tabindex="-1"></a>on for weeks, and the modifications she made this morning "broke" the</span>
-<span id="cb3-185"><a href="#cb3-185" tabindex="-1"></a>script and it no longer runs. She has spent \~ 1hr trying to fix it,</span>
-<span id="cb3-186"><a href="#cb3-186" tabindex="-1"></a>with no luck...</span>
-<span id="cb3-187"><a href="#cb3-187" tabindex="-1"></a></span>
-<span id="cb3-188"><a href="#cb3-188" tabindex="-1"></a>Luckily, she has been keeping track of her project's versions using Git!</span>
-<span id="cb3-189"><a href="#cb3-189" tabindex="-1"></a>Which commands below will let her recover the last committed version of</span>
-<span id="cb3-190"><a href="#cb3-190" tabindex="-1"></a>her Python script called <span class="in">`data_cruncher.py`</span>?</span>
-<span id="cb3-191"><a href="#cb3-191" tabindex="-1"></a></span>
-<span id="cb3-192"><a href="#cb3-192" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`$ git checkout HEAD`</span></span>
-<span id="cb3-193"><a href="#cb3-193" tabindex="-1"></a></span>
-<span id="cb3-194"><a href="#cb3-194" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`$ git checkout HEAD data_cruncher.py`</span></span>
-<span id="cb3-195"><a href="#cb3-195" tabindex="-1"></a></span>
-<span id="cb3-196"><a href="#cb3-196" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`$ git checkout HEAD~1 data_cruncher.py`</span></span>
+<span id="cb3-183"><a href="#cb3-183" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-184"><a href="#cb3-184" tabindex="-1"></a><span class="fu">## Committing Changes to Git</span></span>
+<span id="cb3-185"><a href="#cb3-185" tabindex="-1"></a></span>
+<span id="cb3-186"><a href="#cb3-186" tabindex="-1"></a>Which command(s) below would save the changes of <span class="in">`myfile.txt`</span> to my</span>
+<span id="cb3-187"><a href="#cb3-187" tabindex="-1"></a>local Git repository?</span>
+<span id="cb3-188"><a href="#cb3-188" tabindex="-1"></a></span>
+<span id="cb3-189"><a href="#cb3-189" tabindex="-1"></a><span class="ss">1.  </span>``` bash</span>
+<span id="cb3-190"><a href="#cb3-190" tabindex="-1"></a>       $ git commit -m "my recent changes"</span>
+<span id="cb3-191"><a href="#cb3-191" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb3-192"><a href="#cb3-192" tabindex="-1"></a></span>
+<span id="cb3-193"><a href="#cb3-193" tabindex="-1"></a><span class="in">2.  ``` bash</span></span>
+<span id="cb3-194"><a href="#cb3-194" tabindex="-1"></a><span class="in">       $ git init myfile.txt</span></span>
+<span id="cb3-195"><a href="#cb3-195" tabindex="-1"></a><span class="in">       $ git commit -m "my recent changes"</span></span>
+<span id="cb3-196"><a href="#cb3-196" tabindex="-1"></a><span class="in">    ```</span></span>
 <span id="cb3-197"><a href="#cb3-197" tabindex="-1"></a></span>
-<span id="cb3-198"><a href="#cb3-198" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`$ git checkout &lt;unique ID of last commit&gt; data_cruncher.py`</span></span>
-<span id="cb3-199"><a href="#cb3-199" tabindex="-1"></a></span>
-<span id="cb3-200"><a href="#cb3-200" tabindex="-1"></a><span class="ss">5.  </span>Both 2 and 4</span>
-<span id="cb3-201"><a href="#cb3-201" tabindex="-1"></a>:::</span>
+<span id="cb3-198"><a href="#cb3-198" tabindex="-1"></a><span class="ss">3.  </span>``` bash</span>
+<span id="cb3-199"><a href="#cb3-199" tabindex="-1"></a>       $ git add myfile.txt</span>
+<span id="cb3-200"><a href="#cb3-200" tabindex="-1"></a>       $ git commit -m "my recent changes"</span>
+<span id="cb3-201"><a href="#cb3-201" tabindex="-1"></a>    <span class="in">```</span></span>
 <span id="cb3-202"><a href="#cb3-202" tabindex="-1"></a></span>
-<span id="cb3-203"><a href="#cb3-203" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-204"><a href="#cb3-204" tabindex="-1"></a></span>
-<span id="cb3-205"><a href="#cb3-205" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-206"><a href="#cb3-206" tabindex="-1"></a><span class="fu">## Reverting a Commit</span></span>
+<span id="cb3-203"><a href="#cb3-203" tabindex="-1"></a><span class="in">4.  ``` bash</span></span>
+<span id="cb3-204"><a href="#cb3-204" tabindex="-1"></a><span class="in">       $ git commit -m myfile.txt "my recent changes"</span></span>
+<span id="cb3-205"><a href="#cb3-205" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb3-206"><a href="#cb3-206" tabindex="-1"></a>:::</span>
 <span id="cb3-207"><a href="#cb3-207" tabindex="-1"></a></span>
-<span id="cb3-208"><a href="#cb3-208" tabindex="-1"></a>Jennifer is collaborating with colleagues on her Python script. She</span>
-<span id="cb3-209"><a href="#cb3-209" tabindex="-1"></a>realizes her last commit to the project's repository contained an error,</span>
-<span id="cb3-210"><a href="#cb3-210" tabindex="-1"></a>and wants to undo it. Jennifer wants to undo correctly so everyone in</span>
-<span id="cb3-211"><a href="#cb3-211" tabindex="-1"></a>the project's repository gets the correct change. The command</span>
-<span id="cb3-212"><a href="#cb3-212" tabindex="-1"></a><span class="in">`git revert [erroneous commit ID]`</span> will create a new commit that</span>
-<span id="cb3-213"><a href="#cb3-213" tabindex="-1"></a>reverses the erroneous commit.</span>
-<span id="cb3-214"><a href="#cb3-214" tabindex="-1"></a></span>
-<span id="cb3-215"><a href="#cb3-215" tabindex="-1"></a>The command <span class="in">`git revert`</span> is different from <span class="in">`git checkout [commit ID]`</span></span>
-<span id="cb3-216"><a href="#cb3-216" tabindex="-1"></a>because <span class="in">`git checkout`</span> returns the files not yet committed within the</span>
-<span id="cb3-217"><a href="#cb3-217" tabindex="-1"></a>local repository to a previous state, whereas <span class="in">`git revert`</span> reverses</span>
-<span id="cb3-218"><a href="#cb3-218" tabindex="-1"></a>changes committed to the local and project repositories.</span>
-<span id="cb3-219"><a href="#cb3-219" tabindex="-1"></a></span>
-<span id="cb3-220"><a href="#cb3-220" tabindex="-1"></a>Below are the right steps and explanations for Jennifer to use</span>
-<span id="cb3-221"><a href="#cb3-221" tabindex="-1"></a><span class="in">`git revert`</span>, what is the missing command?</span>
-<span id="cb3-222"><a href="#cb3-222" tabindex="-1"></a></span>
-<span id="cb3-223"><a href="#cb3-223" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`________ # Look at the git history of the project to find the commit ID`</span></span>
-<span id="cb3-224"><a href="#cb3-224" tabindex="-1"></a></span>
-<span id="cb3-225"><a href="#cb3-225" tabindex="-1"></a><span class="ss">2.  </span>Copy the ID (the first few characters of the ID, e.g. 0b1d055).</span>
-<span id="cb3-226"><a href="#cb3-226" tabindex="-1"></a></span>
-<span id="cb3-227"><a href="#cb3-227" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`git revert [commit ID]`</span></span>
+<span id="cb3-208"><a href="#cb3-208" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-209"><a href="#cb3-209" tabindex="-1"></a></span>
+<span id="cb3-210"><a href="#cb3-210" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-211"><a href="#cb3-211" tabindex="-1"></a><span class="fu">## Committing Multiple Files</span></span>
+<span id="cb3-212"><a href="#cb3-212" tabindex="-1"></a></span>
+<span id="cb3-213"><a href="#cb3-213" tabindex="-1"></a>The staging area can hold changes from any number of files that you want</span>
+<span id="cb3-214"><a href="#cb3-214" tabindex="-1"></a>to commit as a single snapshot.</span>
+<span id="cb3-215"><a href="#cb3-215" tabindex="-1"></a></span>
+<span id="cb3-216"><a href="#cb3-216" tabindex="-1"></a><span class="ss">1.  </span>Add some text to <span class="in">`mars.txt`</span> noting your decision to consider Venus</span>
+<span id="cb3-217"><a href="#cb3-217" tabindex="-1"></a>    as a base</span>
+<span id="cb3-218"><a href="#cb3-218" tabindex="-1"></a><span class="ss">2.  </span>Create a new file <span class="in">`venus.txt`</span> with your initial thoughts about Venus</span>
+<span id="cb3-219"><a href="#cb3-219" tabindex="-1"></a>    as a base for you and your friends</span>
+<span id="cb3-220"><a href="#cb3-220" tabindex="-1"></a><span class="ss">3.  </span>Add changes from both files to the staging area, and commit those</span>
+<span id="cb3-221"><a href="#cb3-221" tabindex="-1"></a>    changes.</span>
+<span id="cb3-222"><a href="#cb3-222" tabindex="-1"></a>:::</span>
+<span id="cb3-223"><a href="#cb3-223" tabindex="-1"></a></span>
+<span id="cb3-224"><a href="#cb3-224" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-225"><a href="#cb3-225" tabindex="-1"></a></span>
+<span id="cb3-226"><a href="#cb3-226" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-227"><a href="#cb3-227" tabindex="-1"></a><span class="fu">## `bio` Repository</span></span>
 <span id="cb3-228"><a href="#cb3-228" tabindex="-1"></a></span>
-<span id="cb3-229"><a href="#cb3-229" tabindex="-1"></a><span class="ss">4.  </span>Type in the new commit message.</span>
-<span id="cb3-230"><a href="#cb3-230" tabindex="-1"></a></span>
-<span id="cb3-231"><a href="#cb3-231" tabindex="-1"></a><span class="ss">5.  </span>Save and close</span>
-<span id="cb3-232"><a href="#cb3-232" tabindex="-1"></a>:::</span>
-<span id="cb3-233"><a href="#cb3-233" tabindex="-1"></a></span>
-<span id="cb3-234"><a href="#cb3-234" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-235"><a href="#cb3-235" tabindex="-1"></a></span>
-<span id="cb3-236"><a href="#cb3-236" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-237"><a href="#cb3-237" tabindex="-1"></a><span class="fu">## Understanding Workflow and History</span></span>
+<span id="cb3-229"><a href="#cb3-229" tabindex="-1"></a><span class="ss">-   </span>Create a new Git repository on your computer called <span class="in">`bio`</span>.</span>
+<span id="cb3-230"><a href="#cb3-230" tabindex="-1"></a><span class="ss">-   </span>Write a three-line biography for yourself in a file called <span class="in">`me.txt`</span>,</span>
+<span id="cb3-231"><a href="#cb3-231" tabindex="-1"></a>    commit your changes</span>
+<span id="cb3-232"><a href="#cb3-232" tabindex="-1"></a><span class="ss">-   </span>Modify one line, add a fourth line</span>
+<span id="cb3-233"><a href="#cb3-233" tabindex="-1"></a><span class="ss">-   </span>Display the differences between its updated state and its original</span>
+<span id="cb3-234"><a href="#cb3-234" tabindex="-1"></a>    state.</span>
+<span id="cb3-235"><a href="#cb3-235" tabindex="-1"></a>:::</span>
+<span id="cb3-236"><a href="#cb3-236" tabindex="-1"></a></span>
+<span id="cb3-237"><a href="#cb3-237" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-238"><a href="#cb3-238" tabindex="-1"></a></span>
-<span id="cb3-239"><a href="#cb3-239" tabindex="-1"></a>What is the output of the last command in</span>
-<span id="cb3-240"><a href="#cb3-240" tabindex="-1"></a></span>
-<span id="cb3-241"><a href="#cb3-241" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-242"><a href="#cb3-242" tabindex="-1"></a><span class="ex">$</span> cd planets</span>
-<span id="cb3-243"><a href="#cb3-243" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"Venus is beautiful and full of love"</span> <span class="op">&gt;</span> venus.txt</span>
-<span id="cb3-244"><a href="#cb3-244" tabindex="-1"></a><span class="ex">$</span> git add venus.txt</span>
-<span id="cb3-245"><a href="#cb3-245" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"Venus is too hot to be suitable as a base"</span> <span class="op">&gt;&gt;</span> venus.txt</span>
-<span id="cb3-246"><a href="#cb3-246" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Comment on Venus as an unsuitable base"</span></span>
-<span id="cb3-247"><a href="#cb3-247" tabindex="-1"></a><span class="ex">$</span> git checkout HEAD venus.txt</span>
-<span id="cb3-248"><a href="#cb3-248" tabindex="-1"></a><span class="ex">$</span> cat venus.txt <span class="co">#this will print the contents of venus.txt to the screen</span></span>
-<span id="cb3-249"><a href="#cb3-249" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-239"><a href="#cb3-239" tabindex="-1"></a></span>
+<span id="cb3-240"><a href="#cb3-240" tabindex="-1"></a><span class="fu"># Exploring History</span></span>
+<span id="cb3-241"><a href="#cb3-241" tabindex="-1"></a></span>
+<span id="cb3-242"><a href="#cb3-242" tabindex="-1"></a>::: overview</span>
+<span id="cb3-243"><a href="#cb3-243" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-244"><a href="#cb3-244" tabindex="-1"></a></span>
+<span id="cb3-245"><a href="#cb3-245" tabindex="-1"></a><span class="ss">-   </span>Explain what the HEAD of a repository is and how to use it.</span>
+<span id="cb3-246"><a href="#cb3-246" tabindex="-1"></a><span class="ss">-   </span>Identify and use Git commit numbers.</span>
+<span id="cb3-247"><a href="#cb3-247" tabindex="-1"></a><span class="ss">-   </span>Compare various versions of tracked files.</span>
+<span id="cb3-248"><a href="#cb3-248" tabindex="-1"></a><span class="ss">-   </span>Restore old versions of files.</span>
+<span id="cb3-249"><a href="#cb3-249" tabindex="-1"></a>:::</span>
 <span id="cb3-250"><a href="#cb3-250" tabindex="-1"></a></span>
-<span id="cb3-251"><a href="#cb3-251" tabindex="-1"></a><span class="ss">1.  </span>``` output</span>
-<span id="cb3-252"><a href="#cb3-252" tabindex="-1"></a>      Venus is too hot to be suitable as a base</span>
-<span id="cb3-253"><a href="#cb3-253" tabindex="-1"></a>    <span class="in">```</span></span>
-<span id="cb3-254"><a href="#cb3-254" tabindex="-1"></a></span>
-<span id="cb3-255"><a href="#cb3-255" tabindex="-1"></a><span class="in">2.  ``` output</span></span>
-<span id="cb3-256"><a href="#cb3-256" tabindex="-1"></a><span class="in">      Venus is beautiful and full of love</span></span>
-<span id="cb3-257"><a href="#cb3-257" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb3-251"><a href="#cb3-251" tabindex="-1"></a>::: overview</span>
+<span id="cb3-252"><a href="#cb3-252" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-253"><a href="#cb3-253" tabindex="-1"></a></span>
+<span id="cb3-254"><a href="#cb3-254" tabindex="-1"></a><span class="ss">-   </span>How can I identify old versions of files?</span>
+<span id="cb3-255"><a href="#cb3-255" tabindex="-1"></a><span class="ss">-   </span>How do I review my changes?</span>
+<span id="cb3-256"><a href="#cb3-256" tabindex="-1"></a><span class="ss">-   </span>How can I recover old versions of files?</span>
+<span id="cb3-257"><a href="#cb3-257" tabindex="-1"></a>:::</span>
 <span id="cb3-258"><a href="#cb3-258" tabindex="-1"></a></span>
-<span id="cb3-259"><a href="#cb3-259" tabindex="-1"></a><span class="ss">3.  </span>``` output</span>
-<span id="cb3-260"><a href="#cb3-260" tabindex="-1"></a>      Venus is beautiful and full of love</span>
-<span id="cb3-261"><a href="#cb3-261" tabindex="-1"></a>      Venus is too hot to be suitable as a base</span>
-<span id="cb3-262"><a href="#cb3-262" tabindex="-1"></a>    <span class="in">```</span></span>
-<span id="cb3-263"><a href="#cb3-263" tabindex="-1"></a></span>
-<span id="cb3-264"><a href="#cb3-264" tabindex="-1"></a><span class="in">4.  ``` output</span></span>
-<span id="cb3-265"><a href="#cb3-265" tabindex="-1"></a><span class="in">      Error because you have changed venus.txt without committing the changes</span></span>
-<span id="cb3-266"><a href="#cb3-266" tabindex="-1"></a><span class="in">    ```</span></span>
-<span id="cb3-267"><a href="#cb3-267" tabindex="-1"></a>:::</span>
+<span id="cb3-259"><a href="#cb3-259" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-260"><a href="#cb3-260" tabindex="-1"></a></span>
+<span id="cb3-261"><a href="#cb3-261" tabindex="-1"></a><span class="al">![](fig/git-checkout.svg)</span>{alt="A diagram showing how git checkout HEAD~1 can be used to restore the previous version of two files"}</span>
+<span id="cb3-262"><a href="#cb3-262" tabindex="-1"></a></span>
+<span id="cb3-263"><a href="#cb3-263" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-264"><a href="#cb3-264" tabindex="-1"></a></span>
+<span id="cb3-265"><a href="#cb3-265" tabindex="-1"></a>![A diagram showing the entire git workflow: local changes are staged</span>
+<span id="cb3-266"><a href="#cb3-266" tabindex="-1"></a>using git add, applied to the local repository using git commit, and can</span>
+<span id="cb3-267"><a href="#cb3-267" tabindex="-1"></a>be restored from the repository using git checkout](fig/git_staging.svg)</span>
 <span id="cb3-268"><a href="#cb3-268" tabindex="-1"></a></span>
 <span id="cb3-269"><a href="#cb3-269" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-270"><a href="#cb3-270" tabindex="-1"></a></span>
 <span id="cb3-271"><a href="#cb3-271" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-272"><a href="#cb3-272" tabindex="-1"></a><span class="fu">## Checking Understanding of `git diff`</span></span>
+<span id="cb3-272"><a href="#cb3-272" tabindex="-1"></a><span class="fu">## Recovering Older Versions of a File</span></span>
 <span id="cb3-273"><a href="#cb3-273" tabindex="-1"></a></span>
-<span id="cb3-274"><a href="#cb3-274" tabindex="-1"></a>Consider this command: <span class="in">`git diff HEAD~9 mars.txt`</span>. What do you predict</span>
-<span id="cb3-275"><a href="#cb3-275" tabindex="-1"></a>this command will do if you execute it? What happens when you do execute</span>
-<span id="cb3-276"><a href="#cb3-276" tabindex="-1"></a>it? Why?</span>
-<span id="cb3-277"><a href="#cb3-277" tabindex="-1"></a></span>
-<span id="cb3-278"><a href="#cb3-278" tabindex="-1"></a>Try another command, <span class="in">`git diff [ID] mars.txt`</span>, where <span class="sc">\[</span>ID<span class="sc">\]</span> is replaced</span>
-<span id="cb3-279"><a href="#cb3-279" tabindex="-1"></a>with the unique identifier for your most recent commit. What do you</span>
-<span id="cb3-280"><a href="#cb3-280" tabindex="-1"></a>think will happen, and what does happen?</span>
-<span id="cb3-281"><a href="#cb3-281" tabindex="-1"></a>:::</span>
+<span id="cb3-274"><a href="#cb3-274" tabindex="-1"></a>Jennifer has made changes to the Python script that she has been working</span>
+<span id="cb3-275"><a href="#cb3-275" tabindex="-1"></a>on for weeks, and the modifications she made this morning "broke" the</span>
+<span id="cb3-276"><a href="#cb3-276" tabindex="-1"></a>script and it no longer runs. She has spent \~ 1hr trying to fix it,</span>
+<span id="cb3-277"><a href="#cb3-277" tabindex="-1"></a>with no luck...</span>
+<span id="cb3-278"><a href="#cb3-278" tabindex="-1"></a></span>
+<span id="cb3-279"><a href="#cb3-279" tabindex="-1"></a>Luckily, she has been keeping track of her project's versions using Git!</span>
+<span id="cb3-280"><a href="#cb3-280" tabindex="-1"></a>Which commands below will let her recover the last committed version of</span>
+<span id="cb3-281"><a href="#cb3-281" tabindex="-1"></a>her Python script called <span class="in">`data_cruncher.py`</span>?</span>
 <span id="cb3-282"><a href="#cb3-282" tabindex="-1"></a></span>
-<span id="cb3-283"><a href="#cb3-283" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-283"><a href="#cb3-283" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`$ git checkout HEAD`</span></span>
 <span id="cb3-284"><a href="#cb3-284" tabindex="-1"></a></span>
-<span id="cb3-285"><a href="#cb3-285" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-286"><a href="#cb3-286" tabindex="-1"></a><span class="fu">## Getting Rid of Staged Changes</span></span>
-<span id="cb3-287"><a href="#cb3-287" tabindex="-1"></a></span>
-<span id="cb3-288"><a href="#cb3-288" tabindex="-1"></a><span class="in">`git checkout`</span> can be used to restore a previous commit when unstaged</span>
-<span id="cb3-289"><a href="#cb3-289" tabindex="-1"></a>changes have been made, but will it also work for changes that have been</span>
-<span id="cb3-290"><a href="#cb3-290" tabindex="-1"></a>staged but not committed? Make a change to <span class="in">`mars.txt`</span>, add that change</span>
-<span id="cb3-291"><a href="#cb3-291" tabindex="-1"></a>using <span class="in">`git add`</span>, then use <span class="in">`git checkout`</span> to see if you can remove your</span>
-<span id="cb3-292"><a href="#cb3-292" tabindex="-1"></a>change.</span>
-<span id="cb3-293"><a href="#cb3-293" tabindex="-1"></a>:::</span>
-<span id="cb3-294"><a href="#cb3-294" tabindex="-1"></a></span>
-<span id="cb3-295"><a href="#cb3-295" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-296"><a href="#cb3-296" tabindex="-1"></a></span>
-<span id="cb3-297"><a href="#cb3-297" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-298"><a href="#cb3-298" tabindex="-1"></a><span class="fu">## Explore and Summarize Histories</span></span>
-<span id="cb3-299"><a href="#cb3-299" tabindex="-1"></a></span>
-<span id="cb3-300"><a href="#cb3-300" tabindex="-1"></a>Exploring history is an important part of Git, and often it is a</span>
-<span id="cb3-301"><a href="#cb3-301" tabindex="-1"></a>challenge to find the right commit ID, especially if the commit is from</span>
-<span id="cb3-302"><a href="#cb3-302" tabindex="-1"></a>several months ago.</span>
-<span id="cb3-303"><a href="#cb3-303" tabindex="-1"></a></span>
-<span id="cb3-304"><a href="#cb3-304" tabindex="-1"></a>Imagine the <span class="in">`planets`</span> project has more than 50 files. You would like to</span>
-<span id="cb3-305"><a href="#cb3-305" tabindex="-1"></a>find a commit that modifies some specific text in <span class="in">`mars.txt`</span>. When you</span>
-<span id="cb3-306"><a href="#cb3-306" tabindex="-1"></a>type <span class="in">`git log`</span>, a very long list appeared. How can you narrow down the</span>
-<span id="cb3-307"><a href="#cb3-307" tabindex="-1"></a>search?</span>
-<span id="cb3-308"><a href="#cb3-308" tabindex="-1"></a></span>
-<span id="cb3-309"><a href="#cb3-309" tabindex="-1"></a>Recall that the <span class="in">`git diff`</span> command allows us to explore one specific</span>
-<span id="cb3-310"><a href="#cb3-310" tabindex="-1"></a>file, e.g., <span class="in">`git diff mars.txt`</span>. We can apply a similar idea here.</span>
-<span id="cb3-311"><a href="#cb3-311" tabindex="-1"></a></span>
-<span id="cb3-312"><a href="#cb3-312" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-313"><a href="#cb3-313" tabindex="-1"></a><span class="ex">$</span> git log mars.txt</span>
-<span id="cb3-314"><a href="#cb3-314" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-285"><a href="#cb3-285" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`$ git checkout HEAD data_cruncher.py`</span></span>
+<span id="cb3-286"><a href="#cb3-286" tabindex="-1"></a></span>
+<span id="cb3-287"><a href="#cb3-287" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`$ git checkout HEAD~1 data_cruncher.py`</span></span>
+<span id="cb3-288"><a href="#cb3-288" tabindex="-1"></a></span>
+<span id="cb3-289"><a href="#cb3-289" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`$ git checkout &lt;unique ID of last commit&gt; data_cruncher.py`</span></span>
+<span id="cb3-290"><a href="#cb3-290" tabindex="-1"></a></span>
+<span id="cb3-291"><a href="#cb3-291" tabindex="-1"></a><span class="ss">5.  </span>Both 2 and 4</span>
+<span id="cb3-292"><a href="#cb3-292" tabindex="-1"></a>:::</span>
+<span id="cb3-293"><a href="#cb3-293" tabindex="-1"></a></span>
+<span id="cb3-294"><a href="#cb3-294" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-295"><a href="#cb3-295" tabindex="-1"></a></span>
+<span id="cb3-296"><a href="#cb3-296" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-297"><a href="#cb3-297" tabindex="-1"></a><span class="fu">## Reverting a Commit</span></span>
+<span id="cb3-298"><a href="#cb3-298" tabindex="-1"></a></span>
+<span id="cb3-299"><a href="#cb3-299" tabindex="-1"></a>Jennifer is collaborating with colleagues on her Python script. She</span>
+<span id="cb3-300"><a href="#cb3-300" tabindex="-1"></a>realizes her last commit to the project's repository contained an error,</span>
+<span id="cb3-301"><a href="#cb3-301" tabindex="-1"></a>and wants to undo it. Jennifer wants to undo correctly so everyone in</span>
+<span id="cb3-302"><a href="#cb3-302" tabindex="-1"></a>the project's repository gets the correct change. The command</span>
+<span id="cb3-303"><a href="#cb3-303" tabindex="-1"></a><span class="in">`git revert [erroneous commit ID]`</span> will create a new commit that</span>
+<span id="cb3-304"><a href="#cb3-304" tabindex="-1"></a>reverses the erroneous commit.</span>
+<span id="cb3-305"><a href="#cb3-305" tabindex="-1"></a></span>
+<span id="cb3-306"><a href="#cb3-306" tabindex="-1"></a>The command <span class="in">`git revert`</span> is different from <span class="in">`git checkout [commit ID]`</span></span>
+<span id="cb3-307"><a href="#cb3-307" tabindex="-1"></a>because <span class="in">`git checkout`</span> returns the files not yet committed within the</span>
+<span id="cb3-308"><a href="#cb3-308" tabindex="-1"></a>local repository to a previous state, whereas <span class="in">`git revert`</span> reverses</span>
+<span id="cb3-309"><a href="#cb3-309" tabindex="-1"></a>changes committed to the local and project repositories.</span>
+<span id="cb3-310"><a href="#cb3-310" tabindex="-1"></a></span>
+<span id="cb3-311"><a href="#cb3-311" tabindex="-1"></a>Below are the right steps and explanations for Jennifer to use</span>
+<span id="cb3-312"><a href="#cb3-312" tabindex="-1"></a><span class="in">`git revert`</span>, what is the missing command?</span>
+<span id="cb3-313"><a href="#cb3-313" tabindex="-1"></a></span>
+<span id="cb3-314"><a href="#cb3-314" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`________ # Look at the git history of the project to find the commit ID`</span></span>
 <span id="cb3-315"><a href="#cb3-315" tabindex="-1"></a></span>
-<span id="cb3-316"><a href="#cb3-316" tabindex="-1"></a>Unfortunately some of these commit messages are very ambiguous, e.g.,</span>
-<span id="cb3-317"><a href="#cb3-317" tabindex="-1"></a><span class="in">`update files`</span>. How can you search through these files?</span>
-<span id="cb3-318"><a href="#cb3-318" tabindex="-1"></a></span>
-<span id="cb3-319"><a href="#cb3-319" tabindex="-1"></a>Both <span class="in">`git diff`</span> and <span class="in">`git log`</span> are very useful and they summarize a</span>
-<span id="cb3-320"><a href="#cb3-320" tabindex="-1"></a>different part of the history for you. Is it possible to combine both?</span>
-<span id="cb3-321"><a href="#cb3-321" tabindex="-1"></a>Let's try the following:</span>
-<span id="cb3-322"><a href="#cb3-322" tabindex="-1"></a></span>
-<span id="cb3-323"><a href="#cb3-323" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-324"><a href="#cb3-324" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> mars.txt</span>
-<span id="cb3-325"><a href="#cb3-325" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-316"><a href="#cb3-316" tabindex="-1"></a><span class="ss">2.  </span>Copy the ID (the first few characters of the ID, e.g. 0b1d055).</span>
+<span id="cb3-317"><a href="#cb3-317" tabindex="-1"></a></span>
+<span id="cb3-318"><a href="#cb3-318" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`git revert [commit ID]`</span></span>
+<span id="cb3-319"><a href="#cb3-319" tabindex="-1"></a></span>
+<span id="cb3-320"><a href="#cb3-320" tabindex="-1"></a><span class="ss">4.  </span>Type in the new commit message.</span>
+<span id="cb3-321"><a href="#cb3-321" tabindex="-1"></a></span>
+<span id="cb3-322"><a href="#cb3-322" tabindex="-1"></a><span class="ss">5.  </span>Save and close</span>
+<span id="cb3-323"><a href="#cb3-323" tabindex="-1"></a>:::</span>
+<span id="cb3-324"><a href="#cb3-324" tabindex="-1"></a></span>
+<span id="cb3-325"><a href="#cb3-325" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-326"><a href="#cb3-326" tabindex="-1"></a></span>
-<span id="cb3-327"><a href="#cb3-327" tabindex="-1"></a>You should get a long list of output, and you should be able to see both</span>
-<span id="cb3-328"><a href="#cb3-328" tabindex="-1"></a>commit messages and the difference between each commit.</span>
+<span id="cb3-327"><a href="#cb3-327" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-328"><a href="#cb3-328" tabindex="-1"></a><span class="fu">## Understanding Workflow and History</span></span>
 <span id="cb3-329"><a href="#cb3-329" tabindex="-1"></a></span>
-<span id="cb3-330"><a href="#cb3-330" tabindex="-1"></a>Question: What does the following command do?</span>
+<span id="cb3-330"><a href="#cb3-330" tabindex="-1"></a>What is the output of the last command in</span>
 <span id="cb3-331"><a href="#cb3-331" tabindex="-1"></a></span>
 <span id="cb3-332"><a href="#cb3-332" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-333"><a href="#cb3-333" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> HEAD~9 <span class="pp">*</span>.txt</span>
-<span id="cb3-334"><a href="#cb3-334" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-335"><a href="#cb3-335" tabindex="-1"></a>:::</span>
-<span id="cb3-336"><a href="#cb3-336" tabindex="-1"></a></span>
-<span id="cb3-337"><a href="#cb3-337" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-338"><a href="#cb3-338" tabindex="-1"></a></span>
-<span id="cb3-339"><a href="#cb3-339" tabindex="-1"></a></span>
-<span id="cb3-340"><a href="#cb3-340" tabindex="-1"></a><span class="fu"># Ignoring Things</span></span>
+<span id="cb3-333"><a href="#cb3-333" tabindex="-1"></a><span class="ex">$</span> cd planets</span>
+<span id="cb3-334"><a href="#cb3-334" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"Venus is beautiful and full of love"</span> <span class="op">&gt;</span> venus.txt</span>
+<span id="cb3-335"><a href="#cb3-335" tabindex="-1"></a><span class="ex">$</span> git add venus.txt</span>
+<span id="cb3-336"><a href="#cb3-336" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"Venus is too hot to be suitable as a base"</span> <span class="op">&gt;&gt;</span> venus.txt</span>
+<span id="cb3-337"><a href="#cb3-337" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Comment on Venus as an unsuitable base"</span></span>
+<span id="cb3-338"><a href="#cb3-338" tabindex="-1"></a><span class="ex">$</span> git checkout HEAD venus.txt</span>
+<span id="cb3-339"><a href="#cb3-339" tabindex="-1"></a><span class="ex">$</span> cat venus.txt <span class="co">#this will print the contents of venus.txt to the screen</span></span>
+<span id="cb3-340"><a href="#cb3-340" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-341"><a href="#cb3-341" tabindex="-1"></a></span>
-<span id="cb3-342"><a href="#cb3-342" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-343"><a href="#cb3-343" tabindex="-1"></a></span>
-<span id="cb3-344"><a href="#cb3-344" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-345"><a href="#cb3-345" tabindex="-1"></a><span class="fu">## Ignoring Nested Files</span></span>
-<span id="cb3-346"><a href="#cb3-346" tabindex="-1"></a></span>
-<span id="cb3-347"><a href="#cb3-347" tabindex="-1"></a>Given a directory structure that looks like:</span>
-<span id="cb3-348"><a href="#cb3-348" tabindex="-1"></a></span>
-<span id="cb3-349"><a href="#cb3-349" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-350"><a href="#cb3-350" tabindex="-1"></a><span class="ex">results/data</span></span>
-<span id="cb3-351"><a href="#cb3-351" tabindex="-1"></a><span class="ex">results/plots</span></span>
-<span id="cb3-352"><a href="#cb3-352" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-353"><a href="#cb3-353" tabindex="-1"></a></span>
-<span id="cb3-354"><a href="#cb3-354" tabindex="-1"></a>How would you ignore only <span class="in">`results/plots`</span> and not <span class="in">`results/data`</span>?</span>
-<span id="cb3-355"><a href="#cb3-355" tabindex="-1"></a>:::</span>
-<span id="cb3-356"><a href="#cb3-356" tabindex="-1"></a></span>
-<span id="cb3-357"><a href="#cb3-357" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-358"><a href="#cb3-358" tabindex="-1"></a></span>
-<span id="cb3-359"><a href="#cb3-359" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-360"><a href="#cb3-360" tabindex="-1"></a><span class="fu">## Including Specific Files</span></span>
+<span id="cb3-342"><a href="#cb3-342" tabindex="-1"></a><span class="ss">1.  </span>``` output</span>
+<span id="cb3-343"><a href="#cb3-343" tabindex="-1"></a>      Venus is too hot to be suitable as a base</span>
+<span id="cb3-344"><a href="#cb3-344" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb3-345"><a href="#cb3-345" tabindex="-1"></a></span>
+<span id="cb3-346"><a href="#cb3-346" tabindex="-1"></a><span class="in">2.  ``` output</span></span>
+<span id="cb3-347"><a href="#cb3-347" tabindex="-1"></a><span class="in">      Venus is beautiful and full of love</span></span>
+<span id="cb3-348"><a href="#cb3-348" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb3-349"><a href="#cb3-349" tabindex="-1"></a></span>
+<span id="cb3-350"><a href="#cb3-350" tabindex="-1"></a><span class="ss">3.  </span>``` output</span>
+<span id="cb3-351"><a href="#cb3-351" tabindex="-1"></a>      Venus is beautiful and full of love</span>
+<span id="cb3-352"><a href="#cb3-352" tabindex="-1"></a>      Venus is too hot to be suitable as a base</span>
+<span id="cb3-353"><a href="#cb3-353" tabindex="-1"></a>    <span class="in">```</span></span>
+<span id="cb3-354"><a href="#cb3-354" tabindex="-1"></a></span>
+<span id="cb3-355"><a href="#cb3-355" tabindex="-1"></a><span class="in">4.  ``` output</span></span>
+<span id="cb3-356"><a href="#cb3-356" tabindex="-1"></a><span class="in">      Error because you have changed venus.txt without committing the changes</span></span>
+<span id="cb3-357"><a href="#cb3-357" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb3-358"><a href="#cb3-358" tabindex="-1"></a>:::</span>
+<span id="cb3-359"><a href="#cb3-359" tabindex="-1"></a></span>
+<span id="cb3-360"><a href="#cb3-360" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-361"><a href="#cb3-361" tabindex="-1"></a></span>
-<span id="cb3-362"><a href="#cb3-362" tabindex="-1"></a>How would you ignore all <span class="in">`.csv`</span> files in your root directory except for</span>
-<span id="cb3-363"><a href="#cb3-363" tabindex="-1"></a><span class="in">`final.csv`</span>? Hint: Find out what <span class="in">`!`</span> (the exclamation point operator)</span>
-<span id="cb3-364"><a href="#cb3-364" tabindex="-1"></a>does</span>
-<span id="cb3-365"><a href="#cb3-365" tabindex="-1"></a>:::</span>
-<span id="cb3-366"><a href="#cb3-366" tabindex="-1"></a></span>
-<span id="cb3-367"><a href="#cb3-367" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-362"><a href="#cb3-362" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-363"><a href="#cb3-363" tabindex="-1"></a><span class="fu">## Checking Understanding of `git diff`</span></span>
+<span id="cb3-364"><a href="#cb3-364" tabindex="-1"></a></span>
+<span id="cb3-365"><a href="#cb3-365" tabindex="-1"></a>Consider this command: <span class="in">`git diff HEAD~9 mars.txt`</span>. What do you predict</span>
+<span id="cb3-366"><a href="#cb3-366" tabindex="-1"></a>this command will do if you execute it? What happens when you do execute</span>
+<span id="cb3-367"><a href="#cb3-367" tabindex="-1"></a>it? Why?</span>
 <span id="cb3-368"><a href="#cb3-368" tabindex="-1"></a></span>
-<span id="cb3-369"><a href="#cb3-369" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-370"><a href="#cb3-370" tabindex="-1"></a><span class="fu">## Ignoring Nested Files: Variation</span></span>
-<span id="cb3-371"><a href="#cb3-371" tabindex="-1"></a></span>
-<span id="cb3-372"><a href="#cb3-372" tabindex="-1"></a>Given a directory structure that looks similar to the earlier Nested</span>
-<span id="cb3-373"><a href="#cb3-373" tabindex="-1"></a>Files exercise, but with a slightly different directory structure:</span>
-<span id="cb3-374"><a href="#cb3-374" tabindex="-1"></a></span>
-<span id="cb3-375"><a href="#cb3-375" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-376"><a href="#cb3-376" tabindex="-1"></a><span class="ex">results/data</span></span>
-<span id="cb3-377"><a href="#cb3-377" tabindex="-1"></a><span class="ex">results/images</span></span>
-<span id="cb3-378"><a href="#cb3-378" tabindex="-1"></a><span class="ex">results/plots</span></span>
-<span id="cb3-379"><a href="#cb3-379" tabindex="-1"></a><span class="ex">results/analysis</span></span>
-<span id="cb3-380"><a href="#cb3-380" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-381"><a href="#cb3-381" tabindex="-1"></a></span>
-<span id="cb3-382"><a href="#cb3-382" tabindex="-1"></a>How would you ignore all of the contents in the results folder, but not</span>
-<span id="cb3-383"><a href="#cb3-383" tabindex="-1"></a><span class="in">`results/data`</span>?</span>
-<span id="cb3-384"><a href="#cb3-384" tabindex="-1"></a></span>
-<span id="cb3-385"><a href="#cb3-385" tabindex="-1"></a>Hint: think a bit about how you created an exception with the <span class="in">`!`</span></span>
-<span id="cb3-386"><a href="#cb3-386" tabindex="-1"></a>operator before.</span>
-<span id="cb3-387"><a href="#cb3-387" tabindex="-1"></a>:::</span>
-<span id="cb3-388"><a href="#cb3-388" tabindex="-1"></a></span>
-<span id="cb3-389"><a href="#cb3-389" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-369"><a href="#cb3-369" tabindex="-1"></a>Try another command, <span class="in">`git diff [ID] mars.txt`</span>, where <span class="sc">\[</span>ID<span class="sc">\]</span> is replaced</span>
+<span id="cb3-370"><a href="#cb3-370" tabindex="-1"></a>with the unique identifier for your most recent commit. What do you</span>
+<span id="cb3-371"><a href="#cb3-371" tabindex="-1"></a>think will happen, and what does happen?</span>
+<span id="cb3-372"><a href="#cb3-372" tabindex="-1"></a>:::</span>
+<span id="cb3-373"><a href="#cb3-373" tabindex="-1"></a></span>
+<span id="cb3-374"><a href="#cb3-374" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-375"><a href="#cb3-375" tabindex="-1"></a></span>
+<span id="cb3-376"><a href="#cb3-376" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-377"><a href="#cb3-377" tabindex="-1"></a><span class="fu">## Getting Rid of Staged Changes</span></span>
+<span id="cb3-378"><a href="#cb3-378" tabindex="-1"></a></span>
+<span id="cb3-379"><a href="#cb3-379" tabindex="-1"></a><span class="in">`git checkout`</span> can be used to restore a previous commit when unstaged</span>
+<span id="cb3-380"><a href="#cb3-380" tabindex="-1"></a>changes have been made, but will it also work for changes that have been</span>
+<span id="cb3-381"><a href="#cb3-381" tabindex="-1"></a>staged but not committed? Make a change to <span class="in">`mars.txt`</span>, add that change</span>
+<span id="cb3-382"><a href="#cb3-382" tabindex="-1"></a>using <span class="in">`git add`</span>, then use <span class="in">`git checkout`</span> to see if you can remove your</span>
+<span id="cb3-383"><a href="#cb3-383" tabindex="-1"></a>change.</span>
+<span id="cb3-384"><a href="#cb3-384" tabindex="-1"></a>:::</span>
+<span id="cb3-385"><a href="#cb3-385" tabindex="-1"></a></span>
+<span id="cb3-386"><a href="#cb3-386" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-387"><a href="#cb3-387" tabindex="-1"></a></span>
+<span id="cb3-388"><a href="#cb3-388" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-389"><a href="#cb3-389" tabindex="-1"></a><span class="fu">## Explore and Summarize Histories</span></span>
 <span id="cb3-390"><a href="#cb3-390" tabindex="-1"></a></span>
-<span id="cb3-391"><a href="#cb3-391" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-392"><a href="#cb3-392" tabindex="-1"></a><span class="fu">## Ignoring all data Files in a Directory</span></span>
-<span id="cb3-393"><a href="#cb3-393" tabindex="-1"></a></span>
-<span id="cb3-394"><a href="#cb3-394" tabindex="-1"></a>Assuming you have an empty .gitignore file, and given a directory</span>
-<span id="cb3-395"><a href="#cb3-395" tabindex="-1"></a>structure that looks like:</span>
-<span id="cb3-396"><a href="#cb3-396" tabindex="-1"></a></span>
-<span id="cb3-397"><a href="#cb3-397" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-398"><a href="#cb3-398" tabindex="-1"></a><span class="ex">results/data/position/gps/a.csv</span></span>
-<span id="cb3-399"><a href="#cb3-399" tabindex="-1"></a><span class="ex">results/data/position/gps/b.csv</span></span>
-<span id="cb3-400"><a href="#cb3-400" tabindex="-1"></a><span class="ex">results/data/position/gps/c.csv</span></span>
-<span id="cb3-401"><a href="#cb3-401" tabindex="-1"></a><span class="ex">results/data/position/gps/info.txt</span></span>
-<span id="cb3-402"><a href="#cb3-402" tabindex="-1"></a><span class="ex">results/plots</span></span>
-<span id="cb3-403"><a href="#cb3-403" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-404"><a href="#cb3-404" tabindex="-1"></a></span>
-<span id="cb3-405"><a href="#cb3-405" tabindex="-1"></a>What's the shortest <span class="in">`.gitignore`</span> rule you could write to ignore all</span>
-<span id="cb3-406"><a href="#cb3-406" tabindex="-1"></a><span class="in">`.csv`</span> files in <span class="in">`result/data/position/gps`</span>? Do not ignore the</span>
-<span id="cb3-407"><a href="#cb3-407" tabindex="-1"></a><span class="in">`info.txt`</span>.</span>
-<span id="cb3-408"><a href="#cb3-408" tabindex="-1"></a>:::</span>
+<span id="cb3-391"><a href="#cb3-391" tabindex="-1"></a>Exploring history is an important part of Git, and often it is a</span>
+<span id="cb3-392"><a href="#cb3-392" tabindex="-1"></a>challenge to find the right commit ID, especially if the commit is from</span>
+<span id="cb3-393"><a href="#cb3-393" tabindex="-1"></a>several months ago.</span>
+<span id="cb3-394"><a href="#cb3-394" tabindex="-1"></a></span>
+<span id="cb3-395"><a href="#cb3-395" tabindex="-1"></a>Imagine the <span class="in">`planets`</span> project has more than 50 files. You would like to</span>
+<span id="cb3-396"><a href="#cb3-396" tabindex="-1"></a>find a commit that modifies some specific text in <span class="in">`mars.txt`</span>. When you</span>
+<span id="cb3-397"><a href="#cb3-397" tabindex="-1"></a>type <span class="in">`git log`</span>, a very long list appeared. How can you narrow down the</span>
+<span id="cb3-398"><a href="#cb3-398" tabindex="-1"></a>search?</span>
+<span id="cb3-399"><a href="#cb3-399" tabindex="-1"></a></span>
+<span id="cb3-400"><a href="#cb3-400" tabindex="-1"></a>Recall that the <span class="in">`git diff`</span> command allows us to explore one specific</span>
+<span id="cb3-401"><a href="#cb3-401" tabindex="-1"></a>file, e.g., <span class="in">`git diff mars.txt`</span>. We can apply a similar idea here.</span>
+<span id="cb3-402"><a href="#cb3-402" tabindex="-1"></a></span>
+<span id="cb3-403"><a href="#cb3-403" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-404"><a href="#cb3-404" tabindex="-1"></a><span class="ex">$</span> git log mars.txt</span>
+<span id="cb3-405"><a href="#cb3-405" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-406"><a href="#cb3-406" tabindex="-1"></a></span>
+<span id="cb3-407"><a href="#cb3-407" tabindex="-1"></a>Unfortunately some of these commit messages are very ambiguous, e.g.,</span>
+<span id="cb3-408"><a href="#cb3-408" tabindex="-1"></a><span class="in">`update files`</span>. How can you search through these files?</span>
 <span id="cb3-409"><a href="#cb3-409" tabindex="-1"></a></span>
-<span id="cb3-410"><a href="#cb3-410" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-411"><a href="#cb3-411" tabindex="-1"></a></span>
-<span id="cb3-412"><a href="#cb3-412" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-413"><a href="#cb3-413" tabindex="-1"></a><span class="fu">## Ignoring all data Files in the repository</span></span>
-<span id="cb3-414"><a href="#cb3-414" tabindex="-1"></a></span>
-<span id="cb3-415"><a href="#cb3-415" tabindex="-1"></a>Let us assume you have many <span class="in">`.csv`</span> files in different subdirectories of</span>
-<span id="cb3-416"><a href="#cb3-416" tabindex="-1"></a>your repository. For example, you might have:</span>
+<span id="cb3-410"><a href="#cb3-410" tabindex="-1"></a>Both <span class="in">`git diff`</span> and <span class="in">`git log`</span> are very useful and they summarize a</span>
+<span id="cb3-411"><a href="#cb3-411" tabindex="-1"></a>different part of the history for you. Is it possible to combine both?</span>
+<span id="cb3-412"><a href="#cb3-412" tabindex="-1"></a>Let's try the following:</span>
+<span id="cb3-413"><a href="#cb3-413" tabindex="-1"></a></span>
+<span id="cb3-414"><a href="#cb3-414" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-415"><a href="#cb3-415" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> mars.txt</span>
+<span id="cb3-416"><a href="#cb3-416" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-417"><a href="#cb3-417" tabindex="-1"></a></span>
-<span id="cb3-418"><a href="#cb3-418" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-419"><a href="#cb3-419" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
-<span id="cb3-420"><a href="#cb3-420" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
-<span id="cb3-421"><a href="#cb3-421" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
-<span id="cb3-422"><a href="#cb3-422" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span>
-<span id="cb3-423"><a href="#cb3-423" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-424"><a href="#cb3-424" tabindex="-1"></a></span>
-<span id="cb3-425"><a href="#cb3-425" tabindex="-1"></a>How do you ignore all the <span class="in">`.csv`</span> files, without explicitly listing the</span>
-<span id="cb3-426"><a href="#cb3-426" tabindex="-1"></a>names of the corresponding folders?</span>
-<span id="cb3-427"><a href="#cb3-427" tabindex="-1"></a>:::</span>
-<span id="cb3-428"><a href="#cb3-428" tabindex="-1"></a></span>
-<span id="cb3-429"><a href="#cb3-429" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-418"><a href="#cb3-418" tabindex="-1"></a>You should get a long list of output, and you should be able to see both</span>
+<span id="cb3-419"><a href="#cb3-419" tabindex="-1"></a>commit messages and the difference between each commit.</span>
+<span id="cb3-420"><a href="#cb3-420" tabindex="-1"></a></span>
+<span id="cb3-421"><a href="#cb3-421" tabindex="-1"></a>Question: What does the following command do?</span>
+<span id="cb3-422"><a href="#cb3-422" tabindex="-1"></a></span>
+<span id="cb3-423"><a href="#cb3-423" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-424"><a href="#cb3-424" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> HEAD~9 <span class="pp">*</span>.txt</span>
+<span id="cb3-425"><a href="#cb3-425" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-426"><a href="#cb3-426" tabindex="-1"></a>:::</span>
+<span id="cb3-427"><a href="#cb3-427" tabindex="-1"></a></span>
+<span id="cb3-428"><a href="#cb3-428" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-429"><a href="#cb3-429" tabindex="-1"></a></span>
 <span id="cb3-430"><a href="#cb3-430" tabindex="-1"></a></span>
-<span id="cb3-431"><a href="#cb3-431" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-432"><a href="#cb3-432" tabindex="-1"></a><span class="fu">## The Order of Rules</span></span>
-<span id="cb3-433"><a href="#cb3-433" tabindex="-1"></a></span>
-<span id="cb3-434"><a href="#cb3-434" tabindex="-1"></a>Given a <span class="in">`.gitignore`</span> file with the following contents:</span>
+<span id="cb3-431"><a href="#cb3-431" tabindex="-1"></a><span class="fu"># Ignoring Things</span></span>
+<span id="cb3-432"><a href="#cb3-432" tabindex="-1"></a></span>
+<span id="cb3-433"><a href="#cb3-433" tabindex="-1"></a>::: overview</span>
+<span id="cb3-434"><a href="#cb3-434" tabindex="-1"></a><span class="fu">## Objectives</span></span>
 <span id="cb3-435"><a href="#cb3-435" tabindex="-1"></a></span>
-<span id="cb3-436"><a href="#cb3-436" tabindex="-1"></a><span class="in">``` bash</span></span>
-<span id="cb3-437"><a href="#cb3-437" tabindex="-1"></a><span class="ex">*.csv</span></span>
-<span id="cb3-438"><a href="#cb3-438" tabindex="-1"></a><span class="ex">!*.csv</span></span>
-<span id="cb3-439"><a href="#cb3-439" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-440"><a href="#cb3-440" tabindex="-1"></a></span>
-<span id="cb3-441"><a href="#cb3-441" tabindex="-1"></a>What will be the result?</span>
-<span id="cb3-442"><a href="#cb3-442" tabindex="-1"></a>:::</span>
-<span id="cb3-443"><a href="#cb3-443" tabindex="-1"></a></span>
-<span id="cb3-444"><a href="#cb3-444" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-436"><a href="#cb3-436" tabindex="-1"></a><span class="ss">-   </span>Configure Git to ignore specific files.</span>
+<span id="cb3-437"><a href="#cb3-437" tabindex="-1"></a><span class="ss">-   </span>Explain why ignoring files can be useful.</span>
+<span id="cb3-438"><a href="#cb3-438" tabindex="-1"></a>:::</span>
+<span id="cb3-439"><a href="#cb3-439" tabindex="-1"></a></span>
+<span id="cb3-440"><a href="#cb3-440" tabindex="-1"></a>::: overview</span>
+<span id="cb3-441"><a href="#cb3-441" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-442"><a href="#cb3-442" tabindex="-1"></a></span>
+<span id="cb3-443"><a href="#cb3-443" tabindex="-1"></a><span class="ss">-   </span>How can I tell Git to ignore files I don't want to track?</span>
+<span id="cb3-444"><a href="#cb3-444" tabindex="-1"></a>:::</span>
 <span id="cb3-445"><a href="#cb3-445" tabindex="-1"></a></span>
-<span id="cb3-446"><a href="#cb3-446" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-447"><a href="#cb3-447" tabindex="-1"></a><span class="fu">## Log Files</span></span>
-<span id="cb3-448"><a href="#cb3-448" tabindex="-1"></a></span>
-<span id="cb3-449"><a href="#cb3-449" tabindex="-1"></a>You wrote a script that creates many intermediate log-files of the form</span>
-<span id="cb3-450"><a href="#cb3-450" tabindex="-1"></a><span class="in">`log_01`</span>, <span class="in">`log_02`</span>, <span class="in">`log_03`</span>, etc. You want to keep them but you do not</span>
-<span id="cb3-451"><a href="#cb3-451" tabindex="-1"></a>want to track them through <span class="in">`git`</span>.</span>
+<span id="cb3-446"><a href="#cb3-446" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-447"><a href="#cb3-447" tabindex="-1"></a></span>
+<span id="cb3-448"><a href="#cb3-448" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-449"><a href="#cb3-449" tabindex="-1"></a><span class="fu">## Ignoring Nested Files</span></span>
+<span id="cb3-450"><a href="#cb3-450" tabindex="-1"></a></span>
+<span id="cb3-451"><a href="#cb3-451" tabindex="-1"></a>Given a directory structure that looks like:</span>
 <span id="cb3-452"><a href="#cb3-452" tabindex="-1"></a></span>
-<span id="cb3-453"><a href="#cb3-453" tabindex="-1"></a><span class="ss">1.  </span>Write **one** <span class="in">`.gitignore`</span> entry that excludes files of the form</span>
-<span id="cb3-454"><a href="#cb3-454" tabindex="-1"></a>    <span class="in">`log_01`</span>, <span class="in">`log_02`</span>, etc.</span>
-<span id="cb3-455"><a href="#cb3-455" tabindex="-1"></a></span>
-<span id="cb3-456"><a href="#cb3-456" tabindex="-1"></a><span class="ss">2.  </span>Test your "ignore pattern" by creating some dummy files of the form</span>
-<span id="cb3-457"><a href="#cb3-457" tabindex="-1"></a>    <span class="in">`log_01`</span>, etc.</span>
-<span id="cb3-458"><a href="#cb3-458" tabindex="-1"></a></span>
-<span id="cb3-459"><a href="#cb3-459" tabindex="-1"></a><span class="ss">3.  </span>You find that the file <span class="in">`log_01`</span> is very important after all, add it</span>
-<span id="cb3-460"><a href="#cb3-460" tabindex="-1"></a>    to the tracked files without changing the <span class="in">`.gitignore`</span> again.</span>
-<span id="cb3-461"><a href="#cb3-461" tabindex="-1"></a></span>
-<span id="cb3-462"><a href="#cb3-462" tabindex="-1"></a><span class="ss">4.  </span>Discuss with your neighbor what other types of files could reside in</span>
-<span id="cb3-463"><a href="#cb3-463" tabindex="-1"></a>    your directory that you do not want to track and thus would exclude</span>
-<span id="cb3-464"><a href="#cb3-464" tabindex="-1"></a>    via <span class="in">`.gitignore`</span>.</span>
-<span id="cb3-465"><a href="#cb3-465" tabindex="-1"></a>:::</span>
-<span id="cb3-466"><a href="#cb3-466" tabindex="-1"></a></span>
-<span id="cb3-467"><a href="#cb3-467" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-468"><a href="#cb3-468" tabindex="-1"></a></span>
-<span id="cb3-469"><a href="#cb3-469" tabindex="-1"></a></span>
-<span id="cb3-470"><a href="#cb3-470" tabindex="-1"></a><span class="fu"># Remotes in GitHub</span></span>
-<span id="cb3-471"><a href="#cb3-471" tabindex="-1"></a></span>
-<span id="cb3-472"><a href="#cb3-472" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-473"><a href="#cb3-473" tabindex="-1"></a></span>
-<span id="cb3-474"><a href="#cb3-474" tabindex="-1"></a><span class="al">![](fig/github-create-repo-01.png)</span>{alt="Creating a Repository on GitHub (Step 1)"}</span>
+<span id="cb3-453"><a href="#cb3-453" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-454"><a href="#cb3-454" tabindex="-1"></a><span class="ex">results/data</span></span>
+<span id="cb3-455"><a href="#cb3-455" tabindex="-1"></a><span class="ex">results/plots</span></span>
+<span id="cb3-456"><a href="#cb3-456" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-457"><a href="#cb3-457" tabindex="-1"></a></span>
+<span id="cb3-458"><a href="#cb3-458" tabindex="-1"></a>How would you ignore only <span class="in">`results/plots`</span> and not <span class="in">`results/data`</span>?</span>
+<span id="cb3-459"><a href="#cb3-459" tabindex="-1"></a>:::</span>
+<span id="cb3-460"><a href="#cb3-460" tabindex="-1"></a></span>
+<span id="cb3-461"><a href="#cb3-461" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-462"><a href="#cb3-462" tabindex="-1"></a></span>
+<span id="cb3-463"><a href="#cb3-463" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-464"><a href="#cb3-464" tabindex="-1"></a><span class="fu">## Including Specific Files</span></span>
+<span id="cb3-465"><a href="#cb3-465" tabindex="-1"></a></span>
+<span id="cb3-466"><a href="#cb3-466" tabindex="-1"></a>How would you ignore all <span class="in">`.csv`</span> files in your root directory except for</span>
+<span id="cb3-467"><a href="#cb3-467" tabindex="-1"></a><span class="in">`final.csv`</span>? Hint: Find out what <span class="in">`!`</span> (the exclamation point operator)</span>
+<span id="cb3-468"><a href="#cb3-468" tabindex="-1"></a>does</span>
+<span id="cb3-469"><a href="#cb3-469" tabindex="-1"></a>:::</span>
+<span id="cb3-470"><a href="#cb3-470" tabindex="-1"></a></span>
+<span id="cb3-471"><a href="#cb3-471" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-472"><a href="#cb3-472" tabindex="-1"></a></span>
+<span id="cb3-473"><a href="#cb3-473" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-474"><a href="#cb3-474" tabindex="-1"></a><span class="fu">## Ignoring Nested Files: Variation</span></span>
 <span id="cb3-475"><a href="#cb3-475" tabindex="-1"></a></span>
-<span id="cb3-476"><a href="#cb3-476" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-477"><a href="#cb3-477" tabindex="-1"></a></span>
-<span id="cb3-478"><a href="#cb3-478" tabindex="-1"></a><span class="al">![](fig/github-create-repo-02.png)</span>{alt="Creating a Repository on GitHub (Step 2)"}</span>
-<span id="cb3-479"><a href="#cb3-479" tabindex="-1"></a></span>
-<span id="cb3-480"><a href="#cb3-480" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-481"><a href="#cb3-481" tabindex="-1"></a></span>
-<span id="cb3-482"><a href="#cb3-482" tabindex="-1"></a><span class="al">![](fig/github-create-repo-03.png)</span>{alt="Creating a Repository on GitHub (Step 3)"}</span>
-<span id="cb3-483"><a href="#cb3-483" tabindex="-1"></a></span>
-<span id="cb3-484"><a href="#cb3-484" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-476"><a href="#cb3-476" tabindex="-1"></a>Given a directory structure that looks similar to the earlier Nested</span>
+<span id="cb3-477"><a href="#cb3-477" tabindex="-1"></a>Files exercise, but with a slightly different directory structure:</span>
+<span id="cb3-478"><a href="#cb3-478" tabindex="-1"></a></span>
+<span id="cb3-479"><a href="#cb3-479" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-480"><a href="#cb3-480" tabindex="-1"></a><span class="ex">results/data</span></span>
+<span id="cb3-481"><a href="#cb3-481" tabindex="-1"></a><span class="ex">results/images</span></span>
+<span id="cb3-482"><a href="#cb3-482" tabindex="-1"></a><span class="ex">results/plots</span></span>
+<span id="cb3-483"><a href="#cb3-483" tabindex="-1"></a><span class="ex">results/analysis</span></span>
+<span id="cb3-484"><a href="#cb3-484" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-485"><a href="#cb3-485" tabindex="-1"></a></span>
-<span id="cb3-486"><a href="#cb3-486" tabindex="-1"></a><span class="al">![](fig/git-staging-area.svg)</span>{alt="The Local Repository with Git Staging Area"}</span>
-<span id="cb3-487"><a href="#cb3-487" tabindex="-1"></a></span>
-<span id="cb3-488"><a href="#cb3-488" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-489"><a href="#cb3-489" tabindex="-1"></a></span>
-<span id="cb3-490"><a href="#cb3-490" tabindex="-1"></a><span class="al">![](fig/git-freshly-made-github-repo.svg)</span>{alt="Freshly-Made GitHub Repository"}</span>
-<span id="cb3-491"><a href="#cb3-491" tabindex="-1"></a></span>
-<span id="cb3-492"><a href="#cb3-492" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-493"><a href="#cb3-493" tabindex="-1"></a></span>
-<span id="cb3-494"><a href="#cb3-494" tabindex="-1"></a><span class="al">![](fig/github-find-repo-string.png)</span>{alt="Where to Find Repository URL on GitHub"}</span>
-<span id="cb3-495"><a href="#cb3-495" tabindex="-1"></a></span>
-<span id="cb3-496"><a href="#cb3-496" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-486"><a href="#cb3-486" tabindex="-1"></a>How would you ignore all of the contents in the results folder, but not</span>
+<span id="cb3-487"><a href="#cb3-487" tabindex="-1"></a><span class="in">`results/data`</span>?</span>
+<span id="cb3-488"><a href="#cb3-488" tabindex="-1"></a></span>
+<span id="cb3-489"><a href="#cb3-489" tabindex="-1"></a>Hint: think a bit about how you created an exception with the <span class="in">`!`</span></span>
+<span id="cb3-490"><a href="#cb3-490" tabindex="-1"></a>operator before.</span>
+<span id="cb3-491"><a href="#cb3-491" tabindex="-1"></a>:::</span>
+<span id="cb3-492"><a href="#cb3-492" tabindex="-1"></a></span>
+<span id="cb3-493"><a href="#cb3-493" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-494"><a href="#cb3-494" tabindex="-1"></a></span>
+<span id="cb3-495"><a href="#cb3-495" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-496"><a href="#cb3-496" tabindex="-1"></a><span class="fu">## Ignoring all data Files in a Directory</span></span>
 <span id="cb3-497"><a href="#cb3-497" tabindex="-1"></a></span>
-<span id="cb3-498"><a href="#cb3-498" tabindex="-1"></a><span class="al">![](fig/github-change-repo-string.png)</span>{alt="Changing the Repository URL on GitHub"}</span>
-<span id="cb3-499"><a href="#cb3-499" tabindex="-1"></a></span>
-<span id="cb3-500"><a href="#cb3-500" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-501"><a href="#cb3-501" tabindex="-1"></a></span>
-<span id="cb3-502"><a href="#cb3-502" tabindex="-1"></a><span class="al">![](fig/github-repo-after-first-push.svg)</span>{alt="GitHub Repository After First Push"}</span>
-<span id="cb3-503"><a href="#cb3-503" tabindex="-1"></a></span>
-<span id="cb3-504"><a href="#cb3-504" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-505"><a href="#cb3-505" tabindex="-1"></a></span>
-<span id="cb3-506"><a href="#cb3-506" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-507"><a href="#cb3-507" tabindex="-1"></a><span class="fu">## GitHub GUI</span></span>
+<span id="cb3-498"><a href="#cb3-498" tabindex="-1"></a>Assuming you have an empty .gitignore file, and given a directory</span>
+<span id="cb3-499"><a href="#cb3-499" tabindex="-1"></a>structure that looks like:</span>
+<span id="cb3-500"><a href="#cb3-500" tabindex="-1"></a></span>
+<span id="cb3-501"><a href="#cb3-501" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-502"><a href="#cb3-502" tabindex="-1"></a><span class="ex">results/data/position/gps/a.csv</span></span>
+<span id="cb3-503"><a href="#cb3-503" tabindex="-1"></a><span class="ex">results/data/position/gps/b.csv</span></span>
+<span id="cb3-504"><a href="#cb3-504" tabindex="-1"></a><span class="ex">results/data/position/gps/c.csv</span></span>
+<span id="cb3-505"><a href="#cb3-505" tabindex="-1"></a><span class="ex">results/data/position/gps/info.txt</span></span>
+<span id="cb3-506"><a href="#cb3-506" tabindex="-1"></a><span class="ex">results/plots</span></span>
+<span id="cb3-507"><a href="#cb3-507" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-508"><a href="#cb3-508" tabindex="-1"></a></span>
-<span id="cb3-509"><a href="#cb3-509" tabindex="-1"></a>Browse to your <span class="in">`planets`</span> repository on GitHub. Underneath the Code</span>
-<span id="cb3-510"><a href="#cb3-510" tabindex="-1"></a>button, find and click on the text that says "XX commits" (where "XX" is</span>
-<span id="cb3-511"><a href="#cb3-511" tabindex="-1"></a>some number). Hover over, and click on, the three buttons to the right</span>
-<span id="cb3-512"><a href="#cb3-512" tabindex="-1"></a>of each commit. What information can you gather/explore from these</span>
-<span id="cb3-513"><a href="#cb3-513" tabindex="-1"></a>buttons? How would you get that same information in the shell?</span>
-<span id="cb3-514"><a href="#cb3-514" tabindex="-1"></a>:::</span>
+<span id="cb3-509"><a href="#cb3-509" tabindex="-1"></a>What's the shortest <span class="in">`.gitignore`</span> rule you could write to ignore all</span>
+<span id="cb3-510"><a href="#cb3-510" tabindex="-1"></a><span class="in">`.csv`</span> files in <span class="in">`result/data/position/gps`</span>? Do not ignore the</span>
+<span id="cb3-511"><a href="#cb3-511" tabindex="-1"></a><span class="in">`info.txt`</span>.</span>
+<span id="cb3-512"><a href="#cb3-512" tabindex="-1"></a>:::</span>
+<span id="cb3-513"><a href="#cb3-513" tabindex="-1"></a></span>
+<span id="cb3-514"><a href="#cb3-514" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-515"><a href="#cb3-515" tabindex="-1"></a></span>
-<span id="cb3-516"><a href="#cb3-516" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-517"><a href="#cb3-517" tabindex="-1"></a></span>
-<span id="cb3-518"><a href="#cb3-518" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-519"><a href="#cb3-519" tabindex="-1"></a><span class="fu">## GitHub Timestamp</span></span>
-<span id="cb3-520"><a href="#cb3-520" tabindex="-1"></a></span>
-<span id="cb3-521"><a href="#cb3-521" tabindex="-1"></a>Create a remote repository on GitHub. Push the contents of your local</span>
-<span id="cb3-522"><a href="#cb3-522" tabindex="-1"></a>repository to the remote. Make changes to your local repository and push</span>
-<span id="cb3-523"><a href="#cb3-523" tabindex="-1"></a>these changes. Go to the repo you just created on GitHub and check the</span>
-<span id="cb3-524"><a href="#cb3-524" tabindex="-1"></a><span class="co">[</span><span class="ot">timestamps</span><span class="co">](../learners/reference.md#timestamp)</span> of the files. How does</span>
-<span id="cb3-525"><a href="#cb3-525" tabindex="-1"></a>GitHub record times, and why?</span>
-<span id="cb3-526"><a href="#cb3-526" tabindex="-1"></a>:::</span>
-<span id="cb3-527"><a href="#cb3-527" tabindex="-1"></a></span>
-<span id="cb3-528"><a href="#cb3-528" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-529"><a href="#cb3-529" tabindex="-1"></a></span>
-<span id="cb3-530"><a href="#cb3-530" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-531"><a href="#cb3-531" tabindex="-1"></a><span class="fu">## Push vs. Commit</span></span>
+<span id="cb3-516"><a href="#cb3-516" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-517"><a href="#cb3-517" tabindex="-1"></a><span class="fu">## Ignoring all data Files in the repository</span></span>
+<span id="cb3-518"><a href="#cb3-518" tabindex="-1"></a></span>
+<span id="cb3-519"><a href="#cb3-519" tabindex="-1"></a>Let us assume you have many <span class="in">`.csv`</span> files in different subdirectories of</span>
+<span id="cb3-520"><a href="#cb3-520" tabindex="-1"></a>your repository. For example, you might have:</span>
+<span id="cb3-521"><a href="#cb3-521" tabindex="-1"></a></span>
+<span id="cb3-522"><a href="#cb3-522" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-523"><a href="#cb3-523" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
+<span id="cb3-524"><a href="#cb3-524" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
+<span id="cb3-525"><a href="#cb3-525" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
+<span id="cb3-526"><a href="#cb3-526" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span>
+<span id="cb3-527"><a href="#cb3-527" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-528"><a href="#cb3-528" tabindex="-1"></a></span>
+<span id="cb3-529"><a href="#cb3-529" tabindex="-1"></a>How do you ignore all the <span class="in">`.csv`</span> files, without explicitly listing the</span>
+<span id="cb3-530"><a href="#cb3-530" tabindex="-1"></a>names of the corresponding folders?</span>
+<span id="cb3-531"><a href="#cb3-531" tabindex="-1"></a>:::</span>
 <span id="cb3-532"><a href="#cb3-532" tabindex="-1"></a></span>
-<span id="cb3-533"><a href="#cb3-533" tabindex="-1"></a>In this episode, we introduced the "git push" command. How is "git push"</span>
-<span id="cb3-534"><a href="#cb3-534" tabindex="-1"></a>different from "git commit"?</span>
-<span id="cb3-535"><a href="#cb3-535" tabindex="-1"></a>:::</span>
-<span id="cb3-536"><a href="#cb3-536" tabindex="-1"></a></span>
-<span id="cb3-537"><a href="#cb3-537" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-538"><a href="#cb3-538" tabindex="-1"></a></span>
-<span id="cb3-539"><a href="#cb3-539" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-540"><a href="#cb3-540" tabindex="-1"></a><span class="fu">## GitHub License and README files</span></span>
-<span id="cb3-541"><a href="#cb3-541" tabindex="-1"></a></span>
-<span id="cb3-542"><a href="#cb3-542" tabindex="-1"></a>In this episode we learned about creating a remote repository on GitHub,</span>
-<span id="cb3-543"><a href="#cb3-543" tabindex="-1"></a>but when you initialized your GitHub repo, you didn't add a README.md or</span>
-<span id="cb3-544"><a href="#cb3-544" tabindex="-1"></a>a license file. If you had, what do you think would have happened when</span>
-<span id="cb3-545"><a href="#cb3-545" tabindex="-1"></a>you tried to link your local and remote repositories?</span>
+<span id="cb3-533"><a href="#cb3-533" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-534"><a href="#cb3-534" tabindex="-1"></a></span>
+<span id="cb3-535"><a href="#cb3-535" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-536"><a href="#cb3-536" tabindex="-1"></a><span class="fu">## The Order of Rules</span></span>
+<span id="cb3-537"><a href="#cb3-537" tabindex="-1"></a></span>
+<span id="cb3-538"><a href="#cb3-538" tabindex="-1"></a>Given a <span class="in">`.gitignore`</span> file with the following contents:</span>
+<span id="cb3-539"><a href="#cb3-539" tabindex="-1"></a></span>
+<span id="cb3-540"><a href="#cb3-540" tabindex="-1"></a><span class="in">``` bash</span></span>
+<span id="cb3-541"><a href="#cb3-541" tabindex="-1"></a><span class="ex">*.csv</span></span>
+<span id="cb3-542"><a href="#cb3-542" tabindex="-1"></a><span class="ex">!*.csv</span></span>
+<span id="cb3-543"><a href="#cb3-543" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-544"><a href="#cb3-544" tabindex="-1"></a></span>
+<span id="cb3-545"><a href="#cb3-545" tabindex="-1"></a>What will be the result?</span>
 <span id="cb3-546"><a href="#cb3-546" tabindex="-1"></a>:::</span>
 <span id="cb3-547"><a href="#cb3-547" tabindex="-1"></a></span>
 <span id="cb3-548"><a href="#cb3-548" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-549"><a href="#cb3-549" tabindex="-1"></a></span>
-<span id="cb3-550"><a href="#cb3-550" tabindex="-1"></a></span>
-<span id="cb3-551"><a href="#cb3-551" tabindex="-1"></a><span class="fu"># Collaborating</span></span>
+<span id="cb3-550"><a href="#cb3-550" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-551"><a href="#cb3-551" tabindex="-1"></a><span class="fu">## Log Files</span></span>
 <span id="cb3-552"><a href="#cb3-552" tabindex="-1"></a></span>
-<span id="cb3-553"><a href="#cb3-553" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-554"><a href="#cb3-554" tabindex="-1"></a></span>
-<span id="cb3-555"><a href="#cb3-555" tabindex="-1"></a><span class="al">![](fig/github-add-collaborators.png)</span>{alt="screenshot of repository page with Settings then Collaborators selected, showing how to add Collaborators in a GitHub repository"}</span>
+<span id="cb3-553"><a href="#cb3-553" tabindex="-1"></a>You wrote a script that creates many intermediate log-files of the form</span>
+<span id="cb3-554"><a href="#cb3-554" tabindex="-1"></a><span class="in">`log_01`</span>, <span class="in">`log_02`</span>, <span class="in">`log_03`</span>, etc. You want to keep them but you do not</span>
+<span id="cb3-555"><a href="#cb3-555" tabindex="-1"></a>want to track them through <span class="in">`git`</span>.</span>
 <span id="cb3-556"><a href="#cb3-556" tabindex="-1"></a></span>
-<span id="cb3-557"><a href="#cb3-557" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-558"><a href="#cb3-558" tabindex="-1"></a></span>
-<span id="cb3-559"><a href="#cb3-559" tabindex="-1"></a><span class="al">![](fig/github-collaboration.svg)</span>{alt="After Creating Clone of Repository"}</span>
-<span id="cb3-560"><a href="#cb3-560" tabindex="-1"></a></span>
-<span id="cb3-561"><a href="#cb3-561" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-557"><a href="#cb3-557" tabindex="-1"></a><span class="ss">1.  </span>Write **one** <span class="in">`.gitignore`</span> entry that excludes files of the form</span>
+<span id="cb3-558"><a href="#cb3-558" tabindex="-1"></a>    <span class="in">`log_01`</span>, <span class="in">`log_02`</span>, etc.</span>
+<span id="cb3-559"><a href="#cb3-559" tabindex="-1"></a></span>
+<span id="cb3-560"><a href="#cb3-560" tabindex="-1"></a><span class="ss">2.  </span>Test your "ignore pattern" by creating some dummy files of the form</span>
+<span id="cb3-561"><a href="#cb3-561" tabindex="-1"></a>    <span class="in">`log_01`</span>, etc.</span>
 <span id="cb3-562"><a href="#cb3-562" tabindex="-1"></a></span>
-<span id="cb3-563"><a href="#cb3-563" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-564"><a href="#cb3-564" tabindex="-1"></a><span class="fu">## Switch Roles and Repeat</span></span>
+<span id="cb3-563"><a href="#cb3-563" tabindex="-1"></a><span class="ss">3.  </span>You find that the file <span class="in">`log_01`</span> is very important after all, add it</span>
+<span id="cb3-564"><a href="#cb3-564" tabindex="-1"></a>    to the tracked files without changing the <span class="in">`.gitignore`</span> again.</span>
 <span id="cb3-565"><a href="#cb3-565" tabindex="-1"></a></span>
-<span id="cb3-566"><a href="#cb3-566" tabindex="-1"></a>Switch roles and repeat the whole process.</span>
-<span id="cb3-567"><a href="#cb3-567" tabindex="-1"></a>:::</span>
-<span id="cb3-568"><a href="#cb3-568" tabindex="-1"></a></span>
-<span id="cb3-569"><a href="#cb3-569" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-566"><a href="#cb3-566" tabindex="-1"></a><span class="ss">4.  </span>Discuss with your neighbor what other types of files could reside in</span>
+<span id="cb3-567"><a href="#cb3-567" tabindex="-1"></a>    your directory that you do not want to track and thus would exclude</span>
+<span id="cb3-568"><a href="#cb3-568" tabindex="-1"></a>    via <span class="in">`.gitignore`</span>.</span>
+<span id="cb3-569"><a href="#cb3-569" tabindex="-1"></a>:::</span>
 <span id="cb3-570"><a href="#cb3-570" tabindex="-1"></a></span>
-<span id="cb3-571"><a href="#cb3-571" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-572"><a href="#cb3-572" tabindex="-1"></a><span class="fu">## Review Changes</span></span>
+<span id="cb3-571"><a href="#cb3-571" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-572"><a href="#cb3-572" tabindex="-1"></a></span>
 <span id="cb3-573"><a href="#cb3-573" tabindex="-1"></a></span>
-<span id="cb3-574"><a href="#cb3-574" tabindex="-1"></a>The Owner pushed commits to the repository without giving any</span>
-<span id="cb3-575"><a href="#cb3-575" tabindex="-1"></a>information to the Collaborator. How can the Collaborator find out what</span>
-<span id="cb3-576"><a href="#cb3-576" tabindex="-1"></a>has changed with command line? And on GitHub?</span>
-<span id="cb3-577"><a href="#cb3-577" tabindex="-1"></a>:::</span>
+<span id="cb3-574"><a href="#cb3-574" tabindex="-1"></a><span class="fu"># Remotes in GitHub</span></span>
+<span id="cb3-575"><a href="#cb3-575" tabindex="-1"></a></span>
+<span id="cb3-576"><a href="#cb3-576" tabindex="-1"></a>::: overview</span>
+<span id="cb3-577"><a href="#cb3-577" tabindex="-1"></a><span class="fu">## Objectives</span></span>
 <span id="cb3-578"><a href="#cb3-578" tabindex="-1"></a></span>
-<span id="cb3-579"><a href="#cb3-579" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-580"><a href="#cb3-580" tabindex="-1"></a></span>
-<span id="cb3-581"><a href="#cb3-581" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-582"><a href="#cb3-582" tabindex="-1"></a><span class="fu">## Comment Changes in GitHub</span></span>
-<span id="cb3-583"><a href="#cb3-583" tabindex="-1"></a></span>
-<span id="cb3-584"><a href="#cb3-584" tabindex="-1"></a>The Collaborator has some questions about one line change made by the</span>
-<span id="cb3-585"><a href="#cb3-585" tabindex="-1"></a>Owner and has some suggestions to propose.</span>
-<span id="cb3-586"><a href="#cb3-586" tabindex="-1"></a></span>
-<span id="cb3-587"><a href="#cb3-587" tabindex="-1"></a>With GitHub, it is possible to comment on the diff of a commit. Over the</span>
-<span id="cb3-588"><a href="#cb3-588" tabindex="-1"></a>line of code to comment, a blue comment icon appears to open a comment</span>
-<span id="cb3-589"><a href="#cb3-589" tabindex="-1"></a>window.</span>
+<span id="cb3-579"><a href="#cb3-579" tabindex="-1"></a><span class="ss">-   </span>Explain what remote repositories are and why they are useful.</span>
+<span id="cb3-580"><a href="#cb3-580" tabindex="-1"></a><span class="ss">-   </span>Push to or pull from a remote repository.</span>
+<span id="cb3-581"><a href="#cb3-581" tabindex="-1"></a>:::</span>
+<span id="cb3-582"><a href="#cb3-582" tabindex="-1"></a></span>
+<span id="cb3-583"><a href="#cb3-583" tabindex="-1"></a>::: overview</span>
+<span id="cb3-584"><a href="#cb3-584" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-585"><a href="#cb3-585" tabindex="-1"></a></span>
+<span id="cb3-586"><a href="#cb3-586" tabindex="-1"></a><span class="ss">-   </span>How do I share my changes with others on the web?</span>
+<span id="cb3-587"><a href="#cb3-587" tabindex="-1"></a>:::</span>
+<span id="cb3-588"><a href="#cb3-588" tabindex="-1"></a></span>
+<span id="cb3-589"><a href="#cb3-589" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-590"><a href="#cb3-590" tabindex="-1"></a></span>
-<span id="cb3-591"><a href="#cb3-591" tabindex="-1"></a>The Collaborator posts her comments and suggestions using the GitHub</span>
-<span id="cb3-592"><a href="#cb3-592" tabindex="-1"></a>interface.</span>
-<span id="cb3-593"><a href="#cb3-593" tabindex="-1"></a>:::</span>
+<span id="cb3-591"><a href="#cb3-591" tabindex="-1"></a><span class="al">![](fig/github-create-repo-01.png)</span>{alt="The first step in creating a repository on GitHub: clicking the \"create new\" button"}</span>
+<span id="cb3-592"><a href="#cb3-592" tabindex="-1"></a></span>
+<span id="cb3-593"><a href="#cb3-593" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-594"><a href="#cb3-594" tabindex="-1"></a></span>
-<span id="cb3-595"><a href="#cb3-595" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-595"><a href="#cb3-595" tabindex="-1"></a><span class="al">![](fig/github-create-repo-02.png)</span>{alt="The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created"}</span>
 <span id="cb3-596"><a href="#cb3-596" tabindex="-1"></a></span>
-<span id="cb3-597"><a href="#cb3-597" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-598"><a href="#cb3-598" tabindex="-1"></a><span class="fu">## Version History, Backup, and Version Control</span></span>
-<span id="cb3-599"><a href="#cb3-599" tabindex="-1"></a></span>
-<span id="cb3-600"><a href="#cb3-600" tabindex="-1"></a>Some backup software can keep a history of the versions of your files.</span>
-<span id="cb3-601"><a href="#cb3-601" tabindex="-1"></a>They also allows you to recover specific versions. How is this</span>
-<span id="cb3-602"><a href="#cb3-602" tabindex="-1"></a>functionality different from version control? What are some of the</span>
-<span id="cb3-603"><a href="#cb3-603" tabindex="-1"></a>benefits of using version control, Git and GitHub?</span>
-<span id="cb3-604"><a href="#cb3-604" tabindex="-1"></a>:::</span>
-<span id="cb3-605"><a href="#cb3-605" tabindex="-1"></a></span>
-<span id="cb3-606"><a href="#cb3-606" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-607"><a href="#cb3-607" tabindex="-1"></a></span>
+<span id="cb3-597"><a href="#cb3-597" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-598"><a href="#cb3-598" tabindex="-1"></a></span>
+<span id="cb3-599"><a href="#cb3-599" tabindex="-1"></a><span class="al">![](fig/github-create-repo-03.png)</span>{alt="The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a git remote"}</span>
+<span id="cb3-600"><a href="#cb3-600" tabindex="-1"></a></span>
+<span id="cb3-601"><a href="#cb3-601" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-602"><a href="#cb3-602" tabindex="-1"></a></span>
+<span id="cb3-603"><a href="#cb3-603" tabindex="-1"></a><span class="al">![](fig/git-staging-area.svg)</span>{alt="A diagram showing how \"git add\" registers changes in the staging area, while \"git commit\" moves changes from the staging area to the repository"}</span>
+<span id="cb3-604"><a href="#cb3-604" tabindex="-1"></a></span>
+<span id="cb3-605"><a href="#cb3-605" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-606"><a href="#cb3-606" tabindex="-1"></a></span>
+<span id="cb3-607"><a href="#cb3-607" tabindex="-1"></a><span class="al">![](fig/git-freshly-made-github-repo.svg)</span></span>
 <span id="cb3-608"><a href="#cb3-608" tabindex="-1"></a></span>
-<span id="cb3-609"><a href="#cb3-609" tabindex="-1"></a><span class="fu"># Conflicts</span></span>
+<span id="cb3-609"><a href="#cb3-609" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-610"><a href="#cb3-610" tabindex="-1"></a></span>
-<span id="cb3-611"><a href="#cb3-611" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-611"><a href="#cb3-611" tabindex="-1"></a><span class="al">![](fig/github-find-repo-string.png)</span></span>
 <span id="cb3-612"><a href="#cb3-612" tabindex="-1"></a></span>
-<span id="cb3-613"><a href="#cb3-613" tabindex="-1"></a><span class="al">![](fig/conflict.svg)</span>{alt="The Conflicting Changes"}</span>
+<span id="cb3-613"><a href="#cb3-613" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-614"><a href="#cb3-614" tabindex="-1"></a></span>
-<span id="cb3-615"><a href="#cb3-615" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-615"><a href="#cb3-615" tabindex="-1"></a><span class="al">![](fig/github-change-repo-string.png)</span>{alt="A screenshot showing that clicking on \"SSH\" will make GitHub provide the SSH URL for a repository instead of the HTTPS URL"}</span>
 <span id="cb3-616"><a href="#cb3-616" tabindex="-1"></a></span>
-<span id="cb3-617"><a href="#cb3-617" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-618"><a href="#cb3-618" tabindex="-1"></a><span class="fu">## Solving Conflicts that You Create</span></span>
-<span id="cb3-619"><a href="#cb3-619" tabindex="-1"></a></span>
-<span id="cb3-620"><a href="#cb3-620" tabindex="-1"></a>Clone the repository created by your instructor. Add a new file to it,</span>
-<span id="cb3-621"><a href="#cb3-621" tabindex="-1"></a>and modify an existing file (your instructor will tell you which one).</span>
-<span id="cb3-622"><a href="#cb3-622" tabindex="-1"></a>When asked by your instructor, pull her changes from the repository to</span>
-<span id="cb3-623"><a href="#cb3-623" tabindex="-1"></a>create a conflict, then resolve it.</span>
-<span id="cb3-624"><a href="#cb3-624" tabindex="-1"></a>:::</span>
+<span id="cb3-617"><a href="#cb3-617" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-618"><a href="#cb3-618" tabindex="-1"></a></span>
+<span id="cb3-619"><a href="#cb3-619" tabindex="-1"></a><span class="al">![](fig/github-repo-after-first-push.svg)</span>{alt="A diagram showing how \"git push origin\" will push changes from the local repository to the remote, making the remote repository an exact copy of the local repository."}</span>
+<span id="cb3-620"><a href="#cb3-620" tabindex="-1"></a></span>
+<span id="cb3-621"><a href="#cb3-621" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-622"><a href="#cb3-622" tabindex="-1"></a></span>
+<span id="cb3-623"><a href="#cb3-623" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-624"><a href="#cb3-624" tabindex="-1"></a><span class="fu">## GitHub GUI</span></span>
 <span id="cb3-625"><a href="#cb3-625" tabindex="-1"></a></span>
-<span id="cb3-626"><a href="#cb3-626" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-627"><a href="#cb3-627" tabindex="-1"></a></span>
-<span id="cb3-628"><a href="#cb3-628" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-629"><a href="#cb3-629" tabindex="-1"></a><span class="fu">## Conflicts on Non-textual files</span></span>
-<span id="cb3-630"><a href="#cb3-630" tabindex="-1"></a></span>
-<span id="cb3-631"><a href="#cb3-631" tabindex="-1"></a>What does Git do when there is a conflict in an image or some other</span>
-<span id="cb3-632"><a href="#cb3-632" tabindex="-1"></a>non-textual file that is stored in version control?</span>
-<span id="cb3-633"><a href="#cb3-633" tabindex="-1"></a>:::</span>
+<span id="cb3-626"><a href="#cb3-626" tabindex="-1"></a>Browse to your <span class="in">`planets`</span> repository on GitHub. Underneath the Code</span>
+<span id="cb3-627"><a href="#cb3-627" tabindex="-1"></a>button, find and click on the text that says "XX commits" (where "XX" is</span>
+<span id="cb3-628"><a href="#cb3-628" tabindex="-1"></a>some number). Hover over, and click on, the three buttons to the right</span>
+<span id="cb3-629"><a href="#cb3-629" tabindex="-1"></a>of each commit. What information can you gather/explore from these</span>
+<span id="cb3-630"><a href="#cb3-630" tabindex="-1"></a>buttons? How would you get that same information in the shell?</span>
+<span id="cb3-631"><a href="#cb3-631" tabindex="-1"></a>:::</span>
+<span id="cb3-632"><a href="#cb3-632" tabindex="-1"></a></span>
+<span id="cb3-633"><a href="#cb3-633" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-634"><a href="#cb3-634" tabindex="-1"></a></span>
-<span id="cb3-635"><a href="#cb3-635" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-636"><a href="#cb3-636" tabindex="-1"></a></span>
-<span id="cb3-637"><a href="#cb3-637" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-638"><a href="#cb3-638" tabindex="-1"></a><span class="fu">## A Typical Work Session</span></span>
-<span id="cb3-639"><a href="#cb3-639" tabindex="-1"></a></span>
-<span id="cb3-640"><a href="#cb3-640" tabindex="-1"></a>You sit down at your computer to work on a shared project that is</span>
-<span id="cb3-641"><a href="#cb3-641" tabindex="-1"></a>tracked in a remote Git repository. During your work session, you take</span>
-<span id="cb3-642"><a href="#cb3-642" tabindex="-1"></a>the following actions, but not in this order:</span>
-<span id="cb3-643"><a href="#cb3-643" tabindex="-1"></a></span>
-<span id="cb3-644"><a href="#cb3-644" tabindex="-1"></a><span class="ss">-   </span>*Make changes* by appending the number <span class="in">`100`</span> to a text file</span>
-<span id="cb3-645"><a href="#cb3-645" tabindex="-1"></a>    <span class="in">`numbers.txt`</span></span>
-<span id="cb3-646"><a href="#cb3-646" tabindex="-1"></a><span class="ss">-   </span>*Update remote* repository to match the local repository</span>
-<span id="cb3-647"><a href="#cb3-647" tabindex="-1"></a><span class="ss">-   </span>*Celebrate* your success with some fancy beverage(s)</span>
-<span id="cb3-648"><a href="#cb3-648" tabindex="-1"></a><span class="ss">-   </span>*Update local* repository to match the remote repository</span>
-<span id="cb3-649"><a href="#cb3-649" tabindex="-1"></a><span class="ss">-   </span>*Stage changes* to be committed</span>
-<span id="cb3-650"><a href="#cb3-650" tabindex="-1"></a><span class="ss">-   </span>*Commit changes* to the local repository</span>
-<span id="cb3-651"><a href="#cb3-651" tabindex="-1"></a></span>
-<span id="cb3-652"><a href="#cb3-652" tabindex="-1"></a>In what order should you perform these actions to minimize the chances</span>
-<span id="cb3-653"><a href="#cb3-653" tabindex="-1"></a>of conflicts? Put the commands above in order in the *action* column of</span>
-<span id="cb3-654"><a href="#cb3-654" tabindex="-1"></a>the table below. When you have the order right, see if you can write the</span>
-<span id="cb3-655"><a href="#cb3-655" tabindex="-1"></a>corresponding commands in the *command* column. A few steps are</span>
-<span id="cb3-656"><a href="#cb3-656" tabindex="-1"></a>populated to get you started.</span>
-<span id="cb3-657"><a href="#cb3-657" tabindex="-1"></a></span>
-<span id="cb3-658"><a href="#cb3-658" tabindex="-1"></a>  ---------------------------------------------------------------------------</span>
-<span id="cb3-659"><a href="#cb3-659" tabindex="-1"></a>  order   action . . . . . . . . . command . . . . . . . . . .</span>
-<span id="cb3-660"><a href="#cb3-660" tabindex="-1"></a>          .                        </span>
-<span id="cb3-661"><a href="#cb3-661" tabindex="-1"></a>  ------- ------------------------ ------------------------------------------</span>
-<span id="cb3-662"><a href="#cb3-662" tabindex="-1"></a>  1                                </span>
-<span id="cb3-663"><a href="#cb3-663" tabindex="-1"></a></span>
-<span id="cb3-664"><a href="#cb3-664" tabindex="-1"></a>  2                                <span class="in">`echo 100 &gt;&gt; numbers.txt`</span></span>
-<span id="cb3-665"><a href="#cb3-665" tabindex="-1"></a></span>
-<span id="cb3-666"><a href="#cb3-666" tabindex="-1"></a>  3                                </span>
+<span id="cb3-635"><a href="#cb3-635" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-636"><a href="#cb3-636" tabindex="-1"></a><span class="fu">## GitHub Timestamp</span></span>
+<span id="cb3-637"><a href="#cb3-637" tabindex="-1"></a></span>
+<span id="cb3-638"><a href="#cb3-638" tabindex="-1"></a>Create a remote repository on GitHub. Push the contents of your local</span>
+<span id="cb3-639"><a href="#cb3-639" tabindex="-1"></a>repository to the remote. Make changes to your local repository and push</span>
+<span id="cb3-640"><a href="#cb3-640" tabindex="-1"></a>these changes. Go to the repo you just created on GitHub and check the</span>
+<span id="cb3-641"><a href="#cb3-641" tabindex="-1"></a><span class="co">[</span><span class="ot">timestamps</span><span class="co">](../learners/reference.md#timestamp)</span> of the files. How does</span>
+<span id="cb3-642"><a href="#cb3-642" tabindex="-1"></a>GitHub record times, and why?</span>
+<span id="cb3-643"><a href="#cb3-643" tabindex="-1"></a>:::</span>
+<span id="cb3-644"><a href="#cb3-644" tabindex="-1"></a></span>
+<span id="cb3-645"><a href="#cb3-645" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-646"><a href="#cb3-646" tabindex="-1"></a></span>
+<span id="cb3-647"><a href="#cb3-647" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-648"><a href="#cb3-648" tabindex="-1"></a><span class="fu">## Push vs. Commit</span></span>
+<span id="cb3-649"><a href="#cb3-649" tabindex="-1"></a></span>
+<span id="cb3-650"><a href="#cb3-650" tabindex="-1"></a>In this episode, we introduced the "git push" command. How is "git push"</span>
+<span id="cb3-651"><a href="#cb3-651" tabindex="-1"></a>different from "git commit"?</span>
+<span id="cb3-652"><a href="#cb3-652" tabindex="-1"></a>:::</span>
+<span id="cb3-653"><a href="#cb3-653" tabindex="-1"></a></span>
+<span id="cb3-654"><a href="#cb3-654" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-655"><a href="#cb3-655" tabindex="-1"></a></span>
+<span id="cb3-656"><a href="#cb3-656" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-657"><a href="#cb3-657" tabindex="-1"></a><span class="fu">## GitHub License and README files</span></span>
+<span id="cb3-658"><a href="#cb3-658" tabindex="-1"></a></span>
+<span id="cb3-659"><a href="#cb3-659" tabindex="-1"></a>In this episode we learned about creating a remote repository on GitHub,</span>
+<span id="cb3-660"><a href="#cb3-660" tabindex="-1"></a>but when you initialized your GitHub repo, you didn't add a README.md or</span>
+<span id="cb3-661"><a href="#cb3-661" tabindex="-1"></a>a license file. If you had, what do you think would have happened when</span>
+<span id="cb3-662"><a href="#cb3-662" tabindex="-1"></a>you tried to link your local and remote repositories?</span>
+<span id="cb3-663"><a href="#cb3-663" tabindex="-1"></a>:::</span>
+<span id="cb3-664"><a href="#cb3-664" tabindex="-1"></a></span>
+<span id="cb3-665"><a href="#cb3-665" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-666"><a href="#cb3-666" tabindex="-1"></a></span>
 <span id="cb3-667"><a href="#cb3-667" tabindex="-1"></a></span>
-<span id="cb3-668"><a href="#cb3-668" tabindex="-1"></a>  4                                </span>
+<span id="cb3-668"><a href="#cb3-668" tabindex="-1"></a><span class="fu"># Collaborating</span></span>
 <span id="cb3-669"><a href="#cb3-669" tabindex="-1"></a></span>
-<span id="cb3-670"><a href="#cb3-670" tabindex="-1"></a>  5                                </span>
-<span id="cb3-671"><a href="#cb3-671" tabindex="-1"></a></span>
-<span id="cb3-672"><a href="#cb3-672" tabindex="-1"></a>  6       Celebrate!               <span class="in">`AFK`</span></span>
-<span id="cb3-673"><a href="#cb3-673" tabindex="-1"></a>  ---------------------------------------------------------------------------</span>
-<span id="cb3-674"><a href="#cb3-674" tabindex="-1"></a>:::</span>
-<span id="cb3-675"><a href="#cb3-675" tabindex="-1"></a></span>
-<span id="cb3-676"><a href="#cb3-676" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-670"><a href="#cb3-670" tabindex="-1"></a>::: overview</span>
+<span id="cb3-671"><a href="#cb3-671" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-672"><a href="#cb3-672" tabindex="-1"></a></span>
+<span id="cb3-673"><a href="#cb3-673" tabindex="-1"></a><span class="ss">-   </span>Clone a remote repository.</span>
+<span id="cb3-674"><a href="#cb3-674" tabindex="-1"></a><span class="ss">-   </span>Collaborate by pushing to a common repository.</span>
+<span id="cb3-675"><a href="#cb3-675" tabindex="-1"></a><span class="ss">-   </span>Describe the basic collaborative workflow.</span>
+<span id="cb3-676"><a href="#cb3-676" tabindex="-1"></a>:::</span>
 <span id="cb3-677"><a href="#cb3-677" tabindex="-1"></a></span>
-<span id="cb3-678"><a href="#cb3-678" tabindex="-1"></a></span>
-<span id="cb3-679"><a href="#cb3-679" tabindex="-1"></a><span class="fu"># Open Science</span></span>
+<span id="cb3-678"><a href="#cb3-678" tabindex="-1"></a>::: overview</span>
+<span id="cb3-679"><a href="#cb3-679" tabindex="-1"></a><span class="fu">## Questions</span></span>
 <span id="cb3-680"><a href="#cb3-680" tabindex="-1"></a></span>
-<span id="cb3-681"><a href="#cb3-681" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-682"><a href="#cb3-682" tabindex="-1"></a></span>
-<span id="cb3-683"><a href="#cb3-683" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-684"><a href="#cb3-684" tabindex="-1"></a><span class="fu">## How Reproducible Is My Work?</span></span>
+<span id="cb3-681"><a href="#cb3-681" tabindex="-1"></a><span class="ss">-   </span>How can I use version control to collaborate with other people?</span>
+<span id="cb3-682"><a href="#cb3-682" tabindex="-1"></a>:::</span>
+<span id="cb3-683"><a href="#cb3-683" tabindex="-1"></a></span>
+<span id="cb3-684"><a href="#cb3-684" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-685"><a href="#cb3-685" tabindex="-1"></a></span>
-<span id="cb3-686"><a href="#cb3-686" tabindex="-1"></a>Ask one of your labmates to reproduce a result you recently obtained</span>
-<span id="cb3-687"><a href="#cb3-687" tabindex="-1"></a>using only what they can find in your papers or on the web. Try to do</span>
-<span id="cb3-688"><a href="#cb3-688" tabindex="-1"></a>the same for one of their results, then try to do it for a result from a</span>
-<span id="cb3-689"><a href="#cb3-689" tabindex="-1"></a>lab you work with.</span>
-<span id="cb3-690"><a href="#cb3-690" tabindex="-1"></a>:::</span>
+<span id="cb3-686"><a href="#cb3-686" tabindex="-1"></a><span class="al">![](fig/github-add-collaborators.png)</span>{alt="A screenshot of the GitHub Collaborators settings page, which is accessed by clicking \"Settings\" then \"Collaborators\""}</span>
+<span id="cb3-687"><a href="#cb3-687" tabindex="-1"></a></span>
+<span id="cb3-688"><a href="#cb3-688" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-689"><a href="#cb3-689" tabindex="-1"></a></span>
+<span id="cb3-690"><a href="#cb3-690" tabindex="-1"></a><span class="al">![](fig/github-collaboration.svg)</span>{alt="A diagram showing that \"git clone\" can create a copy of a remote GitHub repository, allowing a second person to create their own local repository that they can make changes to."}</span>
 <span id="cb3-691"><a href="#cb3-691" tabindex="-1"></a></span>
 <span id="cb3-692"><a href="#cb3-692" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-693"><a href="#cb3-693" tabindex="-1"></a></span>
 <span id="cb3-694"><a href="#cb3-694" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-695"><a href="#cb3-695" tabindex="-1"></a><span class="fu">## How to Find an Appropriate Data Repository?</span></span>
+<span id="cb3-695"><a href="#cb3-695" tabindex="-1"></a><span class="fu">## Switch Roles and Repeat</span></span>
 <span id="cb3-696"><a href="#cb3-696" tabindex="-1"></a></span>
-<span id="cb3-697"><a href="#cb3-697" tabindex="-1"></a>Surf the internet for a couple of minutes and check out the data</span>
-<span id="cb3-698"><a href="#cb3-698" tabindex="-1"></a>repositories mentioned above: <span class="co">[</span><span class="ot">Figshare</span><span class="co">](https://figshare.com/)</span>,</span>
-<span id="cb3-699"><a href="#cb3-699" tabindex="-1"></a><span class="co">[</span><span class="ot">Zenodo</span><span class="co">](https://zenodo.org)</span>, <span class="co">[</span><span class="ot">Dryad</span><span class="co">](https://datadryad.org/)</span>. Depending</span>
-<span id="cb3-700"><a href="#cb3-700" tabindex="-1"></a>on your field of research, you might find community-recognized</span>
-<span id="cb3-701"><a href="#cb3-701" tabindex="-1"></a>repositories that are well-known in your field. You might also find</span>
-<span id="cb3-702"><a href="#cb3-702" tabindex="-1"></a>useful [these data repositories recommended by</span>
-<span id="cb3-703"><a href="#cb3-703" tabindex="-1"></a>Nature](https://www.nature.com/sdata/data-policies/repositories).</span>
-<span id="cb3-704"><a href="#cb3-704" tabindex="-1"></a>Discuss with your neighbor which data repository you might want to</span>
-<span id="cb3-705"><a href="#cb3-705" tabindex="-1"></a>approach for your current project and explain why.</span>
-<span id="cb3-706"><a href="#cb3-706" tabindex="-1"></a>:::</span>
-<span id="cb3-707"><a href="#cb3-707" tabindex="-1"></a></span>
-<span id="cb3-708"><a href="#cb3-708" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-697"><a href="#cb3-697" tabindex="-1"></a>Switch roles and repeat the whole process.</span>
+<span id="cb3-698"><a href="#cb3-698" tabindex="-1"></a>:::</span>
+<span id="cb3-699"><a href="#cb3-699" tabindex="-1"></a></span>
+<span id="cb3-700"><a href="#cb3-700" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-701"><a href="#cb3-701" tabindex="-1"></a></span>
+<span id="cb3-702"><a href="#cb3-702" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-703"><a href="#cb3-703" tabindex="-1"></a><span class="fu">## Review Changes</span></span>
+<span id="cb3-704"><a href="#cb3-704" tabindex="-1"></a></span>
+<span id="cb3-705"><a href="#cb3-705" tabindex="-1"></a>The Owner pushed commits to the repository without giving any</span>
+<span id="cb3-706"><a href="#cb3-706" tabindex="-1"></a>information to the Collaborator. How can the Collaborator find out what</span>
+<span id="cb3-707"><a href="#cb3-707" tabindex="-1"></a>has changed with command line? And on GitHub?</span>
+<span id="cb3-708"><a href="#cb3-708" tabindex="-1"></a>:::</span>
 <span id="cb3-709"><a href="#cb3-709" tabindex="-1"></a></span>
-<span id="cb3-710"><a href="#cb3-710" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-711"><a href="#cb3-711" tabindex="-1"></a><span class="fu">## How to Track Large Data or Image Files using Git?</span></span>
-<span id="cb3-712"><a href="#cb3-712" tabindex="-1"></a></span>
-<span id="cb3-713"><a href="#cb3-713" tabindex="-1"></a>Large data or image files such as <span class="in">`.md5`</span> or <span class="in">`.psd`</span> file types can be</span>
-<span id="cb3-714"><a href="#cb3-714" tabindex="-1"></a>tracked within a github repository using the [Git Large File</span>
-<span id="cb3-715"><a href="#cb3-715" tabindex="-1"></a>Storage](https://git-lfs.github.com) open source extension tool. This</span>
-<span id="cb3-716"><a href="#cb3-716" tabindex="-1"></a>tool automatically uploads large file contents to a remote server and</span>
-<span id="cb3-717"><a href="#cb3-717" tabindex="-1"></a>replaces the file with a text pointer within the github repository.</span>
-<span id="cb3-718"><a href="#cb3-718" tabindex="-1"></a></span>
-<span id="cb3-719"><a href="#cb3-719" tabindex="-1"></a>Try downloading and installing the Git Large File Storage extension</span>
-<span id="cb3-720"><a href="#cb3-720" tabindex="-1"></a>tool, then add tracking of a large file to your github repository. Ask a</span>
-<span id="cb3-721"><a href="#cb3-721" tabindex="-1"></a>colleague to clone your repository and describe what they see when they</span>
-<span id="cb3-722"><a href="#cb3-722" tabindex="-1"></a>access that large file.</span>
-<span id="cb3-723"><a href="#cb3-723" tabindex="-1"></a>:::</span>
-<span id="cb3-724"><a href="#cb3-724" tabindex="-1"></a></span>
-<span id="cb3-725"><a href="#cb3-725" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-726"><a href="#cb3-726" tabindex="-1"></a></span>
+<span id="cb3-710"><a href="#cb3-710" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-711"><a href="#cb3-711" tabindex="-1"></a></span>
+<span id="cb3-712"><a href="#cb3-712" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-713"><a href="#cb3-713" tabindex="-1"></a><span class="fu">## Comment Changes in GitHub</span></span>
+<span id="cb3-714"><a href="#cb3-714" tabindex="-1"></a></span>
+<span id="cb3-715"><a href="#cb3-715" tabindex="-1"></a>The Collaborator has some questions about one line change made by the</span>
+<span id="cb3-716"><a href="#cb3-716" tabindex="-1"></a>Owner and has some suggestions to propose.</span>
+<span id="cb3-717"><a href="#cb3-717" tabindex="-1"></a></span>
+<span id="cb3-718"><a href="#cb3-718" tabindex="-1"></a>With GitHub, it is possible to comment on the diff of a commit. Over the</span>
+<span id="cb3-719"><a href="#cb3-719" tabindex="-1"></a>line of code to comment, a blue comment icon appears to open a comment</span>
+<span id="cb3-720"><a href="#cb3-720" tabindex="-1"></a>window.</span>
+<span id="cb3-721"><a href="#cb3-721" tabindex="-1"></a></span>
+<span id="cb3-722"><a href="#cb3-722" tabindex="-1"></a>The Collaborator posts her comments and suggestions using the GitHub</span>
+<span id="cb3-723"><a href="#cb3-723" tabindex="-1"></a>interface.</span>
+<span id="cb3-724"><a href="#cb3-724" tabindex="-1"></a>:::</span>
+<span id="cb3-725"><a href="#cb3-725" tabindex="-1"></a></span>
+<span id="cb3-726"><a href="#cb3-726" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-727"><a href="#cb3-727" tabindex="-1"></a></span>
-<span id="cb3-728"><a href="#cb3-728" tabindex="-1"></a><span class="fu"># Licensing</span></span>
-<span id="cb3-729"><a href="#cb3-729" tabindex="-1"></a></span>
-<span id="cb3-730"><a href="#cb3-730" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-731"><a href="#cb3-731" tabindex="-1"></a></span>
-<span id="cb3-732"><a href="#cb3-732" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-733"><a href="#cb3-733" tabindex="-1"></a><span class="fu">## Can I Use Open License?</span></span>
-<span id="cb3-734"><a href="#cb3-734" tabindex="-1"></a></span>
-<span id="cb3-735"><a href="#cb3-735" tabindex="-1"></a>Find out whether you are allowed to apply an open license to your</span>
-<span id="cb3-736"><a href="#cb3-736" tabindex="-1"></a>software. Can you do this unilaterally, or do you need permission from</span>
-<span id="cb3-737"><a href="#cb3-737" tabindex="-1"></a>someone in your institution? If so, who?</span>
-<span id="cb3-738"><a href="#cb3-738" tabindex="-1"></a>:::</span>
+<span id="cb3-728"><a href="#cb3-728" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-729"><a href="#cb3-729" tabindex="-1"></a><span class="fu">## Version History, Backup, and Version Control</span></span>
+<span id="cb3-730"><a href="#cb3-730" tabindex="-1"></a></span>
+<span id="cb3-731"><a href="#cb3-731" tabindex="-1"></a>Some backup software can keep a history of the versions of your files.</span>
+<span id="cb3-732"><a href="#cb3-732" tabindex="-1"></a>They also allows you to recover specific versions. How is this</span>
+<span id="cb3-733"><a href="#cb3-733" tabindex="-1"></a>functionality different from version control? What are some of the</span>
+<span id="cb3-734"><a href="#cb3-734" tabindex="-1"></a>benefits of using version control, Git and GitHub?</span>
+<span id="cb3-735"><a href="#cb3-735" tabindex="-1"></a>:::</span>
+<span id="cb3-736"><a href="#cb3-736" tabindex="-1"></a></span>
+<span id="cb3-737"><a href="#cb3-737" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-738"><a href="#cb3-738" tabindex="-1"></a></span>
 <span id="cb3-739"><a href="#cb3-739" tabindex="-1"></a></span>
-<span id="cb3-740"><a href="#cb3-740" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-740"><a href="#cb3-740" tabindex="-1"></a><span class="fu"># Conflicts</span></span>
 <span id="cb3-741"><a href="#cb3-741" tabindex="-1"></a></span>
-<span id="cb3-742"><a href="#cb3-742" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-743"><a href="#cb3-743" tabindex="-1"></a><span class="fu">## What licenses have I already accepted?</span></span>
+<span id="cb3-742"><a href="#cb3-742" tabindex="-1"></a>::: overview</span>
+<span id="cb3-743"><a href="#cb3-743" tabindex="-1"></a><span class="fu">## Objectives</span></span>
 <span id="cb3-744"><a href="#cb3-744" tabindex="-1"></a></span>
-<span id="cb3-745"><a href="#cb3-745" tabindex="-1"></a>Many of the software tools we use on a daily basis (including in this</span>
-<span id="cb3-746"><a href="#cb3-746" tabindex="-1"></a>workshop) are released as open-source software. Pick a project on GitHub</span>
-<span id="cb3-747"><a href="#cb3-747" tabindex="-1"></a>from the list below, or one of your own choosing. Find its license</span>
-<span id="cb3-748"><a href="#cb3-748" tabindex="-1"></a>(usually in a file called <span class="in">`LICENSE`</span> or <span class="in">`COPYING`</span>) and talk about how it</span>
-<span id="cb3-749"><a href="#cb3-749" tabindex="-1"></a>restricts your use of the software. Is it one of the licenses discussed</span>
-<span id="cb3-750"><a href="#cb3-750" tabindex="-1"></a>in this session? How is it different?</span>
+<span id="cb3-745"><a href="#cb3-745" tabindex="-1"></a><span class="ss">-   </span>Explain what conflicts are and when they can occur.</span>
+<span id="cb3-746"><a href="#cb3-746" tabindex="-1"></a><span class="ss">-   </span>Resolve conflicts resulting from a merge.</span>
+<span id="cb3-747"><a href="#cb3-747" tabindex="-1"></a>:::</span>
+<span id="cb3-748"><a href="#cb3-748" tabindex="-1"></a></span>
+<span id="cb3-749"><a href="#cb3-749" tabindex="-1"></a>::: overview</span>
+<span id="cb3-750"><a href="#cb3-750" tabindex="-1"></a><span class="fu">## Questions</span></span>
 <span id="cb3-751"><a href="#cb3-751" tabindex="-1"></a></span>
-<span id="cb3-752"><a href="#cb3-752" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Git</span><span class="co">](https://github.com/git/git)</span>, the source-code management tool</span>
-<span id="cb3-753"><a href="#cb3-753" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">CPython</span><span class="co">](https://github.com/python/cpython)</span>, the standard</span>
-<span id="cb3-754"><a href="#cb3-754" tabindex="-1"></a>    implementation of the Python language</span>
-<span id="cb3-755"><a href="#cb3-755" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Jupyter</span><span class="co">](https://github.com/jupyter)</span>, the project behind the</span>
-<span id="cb3-756"><a href="#cb3-756" tabindex="-1"></a>    web-based Python notebooks we'll be using</span>
-<span id="cb3-757"><a href="#cb3-757" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">EtherPad</span><span class="co">](https://github.com/ether/etherpad-lite)</span>, a real-time</span>
-<span id="cb3-758"><a href="#cb3-758" tabindex="-1"></a>    collaborative editor</span>
-<span id="cb3-759"><a href="#cb3-759" tabindex="-1"></a>:::</span>
+<span id="cb3-752"><a href="#cb3-752" tabindex="-1"></a><span class="ss">-   </span>What do I do when my changes conflict with someone else's?</span>
+<span id="cb3-753"><a href="#cb3-753" tabindex="-1"></a>:::</span>
+<span id="cb3-754"><a href="#cb3-754" tabindex="-1"></a></span>
+<span id="cb3-755"><a href="#cb3-755" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-756"><a href="#cb3-756" tabindex="-1"></a></span>
+<span id="cb3-757"><a href="#cb3-757" tabindex="-1"></a><span class="al">![](fig/conflict.svg)</span>{alt="A diagram showing a conflict that might occur when two sets of independent changes are merged"}</span>
+<span id="cb3-758"><a href="#cb3-758" tabindex="-1"></a></span>
+<span id="cb3-759"><a href="#cb3-759" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-760"><a href="#cb3-760" tabindex="-1"></a></span>
-<span id="cb3-761"><a href="#cb3-761" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-762"><a href="#cb3-762" tabindex="-1"></a></span>
+<span id="cb3-761"><a href="#cb3-761" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-762"><a href="#cb3-762" tabindex="-1"></a><span class="fu">## Solving Conflicts that You Create</span></span>
 <span id="cb3-763"><a href="#cb3-763" tabindex="-1"></a></span>
-<span id="cb3-764"><a href="#cb3-764" tabindex="-1"></a><span class="fu"># Citation</span></span>
-<span id="cb3-765"><a href="#cb3-765" tabindex="-1"></a></span>
-<span id="cb3-766"><a href="#cb3-766" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-767"><a href="#cb3-767" tabindex="-1"></a></span>
-<span id="cb3-768"><a href="#cb3-768" tabindex="-1"></a></span>
-<span id="cb3-769"><a href="#cb3-769" tabindex="-1"></a><span class="fu"># Hosting</span></span>
-<span id="cb3-770"><a href="#cb3-770" tabindex="-1"></a></span>
-<span id="cb3-771"><a href="#cb3-771" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-772"><a href="#cb3-772" tabindex="-1"></a></span>
-<span id="cb3-773"><a href="#cb3-773" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-774"><a href="#cb3-774" tabindex="-1"></a><span class="fu">## Can My Work Be Public?</span></span>
-<span id="cb3-775"><a href="#cb3-775" tabindex="-1"></a></span>
-<span id="cb3-776"><a href="#cb3-776" tabindex="-1"></a>Find out whether you are allowed to host your work openly in a public</span>
-<span id="cb3-777"><a href="#cb3-777" tabindex="-1"></a>repository. Can you do this unilaterally, or do you need permission from</span>
-<span id="cb3-778"><a href="#cb3-778" tabindex="-1"></a>someone in your institution? If so, who?</span>
-<span id="cb3-779"><a href="#cb3-779" tabindex="-1"></a>:::</span>
+<span id="cb3-764"><a href="#cb3-764" tabindex="-1"></a>Clone the repository created by your instructor. Add a new file to it,</span>
+<span id="cb3-765"><a href="#cb3-765" tabindex="-1"></a>and modify an existing file (your instructor will tell you which one).</span>
+<span id="cb3-766"><a href="#cb3-766" tabindex="-1"></a>When asked by your instructor, pull her changes from the repository to</span>
+<span id="cb3-767"><a href="#cb3-767" tabindex="-1"></a>create a conflict, then resolve it.</span>
+<span id="cb3-768"><a href="#cb3-768" tabindex="-1"></a>:::</span>
+<span id="cb3-769"><a href="#cb3-769" tabindex="-1"></a></span>
+<span id="cb3-770"><a href="#cb3-770" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-771"><a href="#cb3-771" tabindex="-1"></a></span>
+<span id="cb3-772"><a href="#cb3-772" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-773"><a href="#cb3-773" tabindex="-1"></a><span class="fu">## Conflicts on Non-textual files</span></span>
+<span id="cb3-774"><a href="#cb3-774" tabindex="-1"></a></span>
+<span id="cb3-775"><a href="#cb3-775" tabindex="-1"></a>What does Git do when there is a conflict in an image or some other</span>
+<span id="cb3-776"><a href="#cb3-776" tabindex="-1"></a>non-textual file that is stored in version control?</span>
+<span id="cb3-777"><a href="#cb3-777" tabindex="-1"></a>:::</span>
+<span id="cb3-778"><a href="#cb3-778" tabindex="-1"></a></span>
+<span id="cb3-779"><a href="#cb3-779" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-780"><a href="#cb3-780" tabindex="-1"></a></span>
-<span id="cb3-781"><a href="#cb3-781" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-782"><a href="#cb3-782" tabindex="-1"></a></span>
-<span id="cb3-783"><a href="#cb3-783" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-784"><a href="#cb3-784" tabindex="-1"></a><span class="fu">## Where Can I Share My Work?</span></span>
-<span id="cb3-785"><a href="#cb3-785" tabindex="-1"></a></span>
-<span id="cb3-786"><a href="#cb3-786" tabindex="-1"></a>Does your institution have a repository or repositories that you can use</span>
-<span id="cb3-787"><a href="#cb3-787" tabindex="-1"></a>to share your papers, data and software? How do institutional</span>
-<span id="cb3-788"><a href="#cb3-788" tabindex="-1"></a>repositories differ from services like <span class="co">[</span><span class="ot">arXiV</span><span class="co">](https://arxiv.org/)</span>,</span>
-<span id="cb3-789"><a href="#cb3-789" tabindex="-1"></a><span class="co">[</span><span class="ot">figshare</span><span class="co">](https://figshare.com/)</span>, <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> or</span>
-<span id="cb3-790"><a href="#cb3-790" tabindex="-1"></a><span class="co">[</span><span class="ot">GitLab</span><span class="co">](https://about.gitlab.com/)</span>?</span>
-<span id="cb3-791"><a href="#cb3-791" tabindex="-1"></a>:::</span>
-<span id="cb3-792"><a href="#cb3-792" tabindex="-1"></a></span>
-<span id="cb3-793"><a href="#cb3-793" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-794"><a href="#cb3-794" tabindex="-1"></a></span>
+<span id="cb3-781"><a href="#cb3-781" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-782"><a href="#cb3-782" tabindex="-1"></a><span class="fu">## A Typical Work Session</span></span>
+<span id="cb3-783"><a href="#cb3-783" tabindex="-1"></a></span>
+<span id="cb3-784"><a href="#cb3-784" tabindex="-1"></a>You sit down at your computer to work on a shared project that is</span>
+<span id="cb3-785"><a href="#cb3-785" tabindex="-1"></a>tracked in a remote Git repository. During your work session, you take</span>
+<span id="cb3-786"><a href="#cb3-786" tabindex="-1"></a>the following actions, but not in this order:</span>
+<span id="cb3-787"><a href="#cb3-787" tabindex="-1"></a></span>
+<span id="cb3-788"><a href="#cb3-788" tabindex="-1"></a><span class="ss">-   </span>*Make changes* by appending the number <span class="in">`100`</span> to a text file</span>
+<span id="cb3-789"><a href="#cb3-789" tabindex="-1"></a>    <span class="in">`numbers.txt`</span></span>
+<span id="cb3-790"><a href="#cb3-790" tabindex="-1"></a><span class="ss">-   </span>*Update remote* repository to match the local repository</span>
+<span id="cb3-791"><a href="#cb3-791" tabindex="-1"></a><span class="ss">-   </span>*Celebrate* your success with some fancy beverage(s)</span>
+<span id="cb3-792"><a href="#cb3-792" tabindex="-1"></a><span class="ss">-   </span>*Update local* repository to match the remote repository</span>
+<span id="cb3-793"><a href="#cb3-793" tabindex="-1"></a><span class="ss">-   </span>*Stage changes* to be committed</span>
+<span id="cb3-794"><a href="#cb3-794" tabindex="-1"></a><span class="ss">-   </span>*Commit changes* to the local repository</span>
 <span id="cb3-795"><a href="#cb3-795" tabindex="-1"></a></span>
-<span id="cb3-796"><a href="#cb3-796" tabindex="-1"></a><span class="fu"># Supplemental: Using Git from RStudio</span></span>
-<span id="cb3-797"><a href="#cb3-797" tabindex="-1"></a></span>
-<span id="cb3-798"><a href="#cb3-798" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-799"><a href="#cb3-799" tabindex="-1"></a></span>
-<span id="cb3-800"><a href="#cb3-800" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_newproject.png)</span>{alt="RStudio screenshot showing the file menu dropdown with \"New Project...\" selected"}</span>
+<span id="cb3-796"><a href="#cb3-796" tabindex="-1"></a>In what order should you perform these actions to minimize the chances</span>
+<span id="cb3-797"><a href="#cb3-797" tabindex="-1"></a>of conflicts? Put the commands above in order in the *action* column of</span>
+<span id="cb3-798"><a href="#cb3-798" tabindex="-1"></a>the table below. When you have the order right, see if you can write the</span>
+<span id="cb3-799"><a href="#cb3-799" tabindex="-1"></a>corresponding commands in the *command* column. A few steps are</span>
+<span id="cb3-800"><a href="#cb3-800" tabindex="-1"></a>populated to get you started.</span>
 <span id="cb3-801"><a href="#cb3-801" tabindex="-1"></a></span>
-<span id="cb3-802"><a href="#cb3-802" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-803"><a href="#cb3-803" tabindex="-1"></a></span>
-<span id="cb3-804"><a href="#cb3-804" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_existingdirectory.png)</span>{alt="RStudio screenshot showing New Project dialog window with \"Create project from existing directory\" selected"}</span>
-<span id="cb3-805"><a href="#cb3-805" tabindex="-1"></a></span>
-<span id="cb3-806"><a href="#cb3-806" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-802"><a href="#cb3-802" tabindex="-1"></a>  ---------------------------------------------------------------------------</span>
+<span id="cb3-803"><a href="#cb3-803" tabindex="-1"></a>  order   action . . . . . . . . . command . . . . . . . . . .</span>
+<span id="cb3-804"><a href="#cb3-804" tabindex="-1"></a>          .                        </span>
+<span id="cb3-805"><a href="#cb3-805" tabindex="-1"></a>  ------- ------------------------ ------------------------------------------</span>
+<span id="cb3-806"><a href="#cb3-806" tabindex="-1"></a>  1                                </span>
 <span id="cb3-807"><a href="#cb3-807" tabindex="-1"></a></span>
-<span id="cb3-808"><a href="#cb3-808" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_navigateexisting.png)</span></span>
+<span id="cb3-808"><a href="#cb3-808" tabindex="-1"></a>  2                                <span class="in">`echo 100 &gt;&gt; numbers.txt`</span></span>
 <span id="cb3-809"><a href="#cb3-809" tabindex="-1"></a></span>
-<span id="cb3-810"><a href="#cb3-810" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-810"><a href="#cb3-810" tabindex="-1"></a>  3                                </span>
 <span id="cb3-811"><a href="#cb3-811" tabindex="-1"></a></span>
-<span id="cb3-812"><a href="#cb3-812" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_afterclone.png)</span>{alt="RStudio window after new project is created with large arrow pointing to vertical Git menu bar."}</span>
+<span id="cb3-812"><a href="#cb3-812" tabindex="-1"></a>  4                                </span>
 <span id="cb3-813"><a href="#cb3-813" tabindex="-1"></a></span>
-<span id="cb3-814"><a href="#cb3-814" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-814"><a href="#cb3-814" tabindex="-1"></a>  5                                </span>
 <span id="cb3-815"><a href="#cb3-815" tabindex="-1"></a></span>
-<span id="cb3-816"><a href="#cb3-816" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_editfiles.png)</span></span>
-<span id="cb3-817"><a href="#cb3-817" tabindex="-1"></a></span>
-<span id="cb3-818"><a href="#cb3-818" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-816"><a href="#cb3-816" tabindex="-1"></a>  6       Celebrate!               </span>
+<span id="cb3-817"><a href="#cb3-817" tabindex="-1"></a>  ---------------------------------------------------------------------------</span>
+<span id="cb3-818"><a href="#cb3-818" tabindex="-1"></a>:::</span>
 <span id="cb3-819"><a href="#cb3-819" tabindex="-1"></a></span>
-<span id="cb3-820"><a href="#cb3-820" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_commit.png)</span>{alt="RStudio screenshot showing the Git menu dropdown with \"Commit...\" selected"}</span>
+<span id="cb3-820"><a href="#cb3-820" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-821"><a href="#cb3-821" tabindex="-1"></a></span>
-<span id="cb3-822"><a href="#cb3-822" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-823"><a href="#cb3-823" tabindex="-1"></a></span>
-<span id="cb3-824"><a href="#cb3-824" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_review.png)</span></span>
-<span id="cb3-825"><a href="#cb3-825" tabindex="-1"></a></span>
-<span id="cb3-826"><a href="#cb3-826" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-822"><a href="#cb3-822" tabindex="-1"></a></span>
+<span id="cb3-823"><a href="#cb3-823" tabindex="-1"></a><span class="fu"># Open Science</span></span>
+<span id="cb3-824"><a href="#cb3-824" tabindex="-1"></a></span>
+<span id="cb3-825"><a href="#cb3-825" tabindex="-1"></a>::: overview</span>
+<span id="cb3-826"><a href="#cb3-826" tabindex="-1"></a><span class="fu">## Objectives</span></span>
 <span id="cb3-827"><a href="#cb3-827" tabindex="-1"></a></span>
-<span id="cb3-828"><a href="#cb3-828" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_history.png)</span>{alt="RStudio screenshot showing the git menu dropdown with \"History\" selected"}</span>
-<span id="cb3-829"><a href="#cb3-829" tabindex="-1"></a></span>
-<span id="cb3-830"><a href="#cb3-830" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-828"><a href="#cb3-828" tabindex="-1"></a><span class="ss">-   </span>Explain how a version control system can be leveraged as an</span>
+<span id="cb3-829"><a href="#cb3-829" tabindex="-1"></a>    electronic lab notebook for computational work.</span>
+<span id="cb3-830"><a href="#cb3-830" tabindex="-1"></a>:::</span>
 <span id="cb3-831"><a href="#cb3-831" tabindex="-1"></a></span>
-<span id="cb3-832"><a href="#cb3-832" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_viewhistory.png)</span></span>
-<span id="cb3-833"><a href="#cb3-833" tabindex="-1"></a></span>
-<span id="cb3-834"><a href="#cb3-834" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb3-835"><a href="#cb3-835" tabindex="-1"></a></span>
-<span id="cb3-836"><a href="#cb3-836" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_gitignore.png)</span>{alt="RStudio screenshot showing .gitignore open in the editor pane with the files .Rproj.user, .Rhistory, .RData, and *.Rproj added to the end"}</span>
+<span id="cb3-832"><a href="#cb3-832" tabindex="-1"></a>::: overview</span>
+<span id="cb3-833"><a href="#cb3-833" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-834"><a href="#cb3-834" tabindex="-1"></a></span>
+<span id="cb3-835"><a href="#cb3-835" tabindex="-1"></a><span class="ss">-   </span>How can version control help me make my work more open?</span>
+<span id="cb3-836"><a href="#cb3-836" tabindex="-1"></a>:::</span>
 <span id="cb3-837"><a href="#cb3-837" tabindex="-1"></a></span>
 <span id="cb3-838"><a href="#cb3-838" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb3-839"><a href="#cb3-839" tabindex="-1"></a></span>
 <span id="cb3-840"><a href="#cb3-840" tabindex="-1"></a>::: challenge</span>
-<span id="cb3-841"><a href="#cb3-841" tabindex="-1"></a><span class="fu">## Challenge</span></span>
+<span id="cb3-841"><a href="#cb3-841" tabindex="-1"></a><span class="fu">## How Reproducible Is My Work?</span></span>
 <span id="cb3-842"><a href="#cb3-842" tabindex="-1"></a></span>
-<span id="cb3-843"><a href="#cb3-843" tabindex="-1"></a><span class="ss">1.  </span>Create a new directory within your project called <span class="in">`graphs`</span>.</span>
-<span id="cb3-844"><a href="#cb3-844" tabindex="-1"></a><span class="ss">2.  </span>Modify the <span class="in">`.gitignore`</span> so that the <span class="in">`graphs`</span> directory is not</span>
-<span id="cb3-845"><a href="#cb3-845" tabindex="-1"></a>    version controlled.</span>
-<span id="cb3-846"><a href="#cb3-846" tabindex="-1"></a>:::</span>
-<span id="cb3-847"><a href="#cb3-847" tabindex="-1"></a></span>
-<span id="cb3-848"><a href="#cb3-848" tabindex="-1"></a>------------------------------------------------------------------------</span></code></pre></div>
+<span id="cb3-843"><a href="#cb3-843" tabindex="-1"></a>Ask one of your labmates to reproduce a result you recently obtained</span>
+<span id="cb3-844"><a href="#cb3-844" tabindex="-1"></a>using only what they can find in your papers or on the web. Try to do</span>
+<span id="cb3-845"><a href="#cb3-845" tabindex="-1"></a>the same for one of their results, then try to do it for a result from a</span>
+<span id="cb3-846"><a href="#cb3-846" tabindex="-1"></a>lab you work with.</span>
+<span id="cb3-847"><a href="#cb3-847" tabindex="-1"></a>:::</span>
+<span id="cb3-848"><a href="#cb3-848" tabindex="-1"></a></span>
+<span id="cb3-849"><a href="#cb3-849" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-850"><a href="#cb3-850" tabindex="-1"></a></span>
+<span id="cb3-851"><a href="#cb3-851" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-852"><a href="#cb3-852" tabindex="-1"></a><span class="fu">## How to Find an Appropriate Data Repository?</span></span>
+<span id="cb3-853"><a href="#cb3-853" tabindex="-1"></a></span>
+<span id="cb3-854"><a href="#cb3-854" tabindex="-1"></a>Surf the internet for a couple of minutes and check out the data</span>
+<span id="cb3-855"><a href="#cb3-855" tabindex="-1"></a>repositories mentioned above: <span class="co">[</span><span class="ot">Figshare</span><span class="co">](https://figshare.com/)</span>,</span>
+<span id="cb3-856"><a href="#cb3-856" tabindex="-1"></a><span class="co">[</span><span class="ot">Zenodo</span><span class="co">](https://zenodo.org)</span>, <span class="co">[</span><span class="ot">Dryad</span><span class="co">](https://datadryad.org/)</span>. Depending</span>
+<span id="cb3-857"><a href="#cb3-857" tabindex="-1"></a>on your field of research, you might find community-recognized</span>
+<span id="cb3-858"><a href="#cb3-858" tabindex="-1"></a>repositories that are well-known in your field. You might also find</span>
+<span id="cb3-859"><a href="#cb3-859" tabindex="-1"></a>useful [these data repositories recommended by</span>
+<span id="cb3-860"><a href="#cb3-860" tabindex="-1"></a>Nature](https://www.nature.com/sdata/data-policies/repositories).</span>
+<span id="cb3-861"><a href="#cb3-861" tabindex="-1"></a>Discuss with your neighbor which data repository you might want to</span>
+<span id="cb3-862"><a href="#cb3-862" tabindex="-1"></a>approach for your current project and explain why.</span>
+<span id="cb3-863"><a href="#cb3-863" tabindex="-1"></a>:::</span>
+<span id="cb3-864"><a href="#cb3-864" tabindex="-1"></a></span>
+<span id="cb3-865"><a href="#cb3-865" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-866"><a href="#cb3-866" tabindex="-1"></a></span>
+<span id="cb3-867"><a href="#cb3-867" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-868"><a href="#cb3-868" tabindex="-1"></a><span class="fu">## How to Track Large Data or Image Files using Git?</span></span>
+<span id="cb3-869"><a href="#cb3-869" tabindex="-1"></a></span>
+<span id="cb3-870"><a href="#cb3-870" tabindex="-1"></a>Large data or image files such as <span class="in">`.md5`</span> or <span class="in">`.psd`</span> file types can be</span>
+<span id="cb3-871"><a href="#cb3-871" tabindex="-1"></a>tracked within a github repository using the [Git Large File</span>
+<span id="cb3-872"><a href="#cb3-872" tabindex="-1"></a>Storage](https://git-lfs.github.com) open source extension tool. This</span>
+<span id="cb3-873"><a href="#cb3-873" tabindex="-1"></a>tool automatically uploads large file contents to a remote server and</span>
+<span id="cb3-874"><a href="#cb3-874" tabindex="-1"></a>replaces the file with a text pointer within the github repository.</span>
+<span id="cb3-875"><a href="#cb3-875" tabindex="-1"></a></span>
+<span id="cb3-876"><a href="#cb3-876" tabindex="-1"></a>Try downloading and installing the Git Large File Storage extension</span>
+<span id="cb3-877"><a href="#cb3-877" tabindex="-1"></a>tool, then add tracking of a large file to your github repository. Ask a</span>
+<span id="cb3-878"><a href="#cb3-878" tabindex="-1"></a>colleague to clone your repository and describe what they see when they</span>
+<span id="cb3-879"><a href="#cb3-879" tabindex="-1"></a>access that large file.</span>
+<span id="cb3-880"><a href="#cb3-880" tabindex="-1"></a>:::</span>
+<span id="cb3-881"><a href="#cb3-881" tabindex="-1"></a></span>
+<span id="cb3-882"><a href="#cb3-882" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-883"><a href="#cb3-883" tabindex="-1"></a></span>
+<span id="cb3-884"><a href="#cb3-884" tabindex="-1"></a></span>
+<span id="cb3-885"><a href="#cb3-885" tabindex="-1"></a><span class="fu"># Licensing</span></span>
+<span id="cb3-886"><a href="#cb3-886" tabindex="-1"></a></span>
+<span id="cb3-887"><a href="#cb3-887" tabindex="-1"></a>::: overview</span>
+<span id="cb3-888"><a href="#cb3-888" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-889"><a href="#cb3-889" tabindex="-1"></a></span>
+<span id="cb3-890"><a href="#cb3-890" tabindex="-1"></a><span class="ss">-   </span>Explain why adding licensing information to a repository is</span>
+<span id="cb3-891"><a href="#cb3-891" tabindex="-1"></a>    important.</span>
+<span id="cb3-892"><a href="#cb3-892" tabindex="-1"></a><span class="ss">-   </span>Choose a proper license.</span>
+<span id="cb3-893"><a href="#cb3-893" tabindex="-1"></a><span class="ss">-   </span>Explain differences in licensing and social expectations.</span>
+<span id="cb3-894"><a href="#cb3-894" tabindex="-1"></a>:::</span>
+<span id="cb3-895"><a href="#cb3-895" tabindex="-1"></a></span>
+<span id="cb3-896"><a href="#cb3-896" tabindex="-1"></a>::: overview</span>
+<span id="cb3-897"><a href="#cb3-897" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-898"><a href="#cb3-898" tabindex="-1"></a></span>
+<span id="cb3-899"><a href="#cb3-899" tabindex="-1"></a><span class="ss">-   </span>What licensing information should I include with my work?</span>
+<span id="cb3-900"><a href="#cb3-900" tabindex="-1"></a>:::</span>
+<span id="cb3-901"><a href="#cb3-901" tabindex="-1"></a></span>
+<span id="cb3-902"><a href="#cb3-902" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-903"><a href="#cb3-903" tabindex="-1"></a></span>
+<span id="cb3-904"><a href="#cb3-904" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-905"><a href="#cb3-905" tabindex="-1"></a><span class="fu">## Can I Use Open License?</span></span>
+<span id="cb3-906"><a href="#cb3-906" tabindex="-1"></a></span>
+<span id="cb3-907"><a href="#cb3-907" tabindex="-1"></a>Find out whether you are allowed to apply an open license to your</span>
+<span id="cb3-908"><a href="#cb3-908" tabindex="-1"></a>software. Can you do this unilaterally, or do you need permission from</span>
+<span id="cb3-909"><a href="#cb3-909" tabindex="-1"></a>someone in your institution? If so, who?</span>
+<span id="cb3-910"><a href="#cb3-910" tabindex="-1"></a>:::</span>
+<span id="cb3-911"><a href="#cb3-911" tabindex="-1"></a></span>
+<span id="cb3-912"><a href="#cb3-912" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-913"><a href="#cb3-913" tabindex="-1"></a></span>
+<span id="cb3-914"><a href="#cb3-914" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-915"><a href="#cb3-915" tabindex="-1"></a><span class="fu">## What licenses have I already accepted?</span></span>
+<span id="cb3-916"><a href="#cb3-916" tabindex="-1"></a></span>
+<span id="cb3-917"><a href="#cb3-917" tabindex="-1"></a>Many of the software tools we use on a daily basis (including in this</span>
+<span id="cb3-918"><a href="#cb3-918" tabindex="-1"></a>workshop) are released as open-source software. Pick a project on GitHub</span>
+<span id="cb3-919"><a href="#cb3-919" tabindex="-1"></a>from the list below, or one of your own choosing. Find its license</span>
+<span id="cb3-920"><a href="#cb3-920" tabindex="-1"></a>(usually in a file called <span class="in">`LICENSE`</span> or <span class="in">`COPYING`</span>) and talk about how it</span>
+<span id="cb3-921"><a href="#cb3-921" tabindex="-1"></a>restricts your use of the software. Is it one of the licenses discussed</span>
+<span id="cb3-922"><a href="#cb3-922" tabindex="-1"></a>in this session? How is it different?</span>
+<span id="cb3-923"><a href="#cb3-923" tabindex="-1"></a></span>
+<span id="cb3-924"><a href="#cb3-924" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Git</span><span class="co">](https://github.com/git/git)</span>, the source-code management tool</span>
+<span id="cb3-925"><a href="#cb3-925" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">CPython</span><span class="co">](https://github.com/python/cpython)</span>, the standard</span>
+<span id="cb3-926"><a href="#cb3-926" tabindex="-1"></a>    implementation of the Python language</span>
+<span id="cb3-927"><a href="#cb3-927" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Jupyter</span><span class="co">](https://github.com/jupyter)</span>, the project behind the</span>
+<span id="cb3-928"><a href="#cb3-928" tabindex="-1"></a>    web-based Python notebooks we'll be using</span>
+<span id="cb3-929"><a href="#cb3-929" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">EtherPad</span><span class="co">](https://github.com/ether/etherpad-lite)</span>, a real-time</span>
+<span id="cb3-930"><a href="#cb3-930" tabindex="-1"></a>    collaborative editor</span>
+<span id="cb3-931"><a href="#cb3-931" tabindex="-1"></a>:::</span>
+<span id="cb3-932"><a href="#cb3-932" tabindex="-1"></a></span>
+<span id="cb3-933"><a href="#cb3-933" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-934"><a href="#cb3-934" tabindex="-1"></a></span>
+<span id="cb3-935"><a href="#cb3-935" tabindex="-1"></a></span>
+<span id="cb3-936"><a href="#cb3-936" tabindex="-1"></a><span class="fu"># Citation</span></span>
+<span id="cb3-937"><a href="#cb3-937" tabindex="-1"></a></span>
+<span id="cb3-938"><a href="#cb3-938" tabindex="-1"></a>::: overview</span>
+<span id="cb3-939"><a href="#cb3-939" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-940"><a href="#cb3-940" tabindex="-1"></a></span>
+<span id="cb3-941"><a href="#cb3-941" tabindex="-1"></a><span class="ss">-   </span>Make your work easy to cite</span>
+<span id="cb3-942"><a href="#cb3-942" tabindex="-1"></a>:::</span>
+<span id="cb3-943"><a href="#cb3-943" tabindex="-1"></a></span>
+<span id="cb3-944"><a href="#cb3-944" tabindex="-1"></a>::: overview</span>
+<span id="cb3-945"><a href="#cb3-945" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-946"><a href="#cb3-946" tabindex="-1"></a></span>
+<span id="cb3-947"><a href="#cb3-947" tabindex="-1"></a><span class="ss">-   </span>How can I make my work easier to cite?</span>
+<span id="cb3-948"><a href="#cb3-948" tabindex="-1"></a>:::</span>
+<span id="cb3-949"><a href="#cb3-949" tabindex="-1"></a></span>
+<span id="cb3-950"><a href="#cb3-950" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-951"><a href="#cb3-951" tabindex="-1"></a></span>
+<span id="cb3-952"><a href="#cb3-952" tabindex="-1"></a></span>
+<span id="cb3-953"><a href="#cb3-953" tabindex="-1"></a><span class="fu"># Hosting</span></span>
+<span id="cb3-954"><a href="#cb3-954" tabindex="-1"></a></span>
+<span id="cb3-955"><a href="#cb3-955" tabindex="-1"></a>::: overview</span>
+<span id="cb3-956"><a href="#cb3-956" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-957"><a href="#cb3-957" tabindex="-1"></a></span>
+<span id="cb3-958"><a href="#cb3-958" tabindex="-1"></a><span class="ss">-   </span>Explain different options for hosting scientific work.</span>
+<span id="cb3-959"><a href="#cb3-959" tabindex="-1"></a>:::</span>
+<span id="cb3-960"><a href="#cb3-960" tabindex="-1"></a></span>
+<span id="cb3-961"><a href="#cb3-961" tabindex="-1"></a>::: overview</span>
+<span id="cb3-962"><a href="#cb3-962" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-963"><a href="#cb3-963" tabindex="-1"></a></span>
+<span id="cb3-964"><a href="#cb3-964" tabindex="-1"></a><span class="ss">-   </span>Where should I host my version control repositories?</span>
+<span id="cb3-965"><a href="#cb3-965" tabindex="-1"></a>:::</span>
+<span id="cb3-966"><a href="#cb3-966" tabindex="-1"></a></span>
+<span id="cb3-967"><a href="#cb3-967" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-968"><a href="#cb3-968" tabindex="-1"></a></span>
+<span id="cb3-969"><a href="#cb3-969" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-970"><a href="#cb3-970" tabindex="-1"></a><span class="fu">## Can My Work Be Public?</span></span>
+<span id="cb3-971"><a href="#cb3-971" tabindex="-1"></a></span>
+<span id="cb3-972"><a href="#cb3-972" tabindex="-1"></a>Find out whether you are allowed to host your work openly in a public</span>
+<span id="cb3-973"><a href="#cb3-973" tabindex="-1"></a>repository. Can you do this unilaterally, or do you need permission from</span>
+<span id="cb3-974"><a href="#cb3-974" tabindex="-1"></a>someone in your institution? If so, who?</span>
+<span id="cb3-975"><a href="#cb3-975" tabindex="-1"></a>:::</span>
+<span id="cb3-976"><a href="#cb3-976" tabindex="-1"></a></span>
+<span id="cb3-977"><a href="#cb3-977" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-978"><a href="#cb3-978" tabindex="-1"></a></span>
+<span id="cb3-979"><a href="#cb3-979" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-980"><a href="#cb3-980" tabindex="-1"></a><span class="fu">## Where Can I Share My Work?</span></span>
+<span id="cb3-981"><a href="#cb3-981" tabindex="-1"></a></span>
+<span id="cb3-982"><a href="#cb3-982" tabindex="-1"></a>Does your institution have a repository or repositories that you can use</span>
+<span id="cb3-983"><a href="#cb3-983" tabindex="-1"></a>to share your papers, data and software? How do institutional</span>
+<span id="cb3-984"><a href="#cb3-984" tabindex="-1"></a>repositories differ from services like <span class="co">[</span><span class="ot">arXiV</span><span class="co">](https://arxiv.org/)</span>,</span>
+<span id="cb3-985"><a href="#cb3-985" tabindex="-1"></a><span class="co">[</span><span class="ot">figshare</span><span class="co">](https://figshare.com/)</span>, <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> or</span>
+<span id="cb3-986"><a href="#cb3-986" tabindex="-1"></a><span class="co">[</span><span class="ot">GitLab</span><span class="co">](https://about.gitlab.com/)</span>?</span>
+<span id="cb3-987"><a href="#cb3-987" tabindex="-1"></a>:::</span>
+<span id="cb3-988"><a href="#cb3-988" tabindex="-1"></a></span>
+<span id="cb3-989"><a href="#cb3-989" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-990"><a href="#cb3-990" tabindex="-1"></a></span>
+<span id="cb3-991"><a href="#cb3-991" tabindex="-1"></a></span>
+<span id="cb3-992"><a href="#cb3-992" tabindex="-1"></a><span class="fu"># Supplemental: Using Git from RStudio</span></span>
+<span id="cb3-993"><a href="#cb3-993" tabindex="-1"></a></span>
+<span id="cb3-994"><a href="#cb3-994" tabindex="-1"></a>::: overview</span>
+<span id="cb3-995"><a href="#cb3-995" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-996"><a href="#cb3-996" tabindex="-1"></a></span>
+<span id="cb3-997"><a href="#cb3-997" tabindex="-1"></a><span class="ss">-   </span>Understand how to use Git from RStudio.</span>
+<span id="cb3-998"><a href="#cb3-998" tabindex="-1"></a>:::</span>
+<span id="cb3-999"><a href="#cb3-999" tabindex="-1"></a></span>
+<span id="cb3-1000"><a href="#cb3-1000" tabindex="-1"></a>::: overview</span>
+<span id="cb3-1001"><a href="#cb3-1001" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb3-1002"><a href="#cb3-1002" tabindex="-1"></a></span>
+<span id="cb3-1003"><a href="#cb3-1003" tabindex="-1"></a><span class="ss">-   </span>How can I use Git with RStudio?</span>
+<span id="cb3-1004"><a href="#cb3-1004" tabindex="-1"></a>:::</span>
+<span id="cb3-1005"><a href="#cb3-1005" tabindex="-1"></a></span>
+<span id="cb3-1006"><a href="#cb3-1006" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1007"><a href="#cb3-1007" tabindex="-1"></a></span>
+<span id="cb3-1008"><a href="#cb3-1008" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_newproject.png)</span>{alt="RStudio screenshot showing the file menu dropdown with \"New Project...\" selected"}</span>
+<span id="cb3-1009"><a href="#cb3-1009" tabindex="-1"></a></span>
+<span id="cb3-1010"><a href="#cb3-1010" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1011"><a href="#cb3-1011" tabindex="-1"></a></span>
+<span id="cb3-1012"><a href="#cb3-1012" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_existingdirectory.png)</span>{alt="RStudio screenshot showing New Project dialog window with \"Create project from existing directory\" selected"}</span>
+<span id="cb3-1013"><a href="#cb3-1013" tabindex="-1"></a></span>
+<span id="cb3-1014"><a href="#cb3-1014" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1015"><a href="#cb3-1015" tabindex="-1"></a></span>
+<span id="cb3-1016"><a href="#cb3-1016" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_navigateexisting.png)</span>{alt="RStudio window showing the \"Create Project From Existing Directory\" dialog. In the dialog, the project working directory has been set to \"~/Desktop/planets\""}</span>
+<span id="cb3-1017"><a href="#cb3-1017" tabindex="-1"></a></span>
+<span id="cb3-1018"><a href="#cb3-1018" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1019"><a href="#cb3-1019" tabindex="-1"></a></span>
+<span id="cb3-1020"><a href="#cb3-1020" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_afterclone.png)</span>{alt="RStudio window after new project is created with large arrow pointing to vertical Git menu bar."}</span>
+<span id="cb3-1021"><a href="#cb3-1021" tabindex="-1"></a></span>
+<span id="cb3-1022"><a href="#cb3-1022" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1023"><a href="#cb3-1023" tabindex="-1"></a></span>
+<span id="cb3-1024"><a href="#cb3-1024" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_editfiles.png)</span>{alt="RStudio window demonstrating the use of the editor panel to modify the \"pluto.txt\" file"}</span>
+<span id="cb3-1025"><a href="#cb3-1025" tabindex="-1"></a></span>
+<span id="cb3-1026"><a href="#cb3-1026" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1027"><a href="#cb3-1027" tabindex="-1"></a></span>
+<span id="cb3-1028"><a href="#cb3-1028" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_commit.png)</span>{alt="RStudio screenshot showing the Git menu dropdown with the \"Commit...\" option selected"}</span>
+<span id="cb3-1029"><a href="#cb3-1029" tabindex="-1"></a></span>
+<span id="cb3-1030"><a href="#cb3-1030" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1031"><a href="#cb3-1031" tabindex="-1"></a></span>
+<span id="cb3-1032"><a href="#cb3-1032" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_review.png)</span>{alt="RStudio screenshow showing the \"Review Changes\" dialog. The top left panel shows the list of files that can be included or excluded from the commit. The top right panel is for writing a commit message. The bottom panel shows information about the currently selected file in the top left panel."}</span>
+<span id="cb3-1033"><a href="#cb3-1033" tabindex="-1"></a></span>
+<span id="cb3-1034"><a href="#cb3-1034" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1035"><a href="#cb3-1035" tabindex="-1"></a></span>
+<span id="cb3-1036"><a href="#cb3-1036" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_history.png)</span>{alt="RStudio screenshot showing the git menu dropdown with the \"History\" option selected"}</span>
+<span id="cb3-1037"><a href="#cb3-1037" tabindex="-1"></a></span>
+<span id="cb3-1038"><a href="#cb3-1038" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1039"><a href="#cb3-1039" tabindex="-1"></a></span>
+<span id="cb3-1040"><a href="#cb3-1040" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_viewhistory.png)</span>{alt="RStudio screenshot showing the \"Review Changes\" dialog after pressing the \"History\" button. The top panel lists the commits in the repository, similar to git log. The bottom panel shows the changes included in the commit that has been selected in the top panel."}</span>
+<span id="cb3-1041"><a href="#cb3-1041" tabindex="-1"></a></span>
+<span id="cb3-1042"><a href="#cb3-1042" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1043"><a href="#cb3-1043" tabindex="-1"></a></span>
+<span id="cb3-1044"><a href="#cb3-1044" tabindex="-1"></a><span class="al">![](fig/RStudio_screenshot_gitignore.png)</span>{alt="RStudio screenshot showing .gitignore open in the editor pane with the files .Rproj.user, .Rhistory, .RData, and *.Rproj added to the end"}</span>
+<span id="cb3-1045"><a href="#cb3-1045" tabindex="-1"></a></span>
+<span id="cb3-1046"><a href="#cb3-1046" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-1047"><a href="#cb3-1047" tabindex="-1"></a></span>
+<span id="cb3-1048"><a href="#cb3-1048" tabindex="-1"></a>::: challenge</span>
+<span id="cb3-1049"><a href="#cb3-1049" tabindex="-1"></a><span class="fu">## Challenge</span></span>
+<span id="cb3-1050"><a href="#cb3-1050" tabindex="-1"></a></span>
+<span id="cb3-1051"><a href="#cb3-1051" tabindex="-1"></a><span class="ss">1.  </span>Create a new directory within your project called <span class="in">`graphs`</span>.</span>
+<span id="cb3-1052"><a href="#cb3-1052" tabindex="-1"></a><span class="ss">2.  </span>Modify the <span class="in">`.gitignore`</span> so that the <span class="in">`graphs`</span> directory is not</span>
+<span id="cb3-1053"><a href="#cb3-1053" tabindex="-1"></a>    version controlled.</span>
+<span id="cb3-1054"><a href="#cb3-1054" tabindex="-1"></a>:::</span>
+<span id="cb3-1055"><a href="#cb3-1055" tabindex="-1"></a></span>
+<span id="cb3-1056"><a href="#cb3-1056" tabindex="-1"></a>------------------------------------------------------------------------</span></code></pre></div>
 <p>Once we’re happy with the content, we can convert the markdown to a
 Reveal JS slideshow, which is an HTML page:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">

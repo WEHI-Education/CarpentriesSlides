@@ -1,4 +1,34 @@
+# Agenda
+1. Setting Up Git
+2. Creating a Repository
+3. Tracking Changes
+4. Exploring History
+5. Ignoring Things
+6. Remotes in GitHub
+7. Collaborating
+8. Conflicts
+9. Open Science
+10. Licensing
+11. Citation
+12. Hosting
+13. Supplemental: Using Git from RStudio
+
+---
+
 # Automated Version Control
+
+::: overview
+## Objectives
+
+-   Understand the benefits of an automated version control system.
+-   Understand the basics of how automated version control systems work.
+:::
+
+::: overview
+## Questions
+
+-   What is version control and why should I use it?
+:::
 
 ------------------------------------------------------------------------
 
@@ -9,15 +39,15 @@ and revisions they end up with a file named
 
 ------------------------------------------------------------------------
 
-![](fig/play-changes.svg){alt="Changes Are Saved Sequentially"}
+![](fig/play-changes.svg){alt="A diagram demonstrating how a single document grows as the result of sequential changes"}
 
 ------------------------------------------------------------------------
 
-![](fig/versions.svg){alt="Different Versions Can be Saved"}
+![](fig/versions.svg){alt="A diagram with one source document that has been modified in two different ways to produce two different versions of the document"}
 
 ------------------------------------------------------------------------
 
-![](fig/merge.svg){alt="Multiple Versions Can be Merged"}
+![](fig/merge.svg){alt="A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions"}
 
 ------------------------------------------------------------------------
 
@@ -39,14 +69,40 @@ and revisions they end up with a file named
 
 # Setting Up Git
 
+::: overview
+## Objectives
+
+-   Configure `git` the first time it is used on a computer.
+-   Understand the meaning of the `--global` configuration flag.
+:::
+
+::: overview
+## Questions
+
+-   How do I get set up to use Git?
+:::
+
 ------------------------------------------------------------------------
 
 
 # Creating a Repository
 
+::: overview
+## Objectives
+
+-   Create a local Git repository.
+-   Describe the purpose of the `.git` directory.
+:::
+
+::: overview
+## Questions
+
+-   Where does Git store information?
+:::
+
 ------------------------------------------------------------------------
 
-![](fig/motivatingexample.png){alt="motivatingexample"}
+![](fig/motivatingexample.png){alt="The main elements of the story: Dracula, Wolfman, the Mummy, Mars, Pluto and The Moon"}
 
 ------------------------------------------------------------------------
 
@@ -74,8 +130,8 @@ for tracking files stored in the `moons` subdirectory?
 ## Correcting `git init` Mistakes
 
 Wolfman explains to Dracula how a nested repository is redundant and may
-cause confusion down the road. Dracula would like to remove the nested
-repository. How can Dracula undo his last `git init` in the `moons`
+cause confusion down the road. Dracula would like to go back to a single
+git repository. How can Dracula undo his last `git init` in the `moons`
 subdirectory?
 :::
 
@@ -84,13 +140,29 @@ subdirectory?
 
 # Tracking Changes
 
+::: overview
+## Objectives
+
+-   Go through the modify-add-commit cycle for one or more files.
+-   Explain where information is stored at each stage of that cycle.
+-   Distinguish between descriptive and non-descriptive commit messages.
+:::
+
+::: overview
+## Questions
+
+-   How do I record changes in Git?
+-   How do I check the status of my version control repository?
+-   How do I record notes about what changes I made and why?
+:::
+
 ------------------------------------------------------------------------
 
-![](fig/git-staging-area.svg){alt="The Git Staging Area"}
+![](fig/git-staging-area.svg){alt="A diagram showing how \"git add\" registers changes in the staging area, while \"git commit\" moves changes from the staging area to the repository"}
 
 ------------------------------------------------------------------------
 
-![](fig/git-committing.svg){alt="The Git Commit Workflow"}
+![](fig/git-committing.svg){alt="A diagram showing two documents being separately staged using git add, before being combined into one commit using git commit"}
 
 ------------------------------------------------------------------------
 
@@ -167,13 +239,32 @@ to commit as a single snapshot.
 
 # Exploring History
 
+::: overview
+## Objectives
+
+-   Explain what the HEAD of a repository is and how to use it.
+-   Identify and use Git commit numbers.
+-   Compare various versions of tracked files.
+-   Restore old versions of files.
+:::
+
+::: overview
+## Questions
+
+-   How can I identify old versions of files?
+-   How do I review my changes?
+-   How can I recover old versions of files?
+:::
+
 ------------------------------------------------------------------------
 
-![](fig/git-checkout.svg){alt="Git Checkout"}
+![](fig/git-checkout.svg){alt="A diagram showing how git checkout HEAD~1 can be used to restore the previous version of two files"}
 
 ------------------------------------------------------------------------
 
-![<https://figshare.com/articles/How_Git_works_a_cartoon/1328266>](fig/git_staging.svg)
+![A diagram showing the entire git workflow: local changes are staged
+using git add, applied to the local repository using git commit, and can
+be restored from the repository using git checkout](fig/git_staging.svg)
 
 ------------------------------------------------------------------------
 
@@ -339,6 +430,19 @@ $ git log --patch HEAD~9 *.txt
 
 # Ignoring Things
 
+::: overview
+## Objectives
+
+-   Configure Git to ignore specific files.
+-   Explain why ignoring files can be useful.
+:::
+
+::: overview
+## Questions
+
+-   How can I tell Git to ignore files I don't want to track?
+:::
+
 ------------------------------------------------------------------------
 
 ::: challenge
@@ -469,37 +573,50 @@ want to track them through `git`.
 
 # Remotes in GitHub
 
-------------------------------------------------------------------------
+::: overview
+## Objectives
 
-![](fig/github-create-repo-01.png){alt="Creating a Repository on GitHub (Step 1)"}
+-   Explain what remote repositories are and why they are useful.
+-   Push to or pull from a remote repository.
+:::
 
-------------------------------------------------------------------------
+::: overview
+## Questions
 
-![](fig/github-create-repo-02.png){alt="Creating a Repository on GitHub (Step 2)"}
-
-------------------------------------------------------------------------
-
-![](fig/github-create-repo-03.png){alt="Creating a Repository on GitHub (Step 3)"}
-
-------------------------------------------------------------------------
-
-![](fig/git-staging-area.svg){alt="The Local Repository with Git Staging Area"}
+-   How do I share my changes with others on the web?
+:::
 
 ------------------------------------------------------------------------
 
-![](fig/git-freshly-made-github-repo.svg){alt="Freshly-Made GitHub Repository"}
+![](fig/github-create-repo-01.png){alt="The first step in creating a repository on GitHub: clicking the \"create new\" button"}
 
 ------------------------------------------------------------------------
 
-![](fig/github-find-repo-string.png){alt="Where to Find Repository URL on GitHub"}
+![](fig/github-create-repo-02.png){alt="The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created"}
 
 ------------------------------------------------------------------------
 
-![](fig/github-change-repo-string.png){alt="Changing the Repository URL on GitHub"}
+![](fig/github-create-repo-03.png){alt="The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a git remote"}
 
 ------------------------------------------------------------------------
 
-![](fig/github-repo-after-first-push.svg){alt="GitHub Repository After First Push"}
+![](fig/git-staging-area.svg){alt="A diagram showing how \"git add\" registers changes in the staging area, while \"git commit\" moves changes from the staging area to the repository"}
+
+------------------------------------------------------------------------
+
+![](fig/git-freshly-made-github-repo.svg)
+
+------------------------------------------------------------------------
+
+![](fig/github-find-repo-string.png)
+
+------------------------------------------------------------------------
+
+![](fig/github-change-repo-string.png){alt="A screenshot showing that clicking on \"SSH\" will make GitHub provide the SSH URL for a repository instead of the HTTPS URL"}
+
+------------------------------------------------------------------------
+
+![](fig/github-repo-after-first-push.svg){alt="A diagram showing how \"git push origin\" will push changes from the local repository to the remote, making the remote repository an exact copy of the local repository."}
 
 ------------------------------------------------------------------------
 
@@ -550,13 +667,27 @@ you tried to link your local and remote repositories?
 
 # Collaborating
 
+::: overview
+## Objectives
+
+-   Clone a remote repository.
+-   Collaborate by pushing to a common repository.
+-   Describe the basic collaborative workflow.
+:::
+
+::: overview
+## Questions
+
+-   How can I use version control to collaborate with other people?
+:::
+
 ------------------------------------------------------------------------
 
-![](fig/github-add-collaborators.png){alt="screenshot of repository page with Settings then Collaborators selected, showing how to add Collaborators in a GitHub repository"}
+![](fig/github-add-collaborators.png){alt="A screenshot of the GitHub Collaborators settings page, which is accessed by clicking \"Settings\" then \"Collaborators\""}
 
 ------------------------------------------------------------------------
 
-![](fig/github-collaboration.svg){alt="After Creating Clone of Repository"}
+![](fig/github-collaboration.svg){alt="A diagram showing that \"git clone\" can create a copy of a remote GitHub repository, allowing a second person to create their own local repository that they can make changes to."}
 
 ------------------------------------------------------------------------
 
@@ -608,9 +739,22 @@ benefits of using version control, Git and GitHub?
 
 # Conflicts
 
+::: overview
+## Objectives
+
+-   Explain what conflicts are and when they can occur.
+-   Resolve conflicts resulting from a merge.
+:::
+
+::: overview
+## Questions
+
+-   What do I do when my changes conflict with someone else's?
+:::
+
 ------------------------------------------------------------------------
 
-![](fig/conflict.svg){alt="The Conflicting Changes"}
+![](fig/conflict.svg){alt="A diagram showing a conflict that might occur when two sets of independent changes are merged"}
 
 ------------------------------------------------------------------------
 
@@ -669,7 +813,7 @@ populated to get you started.
 
   5                                
 
-  6       Celebrate!               `AFK`
+  6       Celebrate!               
   ---------------------------------------------------------------------------
 :::
 
@@ -677,6 +821,19 @@ populated to get you started.
 
 
 # Open Science
+
+::: overview
+## Objectives
+
+-   Explain how a version control system can be leveraged as an
+    electronic lab notebook for computational work.
+:::
+
+::: overview
+## Questions
+
+-   How can version control help me make my work more open?
+:::
 
 ------------------------------------------------------------------------
 
@@ -727,6 +884,21 @@ access that large file.
 
 # Licensing
 
+::: overview
+## Objectives
+
+-   Explain why adding licensing information to a repository is
+    important.
+-   Choose a proper license.
+-   Explain differences in licensing and social expectations.
+:::
+
+::: overview
+## Questions
+
+-   What licensing information should I include with my work?
+:::
+
 ------------------------------------------------------------------------
 
 ::: challenge
@@ -763,10 +935,34 @@ in this session? How is it different?
 
 # Citation
 
+::: overview
+## Objectives
+
+-   Make your work easy to cite
+:::
+
+::: overview
+## Questions
+
+-   How can I make my work easier to cite?
+:::
+
 ------------------------------------------------------------------------
 
 
 # Hosting
+
+::: overview
+## Objectives
+
+-   Explain different options for hosting scientific work.
+:::
+
+::: overview
+## Questions
+
+-   Where should I host my version control repositories?
+:::
 
 ------------------------------------------------------------------------
 
@@ -795,6 +991,18 @@ repositories differ from services like [arXiV](https://arxiv.org/),
 
 # Supplemental: Using Git from RStudio
 
+::: overview
+## Objectives
+
+-   Understand how to use Git from RStudio.
+:::
+
+::: overview
+## Questions
+
+-   How can I use Git with RStudio?
+:::
+
 ------------------------------------------------------------------------
 
 ![](fig/RStudio_screenshot_newproject.png){alt="RStudio screenshot showing the file menu dropdown with \"New Project...\" selected"}
@@ -805,7 +1013,7 @@ repositories differ from services like [arXiV](https://arxiv.org/),
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_navigateexisting.png)
+![](fig/RStudio_screenshot_navigateexisting.png){alt="RStudio window showing the \"Create Project From Existing Directory\" dialog. In the dialog, the project working directory has been set to \"~/Desktop/planets\""}
 
 ------------------------------------------------------------------------
 
@@ -813,23 +1021,23 @@ repositories differ from services like [arXiV](https://arxiv.org/),
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_editfiles.png)
+![](fig/RStudio_screenshot_editfiles.png){alt="RStudio window demonstrating the use of the editor panel to modify the \"pluto.txt\" file"}
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_commit.png){alt="RStudio screenshot showing the Git menu dropdown with \"Commit...\" selected"}
+![](fig/RStudio_screenshot_commit.png){alt="RStudio screenshot showing the Git menu dropdown with the \"Commit...\" option selected"}
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_review.png)
+![](fig/RStudio_screenshot_review.png){alt="RStudio screenshow showing the \"Review Changes\" dialog. The top left panel shows the list of files that can be included or excluded from the commit. The top right panel is for writing a commit message. The bottom panel shows information about the currently selected file in the top left panel."}
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_history.png){alt="RStudio screenshot showing the git menu dropdown with \"History\" selected"}
+![](fig/RStudio_screenshot_history.png){alt="RStudio screenshot showing the git menu dropdown with the \"History\" option selected"}
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_viewhistory.png)
+![](fig/RStudio_screenshot_viewhistory.png){alt="RStudio screenshot showing the \"Review Changes\" dialog after pressing the \"History\" button. The top panel lists the commits in the repository, similar to git log. The bottom panel shows the changes included in the commit that has been selected in the top panel."}
 
 ------------------------------------------------------------------------
 

@@ -53,6 +53,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_ppt</span><span class="op">(</span></span>
 <span>  <span class="va">repo</span>,</span>
+<span>  slides_md <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">repo</span>, <span class="st">"slides.md"</span><span class="op">)</span>,</span>
+<span>  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">repo</span>, <span class="st">"slides.pptx"</span><span class="op">)</span>,</span>
 <span>  extra_flags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  template <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -66,9 +68,22 @@
 <dd><p>Path to the git repository corresponding to a lesson that uses Carpentries Workbench.</p></dd>
 
 
+<dt>slides_md</dt>
+<dd><p>Optional output from <a href="make_md.html">make_md</a> indicating where the slide markdown source is found.
+By default, this function looks in the repo for the slides</p></dd>
+
+
+<dt>output</dt>
+<dd><p>An optional path indicating where the resulting slideshow should be written.
+Character scalar. If not provided, the slides will be saved into the lesson's git repository.</p></dd>
+
+
 <dt>extra_flags</dt>
-<dd><p>Character vector. Extra arguments to pass to <code>pandoc</code> to modify the conversion process
-Path to the reveal JS postprocessing lua filter</p></dd>
+<dd><p>Character vector. Extra arguments to pass to <code>pandoc</code> to modify the conversion process</p></dd>
+
+
+<dt>template</dt>
+<dd><p>Path to a powerpoint presentation to copy the style from</p></dd>
 
 
 <dt>verbose</dt>
@@ -79,6 +94,12 @@ Path to the reveal JS postprocessing lua filter</p></dd>
 <dd><p>Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The path to the output slides, invisibly.</p>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
