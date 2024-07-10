@@ -12,6 +12,7 @@ function Pandoc(doc)
     doc.blocks:insert(1, pandoc.HorizontalRule())
 end
 
+
 function Div(div)
     -- Expand the solution box for challenges
     if div.classes:includes("collapse") then
