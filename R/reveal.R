@@ -101,7 +101,7 @@ make_reveal <- function(
 
     cli::cli_alert_success("Slides are available at {.path {output}}")
     if (isTRUE(open)){
-        glue::glue("file://{output}") |> browseURL()
+        glue::glue("file://{output}") |> utils::browseURL()
     }
 
     invisible(output)
