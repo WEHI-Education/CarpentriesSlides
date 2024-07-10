@@ -79,7 +79,7 @@ make_reveal <- function(
     )
     if (isTRUE(verbose)){
         cli::cli_alert_info("Running Pandoc with args:")
-        str(pandoc_args, vec.len=100)
+        utils::str(pandoc_args, vec.len=100)
     }
     do.call(
         pandoc::pandoc_convert,
@@ -101,7 +101,7 @@ make_reveal <- function(
 
     cli::cli_alert_success("Slides are available at {.path {output}}")
     if (isTRUE(open)){
-        glue::glue("file://{output}") |> browseURL()
+        glue::glue("file://{output}") |> utils::browseURL()
     }
 
     invisible(output)
