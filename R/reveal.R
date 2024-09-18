@@ -9,6 +9,7 @@
 #' @param verbose Logical scalar. TRUE if additional but non-essential logging should be provided.
 #' @param open Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.
 #' @param extra_flags Character vector. Extra arguments to pass to `pandoc` to modify the conversion process
+#' @param title Character vector. A title to override the default, taken from the lesson configuration
 #' @return The path to the output slides, invisibly.
 make_reveal <- function(
     repo,
@@ -16,7 +17,8 @@ make_reveal <- function(
     output = normalizePath(repo) |> file.path("slides.html"),
     extra_flags = character(),
     verbose = FALSE,
-    open = TRUE
+    open = TRUE,
+    title = NULL
 ){
     #' Path to the reveal JS postprocessing lua filter
     post_reveal <- system.file("extdata", "post_reveal.lua", package="CarpentriesSlides")
@@ -27,7 +29,9 @@ make_reveal <- function(
     }
     site <- file.path(repo, "site", "built")
     config <- sandpaper::get_config(repo)
-    title <- config$title
+    if (is.null(title)){
+        title <- config$title
+    }
     if (isTRUE(verbose)){
         cli::cli_alert_info("Input markdown is {.path {slides_md}}")
         cli::cli_alert_info('Workshop title is "{title}"')
