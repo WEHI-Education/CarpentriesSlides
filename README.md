@@ -18,7 +18,7 @@ options(repos = c(
   CRAN = "https://cran.rstudio.com/"
 ))
 
-remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
+remotes::install_github("WEHI-Education/CarpentriesSlides")
 ```
 
 ## Documentation and Usage
