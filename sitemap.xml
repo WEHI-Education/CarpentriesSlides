@@ -1,42 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/CarpentriesSlides.html</loc>
-  </url>
-  <url>
-    <loc>/articles/git-novice/slides.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_md.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_ppt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_reveal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/post_reveal.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/404.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/LICENSE-text.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/LICENSE.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/articles/CarpentriesSlides.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/articles/git-novice/slides.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/articles/index.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/authors.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/index.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/reference/index.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/reference/make_md.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/reference/make_ppt.html</loc></url>
+<url><loc>https://wehi-researchcomputing.github.io/CarpentriesSlides/reference/make_reveal.html</loc></url>
 </urlset>
+

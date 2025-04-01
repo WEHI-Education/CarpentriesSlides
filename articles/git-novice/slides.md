@@ -102,37 +102,33 @@ and revisions they end up with a file named
 
 ------------------------------------------------------------------------
 
-![](fig/motivatingexample.png){alt="The main elements of the story: Dracula, Wolfman, the Mummy, Mars, Pluto and The Moon"}
-
-------------------------------------------------------------------------
-
 ::: challenge
 ## Places to Create Git Repositories
 
-Along with tracking information about planets (the project we have
-already created), Dracula would also like to track information about
-moons. Despite Wolfman's concerns, Dracula creates a `moons` project
-inside his `planets` project with the following sequence of commands:
+Along with tracking information about recipes (the project we have
+already created), Alfredo would also like to track information about
+desserts specifically. Alfredo creates a `desserts` project inside his
+`recipes` project with the following sequence of commands:
 
 ``` bash
-$ cd ~/Desktop   # return to Desktop directory
-$ cd planets     # go into planets directory, which is already a Git repository
-$ ls -a          # ensure the .git subdirectory is still present in the planets directory
-$ mkdir moons    # make a subdirectory planets/moons
-$ cd moons       # go into moons subdirectory
-$ git init       # make the moons subdirectory a Git repository
-$ ls -a          # ensure the .git subdirectory is present indicating we have created a new Git repository
+$ cd ~/Desktop    # return to Desktop directory
+$ cd recipes      # go into recipes directory, which is already a Git repository
+$ ls -a           # ensure the .git subdirectory is still present in the recipes directory
+$ mkdir desserts # make a sub-directory recipes/desserts
+$ cd desserts    # go into desserts subdirectory
+$ git init        # make the desserts subdirectory a Git repository
+$ ls -a           # ensure the .git subdirectory is present indicating we have created a new Git repository
 ```
 
-Is the `git init` command, run inside the `moons` subdirectory, required
-for tracking files stored in the `moons` subdirectory?
+Is the `git init` command, run inside the `desserts` subdirectory,
+required for tracking files stored in the `desserts` subdirectory?
 
 ## Correcting `git init` Mistakes
 
-Wolfman explains to Dracula how a nested repository is redundant and may
-cause confusion down the road. Dracula would like to go back to a single
-git repository. How can Dracula undo his last `git init` in the `moons`
-subdirectory?
+Jimmy explains to Alfredo how a nested repository is redundant and may
+cause confusion down the road. Alfredo would like to go back to a single
+git repository. How can Alfredo undo his last `git init` in the
+`desserts` subdirectory?
 :::
 
 ------------------------------------------------------------------------
@@ -170,12 +166,11 @@ subdirectory?
 ## Choosing a Commit Message
 
 Which of the following commit messages would be most appropriate for the
-last commit made to `mars.txt`?
+last commit made to `guacamole.md`?
 
 1.  "Changes"
-2.  "Added line 'But the Mummy will appreciate the lack of humidity' to
-    mars.txt"
-3.  "Discuss effects of Mars' climate on the Mummy"
+2.  "Changed lemon for lime"
+3.  "Guacamole modified to the traditional recipe"
 :::
 
 ------------------------------------------------------------------------
@@ -213,10 +208,10 @@ local Git repository?
 The staging area can hold changes from any number of files that you want
 to commit as a single snapshot.
 
-1.  Add some text to `mars.txt` noting your decision to consider Venus
-    as a base
-2.  Create a new file `venus.txt` with your initial thoughts about Venus
-    as a base for you and your friends
+1.  Add some text to `guacamole.md` noting the rough price of the
+    ingredients.
+2.  Create a new file `groceries.md` with a list of products and their
+    prices for different markets.
 3.  Add changes from both files to the staging area, and commit those
     changes.
 :::
@@ -258,7 +253,7 @@ to commit as a single snapshot.
 
 ------------------------------------------------------------------------
 
-![](fig/git-checkout.svg){alt="A diagram showing how git checkout HEAD~1 can be used to restore the previous version of two files"}
+![](fig/git-restore.svg){alt="A diagram showing how git restore can be used to restore the previous version of two files"}
 
 ------------------------------------------------------------------------
 
@@ -280,13 +275,13 @@ Luckily, she has been keeping track of her project's versions using Git!
 Which commands below will let her recover the last committed version of
 her Python script called `data_cruncher.py`?
 
-1.  `$ git checkout HEAD`
+1.  `$ git restore`
 
-2.  `$ git checkout HEAD data_cruncher.py`
+2.  `$ git restore data_cruncher.py`
 
-3.  `$ git checkout HEAD~1 data_cruncher.py`
+3.  `$ git restore -s HEAD~1 data_cruncher.py`
 
-4.  `$ git checkout <unique ID of last commit> data_cruncher.py`
+4.  `$ git restore -s <unique ID of last commit> data_cruncher.py`
 
 5.  Both 2 and 4
 :::
@@ -303,10 +298,11 @@ the project's repository gets the correct change. The command
 `git revert [erroneous commit ID]` will create a new commit that
 reverses the erroneous commit.
 
-The command `git revert` is different from `git checkout [commit ID]`
-because `git checkout` returns the files not yet committed within the
-local repository to a previous state, whereas `git revert` reverses
-changes committed to the local and project repositories.
+The command `git revert` is different from
+`git restore -s [commit ID] .` because `git restore` returns the files
+not yet committed within the local repository to a previous state,
+whereas `git revert` reverses changes committed to the local and project
+repositories.
 
 Below are the right steps and explanations for Jennifer to use
 `git revert`, what is the missing command?
@@ -319,7 +315,7 @@ Below are the right steps and explanations for Jennifer to use
 
 4.  Type in the new commit message.
 
-5.  Save and close
+5.  Save and close.
 :::
 
 ------------------------------------------------------------------------
@@ -330,30 +326,30 @@ Below are the right steps and explanations for Jennifer to use
 What is the output of the last command in
 
 ``` bash
-$ cd planets
-$ echo "Venus is beautiful and full of love" > venus.txt
-$ git add venus.txt
-$ echo "Venus is too hot to be suitable as a base" >> venus.txt
-$ git commit -m "Comment on Venus as an unsuitable base"
-$ git checkout HEAD venus.txt
-$ cat venus.txt #this will print the contents of venus.txt to the screen
+$ cd recipes
+$ echo "I like tomatoes, therefore I like ketchup" > ketchup.md
+$ git add ketchup.md
+$ echo "ketchup enhances pasta dishes" >> ketchup.md
+$ git commit -m "My opinions about the red sauce"
+$ git restore ketchup.md
+$ cat ketchup.md # this will print the content of ketchup.md on screen
 ```
 
 1.  ``` output
-      Venus is too hot to be suitable as a base
+       ketchup enhances pasta dishes
     ```
 
 2.  ``` output
-      Venus is beautiful and full of love
+       I like tomatoes, therefore I like ketchup
     ```
 
 3.  ``` output
-      Venus is beautiful and full of love
-      Venus is too hot to be suitable as a base
+       I like tomatoes, therefore I like ketchup
+       ketchup enhances pasta dishes
     ```
 
 4.  ``` output
-      Error because you have changed venus.txt without committing the changes
+       Error because you have changed ketchup.md without committing the changes
     ```
 :::
 
@@ -362,13 +358,13 @@ $ cat venus.txt #this will print the contents of venus.txt to the screen
 ::: challenge
 ## Checking Understanding of `git diff`
 
-Consider this command: `git diff HEAD~9 mars.txt`. What do you predict
-this command will do if you execute it? What happens when you do execute
-it? Why?
+Consider this command: `git diff HEAD~9 guacamole.md`. What do you
+predict this command will do if you execute it? What happens when you do
+execute it? Why?
 
-Try another command, `git diff [ID] mars.txt`, where \[ID\] is replaced
-with the unique identifier for your most recent commit. What do you
-think will happen, and what does happen?
+Try another command, `git diff [ID] guacamole.md`, where \[ID\] is
+replaced with the unique identifier for your most recent commit. What do
+you think will happen, and what does happen?
 :::
 
 ------------------------------------------------------------------------
@@ -376,11 +372,11 @@ think will happen, and what does happen?
 ::: challenge
 ## Getting Rid of Staged Changes
 
-`git checkout` can be used to restore a previous commit when unstaged
+`git restore` can be used to restore a previous commit when unstaged
 changes have been made, but will it also work for changes that have been
-staged but not committed? Make a change to `mars.txt`, add that change
-using `git add`, then use `git checkout` to see if you can remove your
-change.
+staged but not committed? Make a change to `guacamole.md`, add that
+change using `git add`, then use `git restore` to see if you can remove
+your change.
 :::
 
 ------------------------------------------------------------------------
@@ -392,16 +388,16 @@ Exploring history is an important part of Git, and often it is a
 challenge to find the right commit ID, especially if the commit is from
 several months ago.
 
-Imagine the `planets` project has more than 50 files. You would like to
-find a commit that modifies some specific text in `mars.txt`. When you
-type `git log`, a very long list appeared. How can you narrow down the
-search?
+Imagine the `recipes` project has more than 50 files. You would like to
+find a commit that modifies some specific text in `guacamole.md`. When
+you type `git log`, a very long list appeared. How can you narrow down
+the search?
 
 Recall that the `git diff` command allows us to explore one specific
-file, e.g., `git diff mars.txt`. We can apply a similar idea here.
+file, e.g., `git diff guacamole.md`. We can apply a similar idea here.
 
 ``` bash
-$ git log mars.txt
+$ git log guacamole.md
 ```
 
 Unfortunately some of these commit messages are very ambiguous, e.g.,
@@ -412,7 +408,7 @@ different part of the history for you. Is it possible to combine both?
 Let's try the following:
 
 ``` bash
-$ git log --patch mars.txt
+$ git log --patch guacamole.md
 ```
 
 You should get a long list of output, and you should be able to see both
@@ -421,7 +417,7 @@ commit messages and the difference between each commit.
 Question: What does the following command do?
 
 ``` bash
-$ git log --patch HEAD~9 *.txt
+$ git log --patch HEAD~9 *.md
 ```
 :::
 
@@ -451,11 +447,11 @@ $ git log --patch HEAD~9 *.txt
 Given a directory structure that looks like:
 
 ``` bash
-results/data
-results/plots
+receipts/data
+receipts/plots
 ```
 
-How would you ignore only `results/plots` and not `results/data`?
+How would you ignore only `receipts/plots` and not `receipts/data`?
 :::
 
 ------------------------------------------------------------------------
@@ -463,8 +459,8 @@ How would you ignore only `results/plots` and not `results/data`?
 ::: challenge
 ## Including Specific Files
 
-How would you ignore all `.csv` files in your root directory except for
-`final.csv`? Hint: Find out what `!` (the exclamation point operator)
+How would you ignore all `.png` files in your root directory except for
+`final.png`? Hint: Find out what `!` (the exclamation point operator)
 does
 :::
 
@@ -477,14 +473,14 @@ Given a directory structure that looks similar to the earlier Nested
 Files exercise, but with a slightly different directory structure:
 
 ``` bash
-results/data
-results/images
-results/plots
-results/analysis
+receipts/data
+receipts/images
+receipts/plots
+receipts/analysis
 ```
 
-How would you ignore all of the contents in the results folder, but not
-`results/data`?
+How would you ignore all of the contents in the receipts folder, but not
+`receipts/data`?
 
 Hint: think a bit about how you created an exception with the `!`
 operator before.
@@ -499,15 +495,15 @@ Assuming you have an empty .gitignore file, and given a directory
 structure that looks like:
 
 ``` bash
-results/data/position/gps/a.csv
-results/data/position/gps/b.csv
-results/data/position/gps/c.csv
-results/data/position/gps/info.txt
-results/plots
+receipts/data/market_position/gps/a.dat
+receipts/data/market_position/gps/b.dat
+receipts/data/market_position/gps/c.dat
+receipts/data/market_position/gps/info.txt
+receipts/plots
 ```
 
 What's the shortest `.gitignore` rule you could write to ignore all
-`.csv` files in `result/data/position/gps`? Do not ignore the
+`.dat` files in `receipts/data/market_position/gps`? Do not ignore the
 `info.txt`.
 :::
 
@@ -604,15 +600,15 @@ want to track them through `git`.
 
 ------------------------------------------------------------------------
 
-![](fig/git-freshly-made-github-repo.svg)
-
-------------------------------------------------------------------------
-
-![](fig/github-find-repo-string.png)
+![](fig/git-freshly-made-github-repo.svg){alt="A diagram illustrating how the GitHub \"recipes\" repository is also a git repository like our local repository, but that it is currently empty"}
 
 ------------------------------------------------------------------------
 
 ![](fig/github-change-repo-string.png){alt="A screenshot showing that clicking on \"SSH\" will make GitHub provide the SSH URL for a repository instead of the HTTPS URL"}
+
+------------------------------------------------------------------------
+
+![](fig/github-find-repo-string.png){alt="Clicking the \"Copy to Clipboard\" button on GitHub to obtain the repository's URL"}
 
 ------------------------------------------------------------------------
 
@@ -623,11 +619,11 @@ want to track them through `git`.
 ::: challenge
 ## GitHub GUI
 
-Browse to your `planets` repository on GitHub. Underneath the Code
-button, find and click on the text that says "XX commits" (where "XX" is
-some number). Hover over, and click on, the three buttons to the right
-of each commit. What information can you gather/explore from these
-buttons? How would you get that same information in the shell?
+Browse to your `recipes` repository on GitHub. Under the Code tab, find
+and click on the text that says "XX commits" (where "XX" is some
+number). Hover over, and click on, the three buttons to the right of
+each commit. What information can you gather/explore from these buttons?
+How would you get that same information in the shell?
 :::
 
 ------------------------------------------------------------------------
@@ -848,19 +844,28 @@ lab you work with.
 
 ------------------------------------------------------------------------
 
-::: challenge
+:::: challenge
 ## How to Find an Appropriate Data Repository?
 
-Surf the internet for a couple of minutes and check out the data
-repositories mentioned above: [Figshare](https://figshare.com/),
-[Zenodo](https://zenodo.org), [Dryad](https://datadryad.org/). Depending
-on your field of research, you might find community-recognized
-repositories that are well-known in your field. You might also find
-useful [these data repositories recommended by
+Surf the internet for a couple of minutes and check out the generalist
+data repositories mentioned above: [Figshare](https://figshare.com/),
+[Zenodo](https://zenodo.org), [Dryad](https://datadryad.org/). Try to
+also find one or more repositories for data in your field. You might
+also find useful [these data repositories recommended by
 Nature](https://www.nature.com/sdata/data-policies/repositories).
 Discuss with your neighbor which data repository you might want to
 approach for your current project and explain why.
+
+::: hint
+### Useful Resource
+
+Confused by the sheer number of different repositories you could choose
+for your data? This [repository selection
+flowchart](https://zenodo.org/records/11105430) aims to "guide users
+through a series of considerations for slecting the right repository for
+sharing data."
 :::
+::::
 
 ------------------------------------------------------------------------
 
@@ -1013,7 +1018,7 @@ repositories differ from services like [arXiV](https://arxiv.org/),
 
 ------------------------------------------------------------------------
 
-![](fig/RStudio_screenshot_navigateexisting.png){alt="RStudio window showing the \"Create Project From Existing Directory\" dialog. In the dialog, the project working directory has been set to \"~/Desktop/planets\""}
+![](fig/RStudio_screenshot_navigateexisting.png){alt="RStudio window showing the \"Create Project From Existing Directory\" dialog. In the dialog, the project working directory has been set to \"~/Desktop/recipes\""}
 
 ------------------------------------------------------------------------
 
