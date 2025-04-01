@@ -18,12 +18,12 @@ options(repos = c(
   CRAN = "https://cran.rstudio.com/"
 ))
 
-remotes::install_github("WEHI-ResearchComputing/CarpentriesSlides")
+remotes::install_github("WEHI-Education/CarpentriesSlides")
 ```
 
 ## Documentation and Usage
 
-**Please visit <https://wehi-researchcomputing.github.io/CarpentriesSlides> for comprehensive documentation!**
+**Please visit <https://wehi-education.github.io/CarpentriesSlides> for comprehensive documentation!**
 
 ## FAQ
 ### But I thought Carpentries didn't allow slides?
