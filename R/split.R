@@ -14,12 +14,14 @@ make_md <- function(repo, output = file.path(repo, "slides.md"), verbose = FALSE
         file.path(repo, "site", "built", suffix = _)
 
     if (isTRUE(verbose)){
-        cli::cli_alert_info("Converting: {all_inputs}")
+        cli::cli_alert_info("Converting: {episodes}")
     }
 
-    episodes |>
-        purrr::map(ep_to_markdown) |>
-        do.call(c, args = _) |>
+    c(
+        make_agenda(repo),
+        "\n---\n",
+        purrr::map(episodes, ep_to_markdown) |> purrr::list_c()
+    ) |>
         writeLines(output)
 
     cli::cli_alert_success("Slides can be found in {.path {output}}")
@@ -53,4 +55,16 @@ ep_to_markdown <- function(episode){
 
     # Add a newline in case it's missing
     c(result, "\n")
+}
+
+#' Return a character vector of markdown content for the agenda slide
+#' @noRd
+make_agenda <- function(repo){
+    syllabus <- sandpaper::get_syllabus(repo)
+    # Remove intro and ending
+    syllabus <- syllabus[2:(nrow(syllabus) - 1), ]
+    c(
+        "# Agenda",
+        glue::glue("{seq_along(syllabus$episode)}. {syllabus$episode}")
+    )
 }

@@ -25,6 +25,8 @@ Character scalar. If not provided, the slides will be saved into the lesson's gi
 
 \item{extra_flags}{Character vector. Extra arguments to pass to \code{pandoc} to modify the conversion process}
 
+\item{template}{Path to a powerpoint presentation to copy the style from}
+
 \item{verbose}{Logical scalar. TRUE if additional but non-essential logging should be provided.}
 
 \item{open}{Logical scalar. TRUE if you want the slides to be opened in your browser after they are generated.}

@@ -55,3 +55,8 @@
     line-height: 60pt;
     text-transform: uppercase;
 }
+
+.reveal .slide li {
+    /* Give dot points more space */
+    margin: 17px 0;
+}

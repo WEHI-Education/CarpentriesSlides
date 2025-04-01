@@ -4,6 +4,7 @@
 #' @inheritParams make_reveal
 #' @param slides_md Optional output from [make_md] indicating where the slide markdown source is found. 
 #'  By default, this function looks in the repo for the slides
+#' @param template Path to a powerpoint presentation to copy the style from
 #' @export
 #' @return The path to the output slides, invisibly.
 make_ppt <- function(
@@ -46,7 +47,7 @@ make_ppt <- function(
 
     if (isTRUE(verbose)){
         cli::cli_alert_info("Running Pandoc with args:")
-        str(pandoc_args, vec.len=100)
+        utils::str(pandoc_args, vec.len=100)
     }
 
     do.call(
@@ -54,7 +55,7 @@ make_ppt <- function(
         pandoc_args
     )
 
-    if (open) browseURL(output)
+    if (open) utils::browseURL(output)
 
     invisible(output)
 }

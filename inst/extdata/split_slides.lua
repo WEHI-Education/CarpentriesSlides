@@ -2,8 +2,27 @@ function Pandoc(doc)
     local slides = pandoc.List({
         -- We add each of the episode titles as a title slide
         pandoc.Header(1, doc.meta.title),
-        pandoc.HorizontalRule()
     })
+
+    -- Add the questions and objectives to the title slide
+    doc:walk({
+        Div = function(div)
+            if div.classes:includes("questions") then
+                div.classes = {"overview"}
+                div.content:insert(1, pandoc.Header(2, "Questions"))
+                table.insert(slides, div)
+                return div
+            elseif div.classes:includes("objectives") then
+                div.classes = {"overview"}
+                div.content:insert(1, pandoc.Header(2, "Objectives"))
+                table.insert(slides, div)
+                return div
+            end
+        end
+    })
+
+    -- Close the title slide
+    table.insert(slides, pandoc.HorizontalRule())
 
     -- Only keep certain elements: figures and challenges
     doc:walk({
