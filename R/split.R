@@ -61,8 +61,9 @@ ep_to_markdown <- function(episode){
 #' @noRd
 make_agenda <- function(repo){
     syllabus <- sandpaper::get_syllabus(repo)
-    # Remove intro and ending
-    syllabus <- syllabus[2:(nrow(syllabus) - 1), ]
+    # The Summary/Setup does not get included in the agenda,
+    # but the ending does, so we need to remove the last row
+    syllabus <- syllabus[1:(nrow(syllabus) - 1), ]
     c(
         "# Agenda",
         glue::glue("{seq_along(syllabus$episode)}. {syllabus$episode}")
