@@ -20,14 +20,14 @@
 ::: overview
 ## Objectives
 
--   Understand the benefits of an automated version control system.
--   Understand the basics of how automated version control systems work.
+- Understand the benefits of an automated version control system.
+- Understand the basics of how automated version control systems work.
 :::
 
 ::: overview
 ## Questions
 
--   What is version control and why should I use it?
+- What is version control and why should I use it?
 :::
 
 ------------------------------------------------------------------------
@@ -54,14 +54,14 @@ and revisions they end up with a file named
 ::: challenge
 ## Paper Writing
 
--   Imagine you drafted an excellent paragraph for a paper you are
-    writing, but later ruin it. How would you retrieve the *excellent*
-    version of your conclusion? Is it even possible?
+- Imagine you drafted an excellent paragraph for a paper you are
+  writing, but later ruin it. How would you retrieve the *excellent*
+  version of your conclusion? Is it even possible?
 
--   Imagine you have 5 co-authors. How would you manage the changes and
-    comments they make to your paper? If you use LibreOffice Writer or
-    Microsoft Word, what happens if you accept changes made using the
-    `Track Changes` option? Do you have a history of those changes?
+- Imagine you have 5 co-authors. How would you manage the changes and
+  comments they make to your paper? If you use LibreOffice Writer or
+  Microsoft Word, what happens if you accept changes made using the
+  `Track Changes` option? Do you have a history of those changes?
 :::
 
 ------------------------------------------------------------------------
@@ -72,14 +72,14 @@ and revisions they end up with a file named
 ::: overview
 ## Objectives
 
--   Configure `git` the first time it is used on a computer.
--   Understand the meaning of the `--global` configuration flag.
+- Configure `git` the first time it is used on a computer.
+- Understand the meaning of the `--global` configuration flag.
 :::
 
 ::: overview
 ## Questions
 
--   How do I get set up to use Git?
+- How do I get set up to use Git?
 :::
 
 ------------------------------------------------------------------------
@@ -90,14 +90,14 @@ and revisions they end up with a file named
 ::: overview
 ## Objectives
 
--   Create a local Git repository.
--   Describe the purpose of the `.git` directory.
+- Create a local Git repository.
+- Describe the purpose of the `.git` directory.
 :::
 
 ::: overview
 ## Questions
 
--   Where does Git store information?
+- Where does Git store information?
 :::
 
 ------------------------------------------------------------------------
@@ -139,17 +139,17 @@ git repository. How can Alfredo undo his last `git init` in the
 ::: overview
 ## Objectives
 
--   Go through the modify-add-commit cycle for one or more files.
--   Explain where information is stored at each stage of that cycle.
--   Distinguish between descriptive and non-descriptive commit messages.
+- Go through the modify-add-commit cycle for one or more files.
+- Explain where information is stored at each stage of that cycle.
+- Distinguish between descriptive and non-descriptive commit messages.
 :::
 
 ::: overview
 ## Questions
 
--   How do I record changes in Git?
--   How do I check the status of my version control repository?
--   How do I record notes about what changes I made and why?
+- How do I record changes in Git?
+- How do I check the status of my version control repository?
+- How do I record notes about what changes I made and why?
 :::
 
 ------------------------------------------------------------------------
@@ -182,21 +182,21 @@ Which command(s) below would save the changes of `myfile.txt` to my
 local Git repository?
 
 1.  ``` bash
-       $ git commit -m "my recent changes"
+    $ git commit -m "my recent changes"
     ```
 
 2.  ``` bash
-       $ git init myfile.txt
-       $ git commit -m "my recent changes"
+    $ git init myfile.txt
+    $ git commit -m "my recent changes"
     ```
 
 3.  ``` bash
-       $ git add myfile.txt
-       $ git commit -m "my recent changes"
+    $ git add myfile.txt
+    $ git commit -m "my recent changes"
     ```
 
 4.  ``` bash
-       $ git commit -m myfile.txt "my recent changes"
+    $ git commit -m myfile.txt "my recent changes"
     ```
 :::
 
@@ -221,12 +221,12 @@ to commit as a single snapshot.
 ::: challenge
 ## `bio` Repository
 
--   Create a new Git repository on your computer called `bio`.
--   Write a three-line biography for yourself in a file called `me.txt`,
-    commit your changes
--   Modify one line, add a fourth line
--   Display the differences between its updated state and its original
-    state.
+- Create a new Git repository on your computer called `bio`.
+- Write a three-line biography for yourself in a file called `me.txt`,
+  commit your changes
+- Modify one line, add a fourth line
+- Display the differences between its updated state and its original
+  state.
 :::
 
 ------------------------------------------------------------------------
@@ -237,18 +237,18 @@ to commit as a single snapshot.
 ::: overview
 ## Objectives
 
--   Explain what the HEAD of a repository is and how to use it.
--   Identify and use Git commit numbers.
--   Compare various versions of tracked files.
--   Restore old versions of files.
+- Explain what the HEAD of a repository is and how to use it.
+- Identify and use Git commit numbers.
+- Compare various versions of tracked files.
+- Restore old versions of files.
 :::
 
 ::: overview
 ## Questions
 
--   How can I identify old versions of files?
--   How do I review my changes?
--   How can I recover old versions of files?
+- How can I identify old versions of files?
+- How do I review my changes?
+- How can I recover old versions of files?
 :::
 
 ------------------------------------------------------------------------
@@ -336,20 +336,20 @@ $ cat ketchup.md # this will print the content of ketchup.md on screen
 ```
 
 1.  ``` output
-       ketchup enhances pasta dishes
+    ketchup enhances pasta dishes
     ```
 
 2.  ``` output
-       I like tomatoes, therefore I like ketchup
+    I like tomatoes, therefore I like ketchup
     ```
 
 3.  ``` output
-       I like tomatoes, therefore I like ketchup
-       ketchup enhances pasta dishes
+    I like tomatoes, therefore I like ketchup
+    ketchup enhances pasta dishes
     ```
 
 4.  ``` output
-       Error because you have changed ketchup.md without committing the changes
+    Error because you have changed ketchup.md without committing the changes
     ```
 :::
 
@@ -429,14 +429,14 @@ $ git log --patch HEAD~9 *.md
 ::: overview
 ## Objectives
 
--   Configure Git to ignore specific files.
--   Explain why ignoring files can be useful.
+- Configure Git to ignore specific files.
+- Explain why ignoring files can be useful.
 :::
 
 ::: overview
 ## Questions
 
--   How can I tell Git to ignore files I don't want to track?
+- How can I tell Git to ignore files I don't want to track?
 :::
 
 ------------------------------------------------------------------------
@@ -447,11 +447,11 @@ $ git log --patch HEAD~9 *.md
 Given a directory structure that looks like:
 
 ``` bash
-receipts/data
-receipts/plots
+pictures/cake
+pictures/pizza
 ```
 
-How would you ignore only `receipts/plots` and not `receipts/data`?
+How would you ignore only `pictures/cake` and not `pictures/pizza`?
 :::
 
 ------------------------------------------------------------------------
@@ -473,14 +473,14 @@ Given a directory structure that looks similar to the earlier Nested
 Files exercise, but with a slightly different directory structure:
 
 ``` bash
-receipts/data
-receipts/images
-receipts/plots
-receipts/analysis
+pictures/cake
+pictures/pizza
+pictures/pie
+pictures/brownie
 ```
 
-How would you ignore all of the contents in the receipts folder, but not
-`receipts/data`?
+How would you ignore all of the contents in the pictures folder, but not
+`pictures/pie`?
 
 Hint: think a bit about how you created an exception with the `!`
 operator before.
@@ -495,15 +495,15 @@ Assuming you have an empty .gitignore file, and given a directory
 structure that looks like:
 
 ``` bash
-receipts/data/market_position/gps/a.dat
-receipts/data/market_position/gps/b.dat
-receipts/data/market_position/gps/c.dat
-receipts/data/market_position/gps/info.txt
-receipts/plots
+pictures/data/location/gps/a.dat
+pictures/data/location/gps/b.dat
+pictures/data/location/gps/c.dat
+pictures/data/location/gps/info.txt
+pictures/plots
 ```
 
 What's the shortest `.gitignore` rule you could write to ignore all
-`.dat` files in `receipts/data/market_position/gps`? Do not ignore the
+`.dat` files in `pictures/data/location/gps`? Do not ignore the
 `info.txt`.
 :::
 
@@ -572,14 +572,14 @@ want to track them through `git`.
 ::: overview
 ## Objectives
 
--   Explain what remote repositories are and why they are useful.
--   Push to or pull from a remote repository.
+- Explain what remote repositories are and why they are useful.
+- Push to or pull from a remote repository.
 :::
 
 ::: overview
 ## Questions
 
--   How do I share my changes with others on the web?
+- How do I share my changes with others on the web?
 :::
 
 ------------------------------------------------------------------------
@@ -666,15 +666,15 @@ you tried to link your local and remote repositories?
 ::: overview
 ## Objectives
 
--   Clone a remote repository.
--   Collaborate by pushing to a common repository.
--   Describe the basic collaborative workflow.
+- Clone a remote repository.
+- Collaborate by pushing to a common repository.
+- Describe the basic collaborative workflow.
 :::
 
 ::: overview
 ## Questions
 
--   How can I use version control to collaborate with other people?
+- How can I use version control to collaborate with other people?
 :::
 
 ------------------------------------------------------------------------
@@ -738,14 +738,14 @@ benefits of using version control, Git and GitHub?
 ::: overview
 ## Objectives
 
--   Explain what conflicts are and when they can occur.
--   Resolve conflicts resulting from a merge.
+- Explain what conflicts are and when they can occur.
+- Resolve conflicts resulting from a merge.
 :::
 
 ::: overview
 ## Questions
 
--   What do I do when my changes conflict with someone else's?
+- What do I do when my changes conflict with someone else's?
 :::
 
 ------------------------------------------------------------------------
@@ -781,13 +781,13 @@ You sit down at your computer to work on a shared project that is
 tracked in a remote Git repository. During your work session, you take
 the following actions, but not in this order:
 
--   *Make changes* by appending the number `100` to a text file
-    `numbers.txt`
--   *Update remote* repository to match the local repository
--   *Celebrate* your success with some fancy beverage(s)
--   *Update local* repository to match the remote repository
--   *Stage changes* to be committed
--   *Commit changes* to the local repository
+- *Make changes* by appending the number `100` to a text file
+  `numbers.txt`
+- *Update remote* repository to match the local repository
+- *Celebrate* your success with some fancy beverage(s)
+- *Update local* repository to match the remote repository
+- *Stage changes* to be committed
+- *Commit changes* to the local repository
 
 In what order should you perform these actions to minimize the chances
 of conflicts? Put the commands above in order in the *action* column of
@@ -821,14 +821,14 @@ populated to get you started.
 ::: overview
 ## Objectives
 
--   Explain how a version control system can be leveraged as an
-    electronic lab notebook for computational work.
+- Explain how a version control system can be leveraged as an electronic
+  lab notebook for computational work.
 :::
 
 ::: overview
 ## Questions
 
--   How can version control help me make my work more open?
+- How can version control help me make my work more open?
 :::
 
 ------------------------------------------------------------------------
@@ -892,16 +892,15 @@ access that large file.
 ::: overview
 ## Objectives
 
--   Explain why adding licensing information to a repository is
-    important.
--   Choose a proper license.
--   Explain differences in licensing and social expectations.
+- Explain why adding licensing information to a repository is important.
+- Choose a proper license.
+- Explain differences in licensing and social expectations.
 :::
 
 ::: overview
 ## Questions
 
--   What licensing information should I include with my work?
+- What licensing information should I include with my work?
 :::
 
 ------------------------------------------------------------------------
@@ -926,13 +925,13 @@ from the list below, or one of your own choosing. Find its license
 restricts your use of the software. Is it one of the licenses discussed
 in this session? How is it different?
 
--   [Git](https://github.com/git/git), the source-code management tool
--   [CPython](https://github.com/python/cpython), the standard
-    implementation of the Python language
--   [Jupyter](https://github.com/jupyter), the project behind the
-    web-based Python notebooks we'll be using
--   [EtherPad](https://github.com/ether/etherpad-lite), a real-time
-    collaborative editor
+- [Git](https://github.com/git/git), the source-code management tool
+- [CPython](https://github.com/python/cpython), the standard
+  implementation of the Python language
+- [Jupyter](https://github.com/jupyter), the project behind the
+  web-based Python notebooks we'll be using
+- [EtherPad](https://github.com/ether/etherpad-lite), a real-time
+  collaborative editor
 :::
 
 ------------------------------------------------------------------------
@@ -943,13 +942,13 @@ in this session? How is it different?
 ::: overview
 ## Objectives
 
--   Make your work easy to cite
+- Make your work easy to cite
 :::
 
 ::: overview
 ## Questions
 
--   How can I make my work easier to cite?
+- How can I make my work easier to cite?
 :::
 
 ------------------------------------------------------------------------
@@ -960,13 +959,13 @@ in this session? How is it different?
 ::: overview
 ## Objectives
 
--   Explain different options for hosting scientific work.
+- Explain different options for hosting scientific work.
 :::
 
 ::: overview
 ## Questions
 
--   Where should I host my version control repositories?
+- Where should I host my version control repositories?
 :::
 
 ------------------------------------------------------------------------
@@ -999,13 +998,13 @@ repositories differ from services like [arXiV](https://arxiv.org/),
 ::: overview
 ## Objectives
 
--   Understand how to use Git from RStudio.
+- Understand how to use Git from RStudio.
 :::
 
 ::: overview
 ## Questions
 
--   How can I use Git with RStudio?
+- How can I use Git with RStudio?
 :::
 
 ------------------------------------------------------------------------
